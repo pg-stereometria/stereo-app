@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Point : MonoBehaviour
 {
     [SerializeField]
     private Color _highlightColor = Color.yellow;
     private Color _startColor;
-    private InputHandler.Mode _startMode;
+    private BasicsCreator.Mode _startMode;
 
 
     // Start is called before the first frame update
@@ -23,28 +24,29 @@ public class Point : MonoBehaviour
     }
     void OnMouseEnter()
     {
-        _startMode = InputHandler.Instance.CurrentMode;
-        InputHandler.Instance.CanCreatePoints = false;
-        InputHandler.Instance.CurrentMode = InputHandler.Mode.NONE;
+        if (BasicsCreator.Instance.CurrentMode == BasicsCreator.Mode.CONNECT_POINTS)
+            BasicsCreator.Instance.TrackSegment(transform);
+        _startMode = BasicsCreator.Instance.CurrentMode;
+        BasicsCreator.Instance.CanCreatePoints = false;
+        BasicsCreator.Instance.CurrentMode = BasicsCreator.Mode.NONE;
         _startColor = GetComponent<Renderer>().material.color;
         GetComponent<Renderer>().material.color = _highlightColor;
     }
     void OnMouseExit()
     {
-        InputHandler.Instance.CanCreatePoints = true;
-        if (InputHandler.Instance.CurrentMode == InputHandler.Mode.NONE)
-            InputHandler.Instance.CurrentMode = _startMode;
+        BasicsCreator.Instance.CanCreatePoints = true;
+        if (BasicsCreator.Instance.CurrentMode == BasicsCreator.Mode.NONE)
+            BasicsCreator.Instance.CurrentMode = _startMode;
         GetComponent<Renderer>().material.color = _startColor;
     }
 
     void OnMouseOver()
     {
-        if (!Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0) || EventSystem.current.IsPointerOverGameObject())
             return;
-        Debug.Log("Creating Segment");
-        if (_startMode != InputHandler.Mode.CONNECT_POINTS)
-            InputHandler.Instance.StartCreatingSegment(this);
+        if (_startMode != BasicsCreator.Mode.CONNECT_POINTS)
+            BasicsCreator.Instance.StartCreatingSegment(this);
         else
-            InputHandler.Instance.StopCreatingSegment(this);
+            BasicsCreator.Instance.StopCreatingSegment(this);
     }
 }
