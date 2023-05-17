@@ -1,0 +1,15 @@
+# Unity
+
+*.cs diff=csharp text
+*.cginc text
+*.shader text
+
+*.anim linguist-generated merge=unityyamlmerge diff eol=lf
+*.asset linguist-generated merge=unityyamlmerge diff eol=lf
+*.controller linguist-generated merge=unityyamlmerge diff eol=lf
+*.mat linguist-generated merge=unityyamlmerge diff eol=lf
+*.meta linguist-generated merge=unityyamlmerge diff eol=lf
+*.physicMaterial linguist-generated merge=unityyamlmerge diff eol=lf
+*.physicsMaterial2D linguist-generated merge=unityyamlmerge diff eol=lf
+*.prefab linguist-generated merge=unityyamlmerge diff eol=lf
+*.unity linguist-generated merge=unityyamlmerge diff eol=lf
