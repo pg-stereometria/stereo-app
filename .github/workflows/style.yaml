@@ -1,0 +1,24 @@
+name: Style
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  style:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Install dotnet tools
+        run: |
+          dotnet tool restore
+
+      - name: Check style with CSharpier
+        run: |
+          dotnet csharpier .
+
+      - name: Check/show git diff
+        run: |
+          git diff --exit-code
