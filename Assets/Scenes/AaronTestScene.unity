@@ -596,8 +596,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 904809918}
-        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+      - m_Target: {fileID: 904809920}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
         m_MethodName: CreatePointFromUI
         m_Mode: 1
         m_Arguments:
@@ -926,6 +926,7 @@ GameObject:
   m_Component:
   - component: {fileID: 904809919}
   - component: {fileID: 904809918}
+  - component: {fileID: 904809920}
   m_Layer: 0
   m_Name: AppManager
   m_TagString: Untagged
@@ -951,9 +952,6 @@ MonoBehaviour:
   _segmentPrefab: {fileID: 3731926971303906018, guid: f117d41e026895942947f179dc1a9804, type: 3}
   _pointPrefab: {fileID: 2345134072970349179, guid: e39c6c5ba6344924aaa151237093cb5c, type: 3}
   _zPositionSlider: {fileID: 1715601982}
-  _xPositionInput: {fileID: 1945856739}
-  _yPositionInput: {fileID: 1177146027}
-  _zPositionInput: {fileID: 1945704058}
   _minZDistance: 4
 --- !u!4 &904809919
 Transform:
@@ -970,6 +968,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &904809920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904809917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985259012e8252c47a64883efdc4b907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _xPositionInput: {fileID: 1945856739}
+  _yPositionInput: {fileID: 1177146027}
+  _zPositionInput: {fileID: 1945704058}
 --- !u!1 &972407075
 GameObject:
   m_ObjectHideFlags: 0
