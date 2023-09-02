@@ -168,6 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 76173822}
   - component: {fileID: 76173823}
+  - component: {fileID: 76173824}
   m_Layer: 0
   m_Name: GeometryManager
   m_TagString: Untagged
@@ -203,6 +204,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointPrefab: {fileID: 2345134072970349179, guid: e39c6c5ba6344924aaa151237093cb5c, type: 3}
+  _pointsParent: {fileID: 0}
+--- !u!114 &76173824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76173821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a4a9dc9e41a104c94b2ed7ce46be5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _segmentsParent: {fileID: 0}
+  _segmentPrefab: {fileID: 3731926971303906018, guid: f117d41e026895942947f179dc1a9804, type: 3}
 --- !u!1 &205563430
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,11 +962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4717021fa8048fa4cb5926b403908b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _segmentsParent: {fileID: 1120728050}
-  _pointsParent: {fileID: 1242120645}
   _mousePoint: {fileID: 2077602107}
-  _segmentPrefab: {fileID: 3731926971303906018, guid: f117d41e026895942947f179dc1a9804, type: 3}
-  _pointPrefab: {fileID: 2345134072970349179, guid: e39c6c5ba6344924aaa151237093cb5c, type: 3}
   _zPositionSlider: {fileID: 1715601982}
   _minZDistance: 4
 --- !u!4 &904809919
