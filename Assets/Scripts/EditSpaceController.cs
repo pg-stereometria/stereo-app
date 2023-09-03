@@ -9,7 +9,7 @@ public enum Mode
     CONNECT_POINTS
 }
 
-public class BasicsCreator : MonoBehaviour
+public class EditSpaceController : MonoBehaviour
 {
     public Mode CurrentMode { get; set; } = Mode.CREATE_POINT;
     public bool CanCreatePoints { get; set; } = true;
@@ -26,7 +26,7 @@ public class BasicsCreator : MonoBehaviour
     private Vector3 _screenPosition;
     private Vector3 _worldPosition;
 
-    public static BasicsCreator Instance { get; private set; }
+    public static EditSpaceController Instance { get; private set; }
 
     private void Awake()
     {
@@ -52,7 +52,7 @@ public class BasicsCreator : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && CurrentMode != Mode.NONE && CanCreatePoints)
         {
-            Point point = PointCreator.Instance.CreatePoint(_worldPosition);
+            var point = PointCreator.Instance.CreatePoint(_worldPosition);
             if (CurrentMode == Mode.CONNECT_POINTS)
                 SegmentCreator.Instance.StopCreatingSegment(point);
         }
@@ -61,7 +61,7 @@ public class BasicsCreator : MonoBehaviour
             SegmentCreator.Instance.TrackSegment(_mousePoint);
             if (Input.GetMouseButtonUp(0) && CanCreatePoints)
             {
-                Point point = PointCreator.Instance.CreatePoint(_worldPosition);
+                var point = PointCreator.Instance.CreatePoint(_worldPosition);
                 SegmentCreator.Instance.StopCreatingSegment(point);
             }
         }

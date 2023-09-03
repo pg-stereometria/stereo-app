@@ -40,16 +40,16 @@ public class Point : MonoBehaviour
 
     void OnMouseEnter()
     {
-        if (BasicsCreator.Instance.CurrentMode == Mode.CONNECT_POINTS)
+        if (EditSpaceController.Instance.CurrentMode == Mode.CONNECT_POINTS)
             SegmentCreator.Instance.TrackSegment(transform);
-        BasicsCreator.Instance.CanCreatePoints = false;
+        EditSpaceController.Instance.CanCreatePoints = false;
 
         IsMouseOver = true;
     }
 
     void OnMouseExit()
     {
-        BasicsCreator.Instance.CanCreatePoints = true;
+        EditSpaceController.Instance.CanCreatePoints = true;
 
         IsMouseOver = false;
     }
@@ -57,19 +57,22 @@ public class Point : MonoBehaviour
     void OnMouseOver()
     {
         if (
-            Input.GetMouseButtonDown(0) && BasicsCreator.Instance.CurrentMode != Mode.CONNECT_POINTS
+            Input.GetMouseButtonDown(0)
+            && EditSpaceController.Instance.CurrentMode != Mode.CONNECT_POINTS
         )
         {
             SegmentCreator.Instance.StartCreatingSegment(this);
         }
         else if (
-            Input.GetMouseButtonDown(0) && BasicsCreator.Instance.CurrentMode == Mode.CONNECT_POINTS
+            Input.GetMouseButtonDown(0)
+            && EditSpaceController.Instance.CurrentMode == Mode.CONNECT_POINTS
         )
         {
             SegmentCreator.Instance.StopCreatingSegment(this);
         }
         else if (
-            Input.GetMouseButtonUp(0) && BasicsCreator.Instance.CurrentMode == Mode.CONNECT_POINTS
+            Input.GetMouseButtonUp(0)
+            && EditSpaceController.Instance.CurrentMode == Mode.CONNECT_POINTS
         )
         {
             SegmentCreator.Instance.StopCreatingSegment(this);

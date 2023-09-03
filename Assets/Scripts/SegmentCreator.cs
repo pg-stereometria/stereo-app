@@ -33,7 +33,7 @@ public class SegmentCreator : MonoBehaviour
     {
         _currentSegment = Instantiate(_segmentPrefab, _segmentsParent).transform;
         _currentSegment.position = originPoint.transform.position;
-        BasicsCreator.Instance.CurrentMode = Mode.CONNECT_POINTS;
+        EditSpaceController.Instance.CurrentMode = Mode.CONNECT_POINTS;
         _startingPoint = originPoint;
         originPoint.IsSelected = true;
     }
@@ -49,7 +49,7 @@ public class SegmentCreator : MonoBehaviour
             _currentSegment.localScale.z
         );
         _currentSegment = null;
-        BasicsCreator.Instance.CurrentMode = Mode.CREATE_POINT;
+        EditSpaceController.Instance.CurrentMode = Mode.CREATE_POINT;
         _startingPoint.IsSelected = false;
     }
 
