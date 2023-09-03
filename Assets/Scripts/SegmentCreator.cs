@@ -35,7 +35,7 @@ public class SegmentCreator : MonoBehaviour
         _currentSegment.position = originPoint.transform.position;
         BasicsCreator.Instance.CurrentMode = Mode.CONNECT_POINTS;
         _startingPoint = originPoint;
-        originPoint.HighlightPoint();
+        originPoint.IsSelected = true;
     }
 
     public void StopCreatingSegment(Point endPoint)
@@ -50,7 +50,7 @@ public class SegmentCreator : MonoBehaviour
         );
         _currentSegment = null;
         BasicsCreator.Instance.CurrentMode = Mode.CREATE_POINT;
-        _startingPoint.ResetColor();
+        _startingPoint.IsSelected = false;
     }
 
     public void TrackSegment(Transform toFollow)
