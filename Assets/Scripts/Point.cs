@@ -40,43 +40,19 @@ public class Point : MonoBehaviour
 
     void OnMouseEnter()
     {
-        if (EditSpaceController.Instance.CurrentMode == Mode.CONNECT_POINTS)
-            SegmentCreator.Instance.TrackSegment(transform);
-        EditSpaceController.Instance.CanCreatePoints = false;
-
         IsMouseOver = true;
+        EditSpaceController.Instance.OnPointMouseEnter(this);
     }
 
     void OnMouseExit()
     {
-        EditSpaceController.Instance.CanCreatePoints = true;
-
         IsMouseOver = false;
+        EditSpaceController.Instance.OnPointMouseExit(this);
     }
 
     void OnMouseOver()
     {
-        if (
-            Input.GetMouseButtonDown(0)
-            && EditSpaceController.Instance.CurrentMode != Mode.CONNECT_POINTS
-        )
-        {
-            SegmentCreator.Instance.StartCreatingSegment(this);
-        }
-        else if (
-            Input.GetMouseButtonDown(0)
-            && EditSpaceController.Instance.CurrentMode == Mode.CONNECT_POINTS
-        )
-        {
-            SegmentCreator.Instance.StopCreatingSegment(this);
-        }
-        else if (
-            Input.GetMouseButtonUp(0)
-            && EditSpaceController.Instance.CurrentMode == Mode.CONNECT_POINTS
-        )
-        {
-            SegmentCreator.Instance.StopCreatingSegment(this);
-        }
+        EditSpaceController.Instance.OnPointMouseOver(this);
     }
 
     private void UpdateMaterialColor()

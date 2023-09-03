@@ -12,7 +12,7 @@ public enum Mode
 public class EditSpaceController : MonoBehaviour
 {
     public Mode CurrentMode { get; set; } = Mode.CREATE_POINT;
-    public bool CanCreatePoints { get; set; } = true;
+    private bool _canCreatePoints { get; set; } = true;
 
     [SerializeField]
     private Transform _mousePoint;
@@ -50,7 +50,7 @@ public class EditSpaceController : MonoBehaviour
         CalculatePosition();
         TrackMouse();
 
-        if (Input.GetMouseButtonDown(0) && CurrentMode != Mode.NONE && CanCreatePoints)
+        if (Input.GetMouseButtonDown(0) && CurrentMode != Mode.NONE && _canCreatePoints)
         {
             var point = PointCreator.Instance.CreatePoint(_worldPosition);
             if (CurrentMode == Mode.CONNECT_POINTS)
@@ -59,7 +59,7 @@ public class EditSpaceController : MonoBehaviour
         if (CurrentMode == Mode.CONNECT_POINTS)
         {
             SegmentCreator.Instance.TrackSegment(_mousePoint);
-            if (Input.GetMouseButtonUp(0) && CanCreatePoints)
+            if (Input.GetMouseButtonUp(0) && _canCreatePoints)
             {
                 var point = PointCreator.Instance.CreatePoint(_worldPosition);
                 SegmentCreator.Instance.StopCreatingSegment(point);
@@ -77,5 +77,38 @@ public class EditSpaceController : MonoBehaviour
         _screenPosition = Input.mousePosition;
         _screenPosition.z = Camera.main.nearClipPlane + _zPositionSlider.value + _minZDistance;
         _worldPosition = Camera.main.ScreenToWorldPoint(_screenPosition);
+    }
+
+    public void OnPointMouseEnter(Point point)
+    {
+        if (CurrentMode == Mode.CONNECT_POINTS)
+        {
+            SegmentCreator.Instance.TrackSegment(point.transform);
+        }
+        _canCreatePoints = false;
+    }
+
+    public void OnPointMouseExit(Point point)
+    {
+        _canCreatePoints = true;
+    }
+
+    public void OnPointMouseOver(Point point)
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (CurrentMode == Mode.CONNECT_POINTS)
+            {
+                SegmentCreator.Instance.StopCreatingSegment(point);
+            }
+            else
+            {
+                SegmentCreator.Instance.StartCreatingSegment(point);
+            }
+        }
+        else if (Input.GetMouseButtonUp(0) && CurrentMode == Mode.CONNECT_POINTS)
+        {
+            SegmentCreator.Instance.StopCreatingSegment(point);
+        }
     }
 }
