@@ -23,6 +23,8 @@ public class EditSpaceController : MonoBehaviour
     [SerializeField]
     private float _minZDistance = 1f;
 
+    private Camera _mainCamera;
+
     private Vector3 _screenPosition;
     private Vector3 _worldPosition;
 
@@ -39,6 +41,11 @@ public class EditSpaceController : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void Start()
+    {
+        _mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -75,8 +82,8 @@ public class EditSpaceController : MonoBehaviour
     private void CalculatePosition()
     {
         _screenPosition = Input.mousePosition;
-        _screenPosition.z = Camera.main.nearClipPlane + _zPositionSlider.value + _minZDistance;
-        _worldPosition = Camera.main.ScreenToWorldPoint(_screenPosition);
+        _screenPosition.z = _mainCamera.nearClipPlane + _zPositionSlider.value + _minZDistance;
+        _worldPosition = _mainCamera.ScreenToWorldPoint(_screenPosition);
     }
 
     public void OnPointMouseEnter(Point point)
