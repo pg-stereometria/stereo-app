@@ -12,7 +12,7 @@ public enum Mode
 public class EditSpaceController : MonoBehaviour
 {
     public Mode CurrentMode { get; set; } = Mode.CREATE_POINT;
-    private bool _canCreatePoints { get; set; } = true;
+    private bool _isMouseOverPoint { get; set; } = false;
 
     [SerializeField]
     private Transform _mousePoint;
@@ -57,7 +57,7 @@ public class EditSpaceController : MonoBehaviour
         CalculatePosition();
         TrackMouse();
 
-        if (Input.GetMouseButtonDown(0) && CurrentMode != Mode.NONE && _canCreatePoints)
+        if (Input.GetMouseButtonDown(0) && CurrentMode != Mode.NONE && !_isMouseOverPoint)
         {
             var point = PointCreator.Instance.CreatePoint(_worldPosition);
             if (CurrentMode == Mode.CONNECT_POINTS)
@@ -66,7 +66,7 @@ public class EditSpaceController : MonoBehaviour
         if (CurrentMode == Mode.CONNECT_POINTS)
         {
             SegmentCreator.Instance.TrackSegment(_mousePoint);
-            if (Input.GetMouseButtonUp(0) && _canCreatePoints)
+            if (Input.GetMouseButtonUp(0) && !_isMouseOverPoint)
             {
                 var point = PointCreator.Instance.CreatePoint(_worldPosition);
                 SegmentCreator.Instance.StopCreatingSegment(point);
@@ -92,12 +92,12 @@ public class EditSpaceController : MonoBehaviour
         {
             SegmentCreator.Instance.TrackSegment(point.transform);
         }
-        _canCreatePoints = false;
+        _isMouseOverPoint = true;
     }
 
     public void OnPointMouseExit(Point point)
     {
-        _canCreatePoints = true;
+        _isMouseOverPoint = false;
     }
 
     public void OnPointMouseOver(Point point)
