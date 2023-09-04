@@ -5,13 +5,12 @@ using UnityEngine.UI;
 public enum Mode
 {
     NONE,
-    CREATE_POINT,
-    CONNECT_POINTS
+    POINT_MANIPULATION,
 }
 
 public class EditSpaceController : MonoBehaviour
 {
-    public Mode CurrentMode { get; set; } = Mode.CREATE_POINT;
+    private Mode _currentMode { get; set; } = Mode.POINT_MANIPULATION;
     private bool _isMouseOverPoint { get; set; } = false;
 
     [SerializeField]
@@ -57,20 +56,37 @@ public class EditSpaceController : MonoBehaviour
         CalculatePosition();
         TrackMouse();
 
-        if (Input.GetMouseButtonDown(0) && CurrentMode != Mode.NONE && !_isMouseOverPoint)
+        switch (_currentMode)
+        {
+            case Mode.NONE:
+                break;
+            case Mode.POINT_MANIPULATION:
+                HandlePointManipulation();
+                break;
+        }
+    }
+
+    void HandlePointManipulation()
+    {
+        if (_isMouseOverPoint)
+        {
+            return;
+        }
+
+        if (SegmentCreator.Instance.StartingPoint is null)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                PointCreator.Instance.CreatePoint(_worldPosition);
+            }
+            return;
+        }
+
+        SegmentCreator.Instance.TrackSegment(_mousePoint);
+        if (Input.GetMouseButtonUp(0))
         {
             var point = PointCreator.Instance.CreatePoint(_worldPosition);
-            if (CurrentMode == Mode.CONNECT_POINTS)
-                SegmentCreator.Instance.StopCreatingSegment(point);
-        }
-        if (CurrentMode == Mode.CONNECT_POINTS)
-        {
-            SegmentCreator.Instance.TrackSegment(_mousePoint);
-            if (Input.GetMouseButtonUp(0) && !_isMouseOverPoint)
-            {
-                var point = PointCreator.Instance.CreatePoint(_worldPosition);
-                SegmentCreator.Instance.StopCreatingSegment(point);
-            }
+            SegmentCreator.Instance.StopCreatingSegment(point);
         }
     }
 
@@ -88,10 +104,7 @@ public class EditSpaceController : MonoBehaviour
 
     public void OnPointMouseEnter(Point point)
     {
-        if (CurrentMode == Mode.CONNECT_POINTS)
-        {
-            SegmentCreator.Instance.TrackSegment(point.transform);
-        }
+        SegmentCreator.Instance.TrackSegment(point.transform);
         _isMouseOverPoint = true;
     }
 
@@ -102,18 +115,17 @@ public class EditSpaceController : MonoBehaviour
 
     public void OnPointMouseOver(Point point)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (SegmentCreator.Instance.StartingPoint is null)
         {
-            if (CurrentMode == Mode.CONNECT_POINTS)
-            {
-                SegmentCreator.Instance.StopCreatingSegment(point);
-            }
-            else
+            if (Input.GetMouseButtonDown(0))
             {
                 SegmentCreator.Instance.StartCreatingSegment(point);
             }
+
+            return;
         }
-        else if (Input.GetMouseButtonUp(0) && CurrentMode == Mode.CONNECT_POINTS)
+
+        if (Input.GetMouseButtonUp(0))
         {
             SegmentCreator.Instance.StopCreatingSegment(point);
         }

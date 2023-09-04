@@ -10,7 +10,7 @@ public class SegmentCreator : MonoBehaviour
     [SerializeField]
     private GameObject _segmentPrefab;
 
-    private Point _startingPoint;
+    public Point StartingPoint { get; private set; }
     private Transform _currentSegment;
 
     public static SegmentCreator Instance { get; private set; }
@@ -31,21 +31,20 @@ public class SegmentCreator : MonoBehaviour
 
     public void StartCreatingSegment(Point originPoint)
     {
-        if (_startingPoint is not null)
+        if (StartingPoint is not null)
         {
-            _startingPoint.IsSelected = false;
-            _startingPoint = null;
+            StartingPoint.IsSelected = false;
+            StartingPoint = null;
         }
         _currentSegment = Instantiate(_segmentPrefab, _segmentsParent).transform;
         _currentSegment.position = originPoint.transform.position;
-        EditSpaceController.Instance.CurrentMode = Mode.CONNECT_POINTS;
-        _startingPoint = originPoint;
+        StartingPoint = originPoint;
         originPoint.IsSelected = true;
     }
 
     public void StopCreatingSegment(Point endPoint)
     {
-        if (_startingPoint is null || _startingPoint == endPoint)
+        if (StartingPoint is null || StartingPoint == endPoint)
         {
             return;
         }
@@ -57,9 +56,8 @@ public class SegmentCreator : MonoBehaviour
             _currentSegment.localScale.z
         );
         _currentSegment = null;
-        EditSpaceController.Instance.CurrentMode = Mode.CREATE_POINT;
-        _startingPoint.IsSelected = false;
-        _startingPoint = null;
+        StartingPoint.IsSelected = false;
+        StartingPoint = null;
     }
 
     public void TrackSegment(Transform toFollow)
