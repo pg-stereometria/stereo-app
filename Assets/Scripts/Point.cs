@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class Point : MonoBehaviour
 {
     private Color _baseColor = Color.blue;
-    private Color _mouseOverColor = Color.yellow;
     private Color _selectionColor = Color.red;
 
     private Renderer _renderer;
@@ -61,10 +60,6 @@ public class Point : MonoBehaviour
         if (_isSelected)
         {
             color = _selectionColor;
-        }
-        else if (_isMouseOver)
-        {
-            color = _mouseOverColor;
         }
         _renderer.material.color = color;
     }
