@@ -5,52 +5,67 @@ using UnityEngine.EventSystems;
 
 public class Point : MonoBehaviour
 {
-    [SerializeField]
-    private Color _highlightColor = Color.yellow;
-    private Color _startColor;
+    private Color _baseColor = Color.blue;
+    private Color _mouseOverColor = Color.yellow;
+    private Color _selectionColor = Color.red;
+
+    private Renderer _renderer;
+
+    private bool _isSelected = false;
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set
+        {
+            _isSelected = value;
+            UpdateMaterialColor();
+        }
+    }
+    private bool _isMouseOver = false;
+    public bool IsMouseOver
+    {
+        get => _isMouseOver;
+        private set
+        {
+            _isMouseOver = value;
+            UpdateMaterialColor();
+        }
+    }
+
+    void Start()
+    {
+        _renderer = GetComponent<Renderer>();
+        UpdateMaterialColor();
+    }
 
     void OnMouseEnter()
     {
-        if (BasicsCreator.Instance.CurrentMode == Mode.CONNECT_POINTS)
-            SegmentCreator.Instance.TrackSegment(transform);
-        BasicsCreator.Instance.CanCreatePoints = false;
+        IsMouseOver = true;
+        EditSpaceController.Instance.OnPointMouseEnter(this);
     }
 
     void OnMouseExit()
     {
-        BasicsCreator.Instance.CanCreatePoints = true;
+        IsMouseOver = false;
+        EditSpaceController.Instance.OnPointMouseExit(this);
     }
 
     void OnMouseOver()
     {
-        if (
-            Input.GetMouseButtonDown(0) && BasicsCreator.Instance.CurrentMode != Mode.CONNECT_POINTS
-        )
-        {
-            SegmentCreator.Instance.StartCreatingSegment(this);
-        }
-        else if (
-            Input.GetMouseButtonDown(0) && BasicsCreator.Instance.CurrentMode == Mode.CONNECT_POINTS
-        )
-        {
-            SegmentCreator.Instance.StopCreatingSegment(this);
-        }
-        else if (
-            Input.GetMouseButtonUp(0) && BasicsCreator.Instance.CurrentMode == Mode.CONNECT_POINTS
-        )
-        {
-            SegmentCreator.Instance.StopCreatingSegment(this);
-        }
+        EditSpaceController.Instance.OnPointMouseOver(this);
     }
 
-    public void HighlightPoint()
+    private void UpdateMaterialColor()
     {
-        _startColor = GetComponent<Renderer>().material.color;
-        GetComponent<Renderer>().material.color = _highlightColor;
-    }
-
-    public void ResetColor()
-    {
-        GetComponent<Renderer>().material.color = _startColor;
+        var color = _baseColor;
+        if (_isSelected)
+        {
+            color = _selectionColor;
+        }
+        else if (_isMouseOver)
+        {
+            color = _mouseOverColor;
+        }
+        _renderer.material.color = color;
     }
 }
