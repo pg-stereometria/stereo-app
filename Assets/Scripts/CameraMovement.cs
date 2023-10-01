@@ -6,6 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
     private float speed = 1f;
+
     [SerializeField]
     private Transform centrePoint;
 
@@ -78,9 +79,11 @@ public class CameraMovement : MonoBehaviour
         Vector3 cartCoords = transform.position;
         if (cartCoords.x == 0)
             cartCoords.x = Mathf.Epsilon;
-        _currentRadius = Mathf.Sqrt((cartCoords.x * cartCoords.x)
-                        + (cartCoords.y * cartCoords.y)
-                        + (cartCoords.z * cartCoords.z));
+        _currentRadius = Mathf.Sqrt(
+            (cartCoords.x * cartCoords.x)
+                + (cartCoords.y * cartCoords.y)
+                + (cartCoords.z * cartCoords.z)
+        );
         _currentPolar = Mathf.Atan(cartCoords.z / cartCoords.x);
         if (cartCoords.x < 0)
             _currentPolar += Mathf.PI;
