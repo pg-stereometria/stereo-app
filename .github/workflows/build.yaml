@@ -10,8 +10,6 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneWindows64
-          - StandaloneLinux64
           - Android
     runs-on: ubuntu-latest
     steps:
@@ -36,4 +34,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: build-${{ matrix.targetPlatform }}
-          path: build
+          path: build/${{ matrix.targetPlatform }}
