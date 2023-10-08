@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: c4a4a9dc9e41a104c94b2ed7ce46be5e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _segmentsParent: {instanceID: 0}
+  - _segmentPrefab: {fileID: 3731926971303906018, guid: f117d41e026895942947f179dc1a9804, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
