@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace StereoApp.Model
     {
         private const float CoplanarTolerance = 1e-5f;
         private readonly List<Point> _points;
+
+        public IEnumerable<Segment> Segments =>
+            _points.Select((point, i) => new Segment(point, _points[(i + 1) % _points.Count]));
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
         public event PropertyChangedEventHandler PropertyChanged;
