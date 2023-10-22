@@ -70,22 +70,12 @@ namespace StereoApp.Presenter
 
             var vertices = _mesh.vertices;
             var triangles = _mesh.triangles;
-            var normals = _mesh.normals;
-            var uv = _mesh.uv;
             _mesh.Clear();
 
             if (vertices.Length != _polygon.Count)
             {
                 vertices = new Vector3[_polygon.Count];
-
                 triangles = new int[3 * (_polygon.Count - 2)];
-
-                normals = new Vector3[_polygon.Count];
-                Array.Fill(normals, -Vector3.forward);
-
-                // TODO: figure out if we need to do this more correctly
-                uv = new Vector2[_polygon.Count];
-                Array.Fill(uv, Vector2.zero);
             }
 
             for (var i = 0; i < _polygon.Count; ++i)
@@ -105,8 +95,6 @@ namespace StereoApp.Presenter
 
             _mesh.vertices = vertices;
             _mesh.triangles = triangles;
-            _mesh.normals = normals;
-            _mesh.uv = uv;
             _meshFilter.mesh = _mesh;
         }
     }
