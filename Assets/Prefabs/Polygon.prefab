@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b881d220428f4902849e1ecbc20d35cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _segmentPrefab: {fileID: 3731926971303906018, guid: f117d41e026895942947f179dc1a9804, type: 3}
+  _pointPrefab: {fileID: 2345134072970349179, guid: e39c6c5ba6344924aaa151237093cb5c, type: 3}
 --- !u!23 &8382603248319958560
 MeshRenderer:
   m_ObjectHideFlags: 0

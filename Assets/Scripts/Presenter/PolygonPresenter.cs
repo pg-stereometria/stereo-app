@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using StereoApp.Model;
 using UnityEngine;
@@ -7,11 +8,19 @@ namespace StereoApp.Presenter
 {
     public class PolygonPresenter : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject _segmentPrefab;
+
+        [SerializeField]
+        private GameObject _pointPrefab;
+
         private Mesh _mesh;
         private MeshFilter _meshFilter;
 
         private MeshRenderer _meshRenderer;
         private Polygon _polygon;
+
+        private readonly List<GameObject> _gameObjects = new();
 
         public Polygon Polygon
         {
@@ -44,6 +53,7 @@ namespace StereoApp.Presenter
 
         public void OnDestroy()
         {
+            CleanupSegments();
             _mesh.Clear();
             Destroy(_meshFilter);
             Destroy(_mesh);
@@ -71,6 +81,7 @@ namespace StereoApp.Presenter
             var vertices = _mesh.vertices;
             var triangles = _mesh.triangles;
             _mesh.Clear();
+            CleanupSegments();
 
             if (vertices.Length != _polygon.Count)
             {
@@ -81,7 +92,28 @@ namespace StereoApp.Presenter
             for (var i = 0; i < _polygon.Count; ++i)
             {
                 var point = _polygon[i];
-                vertices[i] = new Vector3(point.X, point.Y, point.Z);
+                var vertex = point.ToVector3();
+                vertices[i] = vertex;
+                _gameObjects.Add(Instantiate(_pointPrefab, vertex, Quaternion.identity));
+            }
+
+            foreach (var segment in _polygon.Segments)
+            {
+                var gameObj = Instantiate(_segmentPrefab);
+
+                var firstVertex = segment.First.ToVector3();
+                var secondVertex = segment.Second.ToVector3();
+
+                var t = gameObj.transform;
+                t.position = firstVertex;
+                t.LookAt(secondVertex);
+                t.RotateAround(t.position, t.right, 90);
+
+                var localScale = t.localScale;
+                localScale.y = Vector3.Distance(secondVertex, firstVertex) / 2;
+                t.localScale = localScale;
+
+                _gameObjects.Add(gameObj);
             }
 
             // simple fan triangulation - only guaranteed to work on convex polygons
@@ -96,6 +128,16 @@ namespace StereoApp.Presenter
             _mesh.vertices = vertices;
             _mesh.triangles = triangles;
             _meshFilter.mesh = _mesh;
+        }
+
+        private void CleanupSegments()
+        {
+            foreach (var gameObj in _gameObjects)
+            {
+                Destroy(gameObj);
+            }
+
+            _gameObjects.Clear();
         }
     }
 }
