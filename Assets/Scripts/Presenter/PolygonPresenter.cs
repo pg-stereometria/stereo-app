@@ -94,12 +94,12 @@ namespace StereoApp.Presenter
                 var point = _polygon[i];
                 var vertex = point.ToVector3();
                 vertices[i] = vertex;
-                _gameObjects.Add(Instantiate(_pointPrefab, vertex, Quaternion.identity));
+                _gameObjects.Add(Instantiate(_pointPrefab, vertex, Quaternion.identity, transform));
             }
 
             foreach (var segment in _polygon.Segments)
             {
-                var gameObj = Instantiate(_segmentPrefab);
+                var gameObj = Instantiate(_segmentPrefab, transform);
 
                 var firstVertex = segment.First.ToVector3();
                 var secondVertex = segment.Second.ToVector3();

@@ -54,7 +54,7 @@ namespace StereoApp.Presenter
             CleanupPresenters();
             foreach (var polygon in _solid)
             {
-                var polygonObj = Instantiate(_polygonPrefab);
+                var polygonObj = Instantiate(_polygonPrefab, _polygonPrefab.transform.parent);
                 polygonObj.GetComponent<PolygonPresenter>().Polygon = polygon;
                 _polygons.Add(polygonObj);
             }
