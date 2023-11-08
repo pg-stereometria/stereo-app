@@ -8,6 +8,12 @@ public class CameraMovement : MonoBehaviour
     private float speed = 1f;
 
     [SerializeField]
+    private float minRadius = 1f;
+
+    [SerializeField]
+    private float maxRadius = 10f;
+
+    [SerializeField]
     private Transform centrePoint;
 
     private float _width;
@@ -52,7 +58,11 @@ public class CameraMovement : MonoBehaviour
         float prevTouchDeltaMag = (touchZeroPreviousPosition - touchOnePreviousPosition).magnitude;
         float TouchDeltaMag = (touch.position - touchOne.position).magnitude;
         float deltaMagDiff = prevTouchDeltaMag - TouchDeltaMag;
-        _currentRadius += deltaMagDiff * Time.deltaTime;
+        _currentRadius = Mathf.Clamp(
+            _currentRadius + deltaMagDiff * Time.deltaTime,
+            minRadius,
+            maxRadius
+        );
     }
 
     private void MoveCamera(Touch touch)
@@ -69,9 +79,9 @@ public class CameraMovement : MonoBehaviour
     private void UpdateCartesian()
     {
         float a = _currentRadius * Mathf.Cos(_currentElevation);
-        _newPosition.x = a * Mathf.Cos(_currentPolar);
-        _newPosition.y = _currentRadius * Mathf.Sin(_currentElevation);
-        _newPosition.z = a * Mathf.Sin(_currentPolar);
+        _newPosition.x = a * Mathf.Cos(_currentPolar) + centrePoint.position.x;
+        _newPosition.y = _currentRadius * Mathf.Sin(_currentElevation) + centrePoint.position.y;
+        _newPosition.z = a * Mathf.Sin(_currentPolar) + centrePoint.position.z;
     }
 
     private void CalculateStartingSphericalCoordinates()
