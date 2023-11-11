@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using StereoApp.Model.Interfaces;
 using UnityEngine;
 
 namespace StereoApp.Model
 {
-    public class Polygon : IList<Point>, INotifyCollectionChanged, INotifyPropertyChanged
+    public class Polygon
+        : ISerializableTo<Polygon, SerializedPolygon>,
+            IList<Point>,
+            INotifyCollectionChanged,
+            INotifyPropertyChanged
     {
         private const float CoplanarTolerance = 1e-5f;
         private readonly List<Point> _points;
@@ -39,6 +43,14 @@ namespace StereoApp.Model
                 Debug.Assert(IsCoplanar(point));
             }
 #endif
+        }
+
+        public SerializedPolygon ToSerializable()
+        {
+            return new SerializedPolygon
+            {
+                points = _points.Select(point => point.ToSerializable()).ToList()
+            };
         }
 
         private bool IsCoplanar(Point point)
@@ -208,6 +220,17 @@ namespace StereoApp.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
             CollectionChanged?.Invoke(this, e);
+        }
+    }
+
+    [Serializable]
+    public class SerializedPolygon : ISerializableFrom<SerializedPolygon, Polygon>
+    {
+        public List<SerializedPoint> points;
+
+        public Polygon ToActualType()
+        {
+            return new Polygon(points.Select(point => point.ToActualType()));
         }
     }
 }
