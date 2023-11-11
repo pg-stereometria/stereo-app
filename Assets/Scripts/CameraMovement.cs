@@ -19,7 +19,7 @@ public class CameraMovement : MonoBehaviour
     private float _width;
     private float _height;
 
-    private bool _fliped;
+    private bool _flipped;
     private float _currentRadius;
     private float _currentPolar;
     private float _currentElevation;
@@ -48,12 +48,12 @@ public class CameraMovement : MonoBehaviour
             UpdateCartesian();
             transform.position = _newPosition;
 
-            _fliped = false;
+            _flipped = false;
             Vector3 direction = Vector3.up;
             if (_currentElevation > Mathf.PI / 2 || _currentElevation < -Mathf.PI / 2)
             {
                 direction = Vector3.down;
-                _fliped = true;
+                _flipped = true;
             }
             transform.LookAt(centrePoint, direction);
         }
@@ -80,12 +80,13 @@ public class CameraMovement : MonoBehaviour
         if (touch.phase == TouchPhase.Moved)
         {
             int xMultiplier = 1;
-            if (_fliped)
+            if (_flipped)
                 xMultiplier = -1;
             Vector2 pos = touch.deltaPosition;
             _currentPolar += -pos.x * xMultiplier * speed * Time.deltaTime;
             _currentElevation += -pos.y * speed * Time.deltaTime;
 
+            // polar and elevation should be in range from -PI to PI
             if (_currentPolar > Mathf.PI)
                 _currentPolar -= 2 * Mathf.PI;
             if (_currentElevation > Mathf.PI)
