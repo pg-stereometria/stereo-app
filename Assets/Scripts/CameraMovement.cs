@@ -19,6 +19,7 @@ public class CameraMovement : MonoBehaviour
     private float _width;
     private float _height;
 
+    private bool _fliped;
     private float _currentRadius;
     private float _currentPolar;
     private float _currentElevation;
@@ -46,7 +47,15 @@ public class CameraMovement : MonoBehaviour
             }
             UpdateCartesian();
             transform.position = _newPosition;
-            transform.LookAt(centrePoint, Vector3.up);
+
+            _fliped = false;
+            Vector3 direction = Vector3.up;
+            if (_currentElevation > Mathf.PI / 2 || _currentElevation < -Mathf.PI / 2)
+            {
+                direction = Vector3.down;
+                _fliped = true;
+            }
+            transform.LookAt(centrePoint, direction);
         }
     }
 
@@ -70,9 +79,21 @@ public class CameraMovement : MonoBehaviour
         // Move the cube if the screen has the finger moving.
         if (touch.phase == TouchPhase.Moved)
         {
+            int xMultiplier = 1;
+            if (_fliped)
+                xMultiplier = -1;
             Vector2 pos = touch.deltaPosition;
-            _currentPolar += -pos.x * speed * Time.deltaTime;
+            _currentPolar += -pos.x * xMultiplier * speed * Time.deltaTime;
             _currentElevation += -pos.y * speed * Time.deltaTime;
+
+            if (_currentPolar > Mathf.PI)
+                _currentPolar -= 2 * Mathf.PI;
+            if (_currentElevation > Mathf.PI)
+                _currentElevation -= 2 * Mathf.PI;
+            if (_currentPolar < -Mathf.PI)
+                _currentPolar += 2 * Mathf.PI;
+            if (_currentElevation < -Mathf.PI)
+                _currentElevation += 2 * Mathf.PI;
         }
     }
 
