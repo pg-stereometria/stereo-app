@@ -10,8 +10,10 @@ namespace StereoApp
 
         [SerializeField]
         private GameObject coordinatesPrefab;
+
         [SerializeField]
         private GameObject polygonPrefab;
+
         [SerializeField]
         private GameObject coordinatesParent;
 
@@ -20,7 +22,7 @@ namespace StereoApp
 
         private Stack<Coordinates> coordinates;
 
-        private float currentY=0;
+        private float currentY = 0;
         private int count = 0;
 
         // Start is called before the first frame update
@@ -29,7 +31,7 @@ namespace StereoApp
             RectTransform rt = coordinatesParent.GetComponent<RectTransform>();
             Vector3[] worldCorners = new Vector3[4];
             rt.GetWorldCorners(worldCorners);
-            currentY= worldCorners[1].y; // Get top
+            currentY = worldCorners[1].y; // Get top
             coordinates = new Stack<Coordinates>();
         }
 
@@ -50,7 +52,12 @@ namespace StereoApp
 
         private void AddNewPoint()
         {
-            var newGameObject = Instantiate(coordinatesPrefab, new Vector3(0, currentY, 0), Quaternion.identity, coordinatesParent.transform);
+            var newGameObject = Instantiate(
+                coordinatesPrefab,
+                new Vector3(0, currentY, 0),
+                Quaternion.identity,
+                coordinatesParent.transform
+            );
             var coordinate = newGameObject.GetComponent<Coordinates>();
 
             currentY -= newGameObject.GetComponent<RectTransform>().rect.height + offset;
@@ -65,7 +72,13 @@ namespace StereoApp
             List<Model.Point> points = new List<Model.Point>();
             foreach (var coordinate in coordinates)
             {
-                points.Add(new Model.Point(float.Parse(coordinate.xCoordiante.text), float.Parse(coordinate.yCoordiante.text), float.Parse(coordinate.zCoordiante.text)));
+                points.Add(
+                    new Model.Point(
+                        float.Parse(coordinate.xCoordiante.text),
+                        float.Parse(coordinate.yCoordiante.text),
+                        float.Parse(coordinate.zCoordiante.text)
+                    )
+                );
             }
             var polygon = new Model.Polygon(points);
             var newPolygon = Instantiate(polygonPrefab);
