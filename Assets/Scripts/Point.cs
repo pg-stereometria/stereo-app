@@ -36,22 +36,22 @@ namespace StereoApp
             UpdateMaterialColor();
         }
 
-        void OnMouseEnter()
-        {
-            IsMouseOver = true;
-            EditSpaceController.Instance.OnPointMouseEnter(this);
-        }
+        //void OnMouseEnter()
+        //{
+        //    IsMouseOver = true;
+        //    EditSpaceController.Instance.OnPointMouseEnter(this);
+        //}
 
-        void OnMouseExit()
-        {
-            IsMouseOver = false;
-            EditSpaceController.Instance.OnPointMouseExit(this);
-        }
+        //void OnMouseExit()
+        //{
+        //    IsMouseOver = false;
+        //    EditSpaceController.Instance.OnPointMouseExit(this);
+        //}
 
-        void OnMouseOver()
-        {
-            EditSpaceController.Instance.OnPointMouseOver(this);
-        }
+        //void OnMouseOver()
+        //{
+        //    EditSpaceController.Instance.OnPointMouseOver(this);
+        //}
 
         private void UpdateMaterialColor()
         {

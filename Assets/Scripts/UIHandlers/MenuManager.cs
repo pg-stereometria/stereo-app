@@ -7,6 +7,8 @@ namespace StereoApp
     public class MenuManager : MonoBehaviour
     {
         [SerializeField]
+        private CameraMovement camera;
+        [SerializeField]
         private RectTransform menuButton;
         [SerializeField]
         private RectTransform toolbarMenu;
@@ -17,11 +19,13 @@ namespace StereoApp
             {
                 menuButton.anchoredPosition = new Vector2(menuButton.anchoredPosition.x, menuButton.anchoredPosition.y + toolbarMenu.rect.height);
                 toolbarMenu.gameObject.SetActive(true);
+                camera.enabled = false;
             }
             else
             {
                 menuButton.anchoredPosition = new Vector2(menuButton.anchoredPosition.x, menuButton.anchoredPosition.y - toolbarMenu.rect.height);
                 toolbarMenu.gameObject.SetActive(false);
+                camera.enabled = true;
             }
         }
     }
