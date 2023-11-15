@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StereoApp
+namespace StereoApp.UIHandlers
 {
     public class MenuManager : MonoBehaviour
     {

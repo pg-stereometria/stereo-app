@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StereoApp
+namespace StereoApp.UIHandlers.CreatePolygonMenu
 {
     public class CreatePolygonMenuHandler : MonoBehaviour
     {
@@ -26,10 +26,10 @@ namespace StereoApp
         private int count = 0;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            RectTransform rt = coordinatesParent.GetComponent<RectTransform>();
-            Vector3[] worldCorners = new Vector3[4];
+            var rt = coordinatesParent.GetComponent<RectTransform>();
+            var worldCorners = new Vector3[4];
             rt.GetWorldCorners(worldCorners);
             currentY = worldCorners[1].y; // Get top
             coordinates = new Stack<Coordinates>();
@@ -43,8 +43,11 @@ namespace StereoApp
         public void OnDeletePointPressed()
         {
             if (count == 0)
+            {
                 return;
-            GameObject lastPoint = coordinates.Pop().gameObject;
+            }
+
+            var lastPoint = coordinates.Pop().gameObject;
             count--;
             currentY += lastPoint.GetComponent<RectTransform>().rect.height + offset;
             Destroy(lastPoint);
@@ -69,7 +72,7 @@ namespace StereoApp
 
         public void OnFinishPressed()
         {
-            List<Model.Point> points = new List<Model.Point>();
+            var points = new List<Model.Point>();
             foreach (var coordinate in coordinates)
             {
                 points.Add(
@@ -80,6 +83,7 @@ namespace StereoApp
                     )
                 );
             }
+
             var polygon = new Model.Polygon(points);
             var newPolygon = Instantiate(polygonPrefab);
             newPolygon.GetComponentInParent<Presenter.PolygonPresenter>().Polygon = polygon;

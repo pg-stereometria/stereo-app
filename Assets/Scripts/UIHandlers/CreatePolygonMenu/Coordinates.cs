@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace StereoApp
+namespace StereoApp.UIHandlers.CreatePolygonMenu
 {
     public class Coordinates : MonoBehaviour
     {
@@ -14,9 +14,9 @@ namespace StereoApp
         public TMP_InputField zCoordiante;
 
         // Start is called before the first frame update
-        void Start() { }
+        private void Start() { }
 
         // Update is called once per frame
-        void Update() { }
+        private void Update() { }
     }
 }
