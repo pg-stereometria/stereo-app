@@ -77,9 +77,9 @@ namespace StereoApp.UIHandlers.CreatePolygonMenu
             {
                 points.Add(
                     new Model.Point(
-                        float.Parse(coordinate.xCoordiante.text),
-                        float.Parse(coordinate.yCoordiante.text),
-                        float.Parse(coordinate.zCoordiante.text)
+                        float.Parse(coordinate.xCoordinate.text),
+                        float.Parse(coordinate.yCoordinate.text),
+                        float.Parse(coordinate.zCoordinate.text)
                     )
                 );
             }

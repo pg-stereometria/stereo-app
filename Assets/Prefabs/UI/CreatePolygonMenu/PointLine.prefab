@@ -1711,9 +1711,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point: {fileID: 0}
   title: {fileID: 5466781425372927925}
-  xCoordiante: {fileID: 5466781424304667490}
-  yCoordiante: {fileID: 5466781425186810784}
-  zCoordiante: {fileID: 5466781423708091538}
+  xCoordinate: {fileID: 5466781424304667490}
+  yCoordinate: {fileID: 5466781425186810784}
+  zCoordinate: {fileID: 5466781423708091538}
 --- !u!1 &5466781425175452375
 GameObject:
   m_ObjectHideFlags: 0
