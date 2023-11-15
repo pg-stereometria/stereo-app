@@ -5,7 +5,7 @@ namespace StereoApp.UIHandlers.CreatePolygonMenu
 {
     public class CreatePolygonMenuHandler : MonoBehaviour
     {
-        private const int START_ALPHAPHET = 65;
+        private const int ALPHABET_START = 'A';
 
         [SerializeField]
         private GameObject coordinatesPrefab;
@@ -63,7 +63,7 @@ namespace StereoApp.UIHandlers.CreatePolygonMenu
             var coordinate = newGameObject.GetComponent<Coordinates>();
 
             currentY -= newGameObject.GetComponent<RectTransform>().rect.height + offset;
-            coordinate.title.text = "Point " + (char)(START_ALPHAPHET + count) + ":";
+            coordinate.title.text = "Point " + (char)(ALPHABET_START + count) + ":";
             count++;
 
             coordinates.Push(coordinate);
