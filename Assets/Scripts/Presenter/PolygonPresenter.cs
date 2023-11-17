@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using StereoApp.Model;
@@ -29,12 +30,22 @@ namespace StereoApp.Presenter
             {
                 if (_polygon != null)
                 {
+                    foreach (var point in _polygon)
+                    {
+                        point.PropertyChanged -= OnPointChanged;
+                    }
+
                     _polygon.CollectionChanged -= OnPolygonCollectionChanged;
                 }
 
                 _polygon = value;
                 if (value != null)
                 {
+                    foreach (var point in value)
+                    {
+                        point.PropertyChanged += OnPointChanged;
+                    }
+
                     value.CollectionChanged += OnPolygonCollectionChanged;
                 }
 
@@ -60,8 +71,43 @@ namespace StereoApp.Presenter
             Destroy(_meshRenderer);
         }
 
+        private void OnPointChanged(object sender, PropertyChangedEventArgs e)
+        {
+            UpdateMesh();
+        }
+
         private void OnPolygonCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (Model.Point point in e.NewItems)
+                    {
+                        point.PropertyChanged += OnPointChanged;
+                    }
+
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (Model.Point point in e.OldItems)
+                    {
+                        point.PropertyChanged -= OnPointChanged;
+                    }
+
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    foreach (Model.Point point in e.OldItems)
+                    {
+                        point.PropertyChanged -= OnPointChanged;
+                    }
+
+                    foreach (Model.Point point in e.NewItems)
+                    {
+                        point.PropertyChanged += OnPointChanged;
+                    }
+
+                    break;
+            }
+
             UpdateMesh();
         }
 
