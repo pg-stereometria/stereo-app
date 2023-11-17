@@ -181,36 +181,36 @@ namespace StereoApp.Model
             get => _points[index];
             set
             {
-                if (_points.Count == 3)
+                if (_points.Count != 3)
                 {
-                    _points[index] = value;
-                    return;
+                    bool isCoplanar;
+                    if (index < 2)
+                    {
+                        // temporary swap
+                        (_points[index], _points[3]) = (_points[3], _points[index]);
+                        isCoplanar = IsCoplanar(value);
+                        (_points[index], _points[3]) = (_points[3], _points[index]);
+                    }
+                    else
+                    {
+                        isCoplanar = IsCoplanar(value);
+                    }
+
+                    if (!isCoplanar)
+                    {
+                        throw new ArgumentException(
+                            "The point is not coplanar with existing points."
+                        );
+                    }
                 }
 
-                bool isCoplanar;
-                if (index < 2)
-                {
-                    // temporary swap
-                    (_points[index], _points[3]) = (_points[3], _points[index]);
-                    isCoplanar = IsCoplanar(value);
-                    (_points[index], _points[3]) = (_points[3], _points[index]);
-                }
-                else
-                {
-                    isCoplanar = IsCoplanar(value);
-                }
-
-                if (!isCoplanar)
-                {
-                    throw new ArgumentException("The point is not coplanar with existing points.");
-                }
-
+                var oldValue = _points[index];
                 _points[index] = value;
                 OnCollectionChanged(
                     new NotifyCollectionChangedEventArgs(
                         NotifyCollectionChangedAction.Replace,
                         value,
-                        index
+                        oldValue
                     )
                 );
             }
