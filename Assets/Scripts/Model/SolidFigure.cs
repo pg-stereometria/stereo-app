@@ -11,6 +11,8 @@ namespace StereoApp.Model
         : ObservableCollection<Polygon>,
             ISerializableTo<SolidFigure, SerializedSolidFigure>
     {
+        public ISet<Point> Points => new HashSet<Point>(this.SelectMany(polygon => polygon));
+
         public SolidFigure() { }
 
         public SolidFigure(IEnumerable<Polygon> collection)
