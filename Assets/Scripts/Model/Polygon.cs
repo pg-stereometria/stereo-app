@@ -176,6 +176,12 @@ namespace StereoApp.Model
             );
         }
 
+        public void ReplaceAll(List<Point> points)
+        {
+            _points.Clear();
+            _points.AddRange(points);
+        }
+
         public Point this[int index]
         {
             get => _points[index];

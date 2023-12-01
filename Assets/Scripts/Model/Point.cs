@@ -92,6 +92,11 @@ namespace StereoApp.Model
         {
             return new Point(a.X + b.X, a.Y + b.Y, a.Z + b.Z, a.Label);
         }
+
+        public override string ToString()
+        {
+            return Label+"("+X+","+Y+","+Z+")";
+        }
     }
 
     [Serializable]
