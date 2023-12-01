@@ -95,7 +95,7 @@ namespace StereoApp.Model
 
         public override string ToString()
         {
-            return Label+"("+X+","+Y+","+Z+")";
+            return Label + "(" + X + "," + Y + "," + Z + ")";
         }
     }
 

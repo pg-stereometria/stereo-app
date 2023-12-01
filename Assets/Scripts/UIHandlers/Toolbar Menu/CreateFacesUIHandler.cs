@@ -6,12 +6,13 @@ using TMPro;
 namespace StereoApp.UIHandlers
 {
     public class CreateFacesUIHandler : MonoBehaviour
-    { 
+    {
         [SerializeField]
         private Presenter.SolidFigurePresenter solidPresenter;
 
         [SerializeField]
         private GameObject buttonPrefab;
+
         [SerializeField]
         private RectTransform facesParent;
 
@@ -40,7 +41,7 @@ namespace StereoApp.UIHandlers
         {
             var newGameObject = Instantiate(
                 buttonPrefab,
-                facesParent.TransformPoint(new Vector3(facesParent.rect.width/2, currentY, 0)),
+                facesParent.TransformPoint(new Vector3(facesParent.rect.width / 2, currentY, 0)),
                 Quaternion.identity,
                 facesParent
             );
@@ -48,10 +49,13 @@ namespace StereoApp.UIHandlers
             RectTransform rt = newGameObject.GetComponent<RectTransform>();
             currentY -= rt.rect.height + offset;
             if (Mathf.Abs(currentY) > facesParent.rect.height)
-                facesParent.sizeDelta = new Vector2(facesParent.sizeDelta.x, facesParent.sizeDelta.y + rt.rect.height + offset);
+                facesParent.sizeDelta = new Vector2(
+                    facesParent.sizeDelta.x,
+                    facesParent.sizeDelta.y + rt.rect.height + offset
+                );
             faceCount++;
             lastButton = newGameObject.GetComponent<FaceButtonHandler>();
-            
+
             var ButtonText = newGameObject.GetComponentInChildren<TMP_Text>();
             ButtonText.text = "Face " + faceCount + ":";
             MenuManager.Instance.polygonMenu.CurrentSolid = solidPresenter.Solid;

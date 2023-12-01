@@ -18,7 +18,7 @@ namespace StereoApp.UIHandlers
         private Model.SolidFigure _currentSolid;
         public Model.SolidFigure CurrentSolid
         {
-            get => _currentSolid; 
+            get => _currentSolid;
             set
             {
                 if (value == null)

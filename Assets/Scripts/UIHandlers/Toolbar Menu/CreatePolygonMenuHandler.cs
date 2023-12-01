@@ -9,6 +9,7 @@ namespace StereoApp.UIHandlers
 
         [SerializeField]
         private GameObject coordinatesPrefab;
+
         [SerializeField]
         private GameObject polygonPrefab;
 
@@ -45,7 +46,7 @@ namespace StereoApp.UIHandlers
         public void FillInDataFromPolygon(Model.Polygon polygon)
         {
             CurrentPolygon = polygon;
-            foreach(var point in polygon)
+            foreach (var point in polygon)
             {
                 AddNewPoint();
                 coordinates.Peek().SelectPoint(point);
@@ -93,7 +94,7 @@ namespace StereoApp.UIHandlers
             var pointsCount = CurrentSolid.Count;
             foreach (var coordinate in coordinates)
             {
-                if(coordinate.point != null)
+                if (coordinate.point != null)
                 {
                     coordinate.point.X = float.Parse(coordinate.xCoordinate.text);
                     coordinate.point.Y = float.Parse(coordinate.yCoordinate.text);
@@ -106,11 +107,12 @@ namespace StereoApp.UIHandlers
                         float.Parse(coordinate.xCoordinate.text),
                         float.Parse(coordinate.yCoordinate.text),
                         float.Parse(coordinate.zCoordinate.text),
-                        ((char)(ALPHABET_START + pointsCount + points.Count)).ToString())
-                    );
+                        ((char)(ALPHABET_START + pointsCount + points.Count)).ToString()
+                    )
+                );
             }
 
-            if(CurrentPolygon == null)
+            if (CurrentPolygon == null)
             {
                 var polygon = new Model.Polygon(points);
                 CurrentSolid.Add(polygon);

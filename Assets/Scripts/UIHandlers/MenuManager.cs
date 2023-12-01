@@ -22,6 +22,7 @@ namespace StereoApp.UIHandlers
 
         [SerializeField]
         private RectTransform menuButton;
+
         [SerializeField]
         private RectTransform toolbarMenu;
 
