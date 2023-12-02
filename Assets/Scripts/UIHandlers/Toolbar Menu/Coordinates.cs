@@ -27,9 +27,9 @@ namespace StereoApp.UIHandlers
                 }
                 _currentSolid = value;
                 dropdown.ClearOptions();
-                dropdown.AddOptions(value.Points.Select(s => s.ToString()).ToList());
                 dropdown.AddOptions(new List<string>() { "New Point" });
-                dropdown.value = dropdown.options.Count - 1;
+                dropdown.AddOptions(value.Points.Select(s => s.ToString()).ToList());
+                dropdown.value = 0;
             }
         }
 
@@ -38,6 +38,7 @@ namespace StereoApp.UIHandlers
             var value = dropdown.options[dropdown.value].text;
             if (value == "New Point")
             {
+                point = null;
                 xCoordinate.text = "";
                 yCoordinate.text = "";
                 zCoordinate.text = "";

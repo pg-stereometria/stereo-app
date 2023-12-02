@@ -106,6 +106,9 @@ namespace StereoApp.Presenter
                     }
 
                     break;
+                case NotifyCollectionChangedAction.Reset:
+                    UpdateMesh();
+                    break;
             }
 
             UpdateMesh();

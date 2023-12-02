@@ -91,8 +91,13 @@ namespace StereoApp.UIHandlers
         public void OnFinishPressed()
         {
             var points = new List<Model.Point>();
-            var pointsCount = CurrentSolid.Count;
+            var pointsCount = CurrentSolid.Points.Count;
+            var reversedCoordinates = new List<Coordinates>();
             foreach (var coordinate in coordinates)
+            {
+                reversedCoordinates.Add(coordinate);
+            }
+            foreach (var coordinate in reversedCoordinates)
             {
                 if (coordinate.point != null)
                 {

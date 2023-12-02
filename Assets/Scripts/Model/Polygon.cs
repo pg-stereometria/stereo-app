@@ -180,6 +180,9 @@ namespace StereoApp.Model
         {
             _points.Clear();
             _points.AddRange(points);
+            OnCollectionChanged(
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)
+            );
         }
 
         public Point this[int index]
