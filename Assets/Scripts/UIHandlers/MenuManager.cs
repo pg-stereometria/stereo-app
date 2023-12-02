@@ -18,13 +18,17 @@ namespace StereoApp.UIHandlers
         public CreatePolygonMenuHandler polygonMenu;
 
         [SerializeField]
-        private CameraMovement camera;
-
-        [SerializeField]
         private RectTransform menuButton;
 
         [SerializeField]
         private RectTransform toolbarMenu;
+
+        private CameraMovement cameraMovement;
+
+        private void Start()
+        {
+            cameraMovement = Camera.main.GetComponent<CameraMovement>();
+        }
 
         public void OnMenuButtonPressed()
         {
@@ -35,7 +39,7 @@ namespace StereoApp.UIHandlers
                     menuButton.anchoredPosition.y + toolbarMenu.rect.height
                 );
                 toolbarMenu.gameObject.SetActive(true);
-                camera.enabled = false;
+                cameraMovement.enabled = false;
             }
             else
             {
@@ -44,7 +48,7 @@ namespace StereoApp.UIHandlers
                     menuButton.anchoredPosition.y - toolbarMenu.rect.height
                 );
                 toolbarMenu.gameObject.SetActive(false);
-                camera.enabled = true;
+                cameraMovement.enabled = true;
             }
         }
 

@@ -106,9 +106,6 @@ namespace StereoApp.Presenter
                     }
 
                     break;
-                case NotifyCollectionChangedAction.Reset:
-                    UpdateMesh();
-                    break;
             }
 
             UpdateMesh();
@@ -143,7 +140,14 @@ namespace StereoApp.Presenter
                 var point = _polygon[i];
                 var vertex = point.ToVector3();
                 vertices[i] = vertex;
-                _gameObjects.Add(Instantiate(_pointPrefab, vertex, Quaternion.identity, transform));
+                var newGameObject = Instantiate(
+                    _pointPrefab,
+                    vertex,
+                    Quaternion.identity,
+                    transform
+                );
+                _gameObjects.Add(newGameObject);
+                newGameObject.GetComponent<PointPresenter>().Point = point;
             }
 
             foreach (var segment in _polygon.Segments)
