@@ -45,7 +45,7 @@ namespace StereoApp.UIHandlers
                 return;
             }
             point = CurrentSolid.Points.Where(s => s.ToString() == value).Single();
-            string pattern = @"\d+\.?\d*";
+            string pattern = @"-?\d+\.?\d*";
             Match match = Regex.Match(value, pattern);
             xCoordinate.text = match.Value;
             match = match.NextMatch();
