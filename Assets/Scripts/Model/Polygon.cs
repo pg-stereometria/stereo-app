@@ -16,7 +16,7 @@ namespace StereoApp.Model
             INotifyPropertyChanged
     {
         private const float CoplanarTolerance = 1e-5f;
-        private readonly List<Point> _points;
+        private List<Point> _points;
 
         public IEnumerable<Segment> Segments =>
             _points.Select((point, i) => new Segment(point, _points[(i + 1) % _points.Count]));
@@ -176,12 +176,16 @@ namespace StereoApp.Model
             );
         }
 
-        public void ReplaceAll(List<Point> points)
+        public void ReplaceAll(IEnumerable<Point> points)
         {
-            _points.Clear();
-            _points.AddRange(points);
+            var oldItems = _points;
+            _points = new List<Point>(points);
             OnCollectionChanged(
-                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)
+                new NotifyCollectionChangedEventArgs(
+                    NotifyCollectionChangedAction.Replace,
+                    oldItems,
+                    _points.AsReadOnly()
+                )
             );
         }
 
