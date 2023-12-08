@@ -5,7 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace StereoApp.UIHandlers
+namespace StereoApp.UIHandlers.ToolbarMenu
 {
     public class Coordinates : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace StereoApp.UIHandlers
+namespace StereoApp.UIHandlers.ToolbarMenu
 {
     public class CreateFacesUIHandler : MonoBehaviour
     {
