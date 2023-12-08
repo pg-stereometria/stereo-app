@@ -1,17 +1,35 @@
+using StereoApp.UIHandlers.ToolbarMenu;
 using UnityEngine;
 
 namespace StereoApp.UIHandlers
 {
     public class MenuManager : MonoBehaviour
     {
-        [SerializeField]
-        private CameraMovement camera;
+        public static MenuManager Instance;
+
+        private void Awake()
+        {
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(this);
+        }
+
+        public CreateFacesUIHandler facesMenu;
+        public CreatePolygonMenuHandler polygonMenu;
 
         [SerializeField]
         private RectTransform menuButton;
 
         [SerializeField]
         private RectTransform toolbarMenu;
+
+        private CameraMovement cameraMovement;
+
+        private void Start()
+        {
+            cameraMovement = Camera.main.GetComponent<CameraMovement>();
+        }
 
         public void OnMenuButtonPressed()
         {
@@ -22,7 +40,7 @@ namespace StereoApp.UIHandlers
                     menuButton.anchoredPosition.y + toolbarMenu.rect.height
                 );
                 toolbarMenu.gameObject.SetActive(true);
-                camera.enabled = false;
+                cameraMovement.enabled = false;
             }
             else
             {
@@ -31,8 +49,26 @@ namespace StereoApp.UIHandlers
                     menuButton.anchoredPosition.y - toolbarMenu.rect.height
                 );
                 toolbarMenu.gameObject.SetActive(false);
-                camera.enabled = true;
+                cameraMovement.enabled = true;
             }
+        }
+
+        public void ShowFacesMenu()
+        {
+            HideEverythingInToolbar();
+            facesMenu.gameObject.SetActive(true);
+        }
+
+        public void ShowPolygonMenu()
+        {
+            HideEverythingInToolbar();
+            polygonMenu.gameObject.SetActive(true);
+        }
+
+        public void HideEverythingInToolbar()
+        {
+            facesMenu.gameObject.SetActive(false);
+            polygonMenu.gameObject.SetActive(false);
         }
     }
 }

@@ -81,26 +81,26 @@ namespace StereoApp.Presenter
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach (Model.Point point in e.NewItems)
+                    foreach (Point point in e.NewItems)
                     {
                         point.PropertyChanged += OnPointChanged;
                     }
 
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (Model.Point point in e.OldItems)
+                    foreach (Point point in e.OldItems)
                     {
                         point.PropertyChanged -= OnPointChanged;
                     }
 
                     break;
                 case NotifyCollectionChangedAction.Replace:
-                    foreach (Model.Point point in e.OldItems)
+                    foreach (Point point in e.OldItems)
                     {
                         point.PropertyChanged -= OnPointChanged;
                     }
 
-                    foreach (Model.Point point in e.NewItems)
+                    foreach (Point point in e.NewItems)
                     {
                         point.PropertyChanged += OnPointChanged;
                     }
@@ -140,7 +140,14 @@ namespace StereoApp.Presenter
                 var point = _polygon[i];
                 var vertex = point.ToVector3();
                 vertices[i] = vertex;
-                _gameObjects.Add(Instantiate(_pointPrefab, vertex, Quaternion.identity, transform));
+                var newGameObject = Instantiate(
+                    _pointPrefab,
+                    vertex,
+                    Quaternion.identity,
+                    transform
+                );
+                newGameObject.GetComponent<PointPresenter>().Point = point;
+                _gameObjects.Add(newGameObject);
             }
 
             foreach (var segment in _polygon.Segments)
