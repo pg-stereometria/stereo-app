@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace StereoApp.UIHandlers.ToolbarMenu
@@ -40,6 +41,7 @@ namespace StereoApp.UIHandlers.ToolbarMenu
             {
                 Destroy(child.gameObject);
             }
+
             SetDefaultValues();
         }
 
@@ -92,12 +94,7 @@ namespace StereoApp.UIHandlers.ToolbarMenu
         {
             var points = new List<Model.Point>();
             var pointsCount = CurrentSolid.Points.Count;
-            var reversedCoordinates = new List<Coordinates>();
-            foreach (var coordinate in coordinates)
-            {
-                reversedCoordinates.Add(coordinate);
-            }
-            foreach (var coordinate in reversedCoordinates)
+            foreach (var coordinate in coordinates.Reverse())
             {
                 if (coordinate.point != null)
                 {
@@ -107,6 +104,7 @@ namespace StereoApp.UIHandlers.ToolbarMenu
                     points.Add(coordinate.point);
                     continue;
                 }
+
                 points.Add(
                     new Model.Point(
                         float.Parse(coordinate.xCoordinate.text),
