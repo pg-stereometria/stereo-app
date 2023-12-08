@@ -8,7 +8,7 @@ namespace StereoApp.Presenter
     public class DisplayAboveObject : MonoBehaviour
     {
         [SerializeField]
-        private PointPresenter pointPresenter;
+        private GameObject target;
 
         [SerializeField]
         private Vector3 offset;
@@ -16,12 +16,14 @@ namespace StereoApp.Presenter
         private Transform worldSpaceCanvas;
         private Transform cameraTransform;
 
+        public string Text { get; set; }
+
         // Start is called before the first frame update
         void Start()
         {
             worldSpaceCanvas = GameObject.FindWithTag("WorldSpaceCanvas").transform;
             transform.SetParent(worldSpaceCanvas);
-            GetComponent<TMP_Text>().text = pointPresenter.Point.Label;
+            GetComponent<TMP_Text>().text = Text;
 
             cameraTransform = Camera.main.transform;
         }
@@ -33,7 +35,7 @@ namespace StereoApp.Presenter
                 transform.position - cameraTransform.position,
                 cameraTransform.up
             );
-            transform.position = pointPresenter.transform.position + offset;
+            transform.position = target.transform.position + offset;
             if (
                 Physics.Raycast(
                     cameraTransform.position,
@@ -41,7 +43,7 @@ namespace StereoApp.Presenter
                 )
             )
             {
-                transform.position = pointPresenter.transform.position - offset;
+                transform.position = target.transform.position - offset;
             }
         }
     }
