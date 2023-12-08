@@ -146,8 +146,8 @@ namespace StereoApp.Presenter
                     Quaternion.identity,
                     transform
                 );
-                _gameObjects.Add(newGameObject);
                 newGameObject.GetComponent<PointPresenter>().Point = point;
+                _gameObjects.Add(newGameObject);
             }
 
             foreach (var segment in _polygon.Segments)
