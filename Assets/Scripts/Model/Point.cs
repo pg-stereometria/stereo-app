@@ -55,8 +55,6 @@ namespace StereoApp.Model
             }
         }
 
-        public bool Exists { get; set; }
-
         public Point(float x, float y, float z)
         {
             X = x;
