@@ -20,6 +20,9 @@ namespace StereoApp.UIHandlers
         [SerializeField]
         private SolidFigurePresenter _solidPresenter;
 
+        [SerializeField]
+        private SpherePresenter _spherePresenter;
+
         private const double Radius = 5.0;
 
         public void Start()
@@ -41,13 +44,17 @@ namespace StereoApp.UIHandlers
 
         private void OnValueChange()
         {
-            if (_shapeTypeDropdown.value == 0)
+            switch (_shapeTypeDropdown.value)
             {
-                GeneratePrism();
-            }
-            else
-            {
-                GeneratePyramid();
+                case 0:
+                    GeneratePrism();
+                    break;
+                case 1:
+                    GeneratePyramid();
+                    break;
+                case 2:
+                    GenerateSphere();
+                    break;
             }
         }
 
@@ -89,6 +96,7 @@ namespace StereoApp.UIHandlers
             }
 
             _solidPresenter.Solid = solid;
+            _spherePresenter.Sphere = null;
         }
 
         private void GeneratePyramid()
@@ -107,6 +115,14 @@ namespace StereoApp.UIHandlers
             }
 
             _solidPresenter.Solid = solid;
+            _spherePresenter.Sphere = null;
+        }
+
+        private void GenerateSphere()
+        {
+            var sphere = new Sphere((int)_sideCountSlider.value);
+            _solidPresenter.Solid = null;
+            _spherePresenter.Sphere = sphere;
         }
     }
 }
