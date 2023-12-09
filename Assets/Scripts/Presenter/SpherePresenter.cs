@@ -7,6 +7,9 @@ namespace StereoApp.Presenter
 {
     public class SpherePresenter : GeneratedMeshPresenter<Sphere>
     {
+        [SerializeField]
+        private GameObject _circlePrefab;
+
         // number of horizontal (☰) dividers - i.e. parallels on a globe
         private const int PARALLELS = 30;
 
@@ -88,6 +91,10 @@ namespace StereoApp.Presenter
                     ++n;
                 }
             }
+
+            var circleObj = Instantiate(_circlePrefab.gameObject, transform.parent);
+            circleObj.GetComponent<CirclePresenter>().Figure = Figure.Circle;
+            TrackGameObject(circleObj);
 
             UpdateMesh(vertices, triangles, uv);
         }

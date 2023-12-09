@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c77c28b672b64a8c8c9ed9475d94346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _circlePrefab: {fileID: 2722438605169112250, guid: 2b3f89247e33fa43e86ea9d549d9880b, type: 3}
 --- !u!23 &6575650969619431695
 MeshRenderer:
   m_ObjectHideFlags: 0

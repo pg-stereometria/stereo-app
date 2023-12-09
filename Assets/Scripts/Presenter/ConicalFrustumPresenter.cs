@@ -8,6 +8,9 @@ namespace StereoApp.Presenter
 {
     public class ConicalFrustumPresenter : GeneratedMeshPresenter<IConicalFrustum>
     {
+        [SerializeField]
+        private GameObject _circlePrefab;
+
         // number of horizontal (☰) dividers - i.e. parallels on a globe
         private const int PARALLELS = 30;
 
@@ -93,6 +96,24 @@ namespace StereoApp.Presenter
 
                     ++n;
                 }
+            }
+
+            var height = Figure.Height;
+            var bottomBase = Figure.BottomBase;
+            var topBase = Figure.TopBase;
+            var circleObj = Instantiate(_circlePrefab.gameObject, transform.parent);
+            var presenter = circleObj.GetComponent<CirclePresenter>();
+            presenter.Figure = bottomBase;
+            presenter.Y = 0.0f;
+            TrackGameObject(circleObj);
+
+            if (topBase.Valid)
+            {
+                circleObj = Instantiate(_circlePrefab.gameObject, transform.parent);
+                presenter = circleObj.GetComponent<CirclePresenter>();
+                presenter.Figure = topBase;
+                presenter.Y = height;
+                TrackGameObject(circleObj);
             }
 
             UpdateMesh(vertices, triangles, uv);

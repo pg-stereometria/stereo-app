@@ -14,6 +14,9 @@ namespace StereoApp.Presenter
         [SerializeField]
         private GameObject _pointPrefab;
 
+        [SerializeField]
+        private bool _renderPoints = true;
+
         public override Polygon Figure
         {
             set
@@ -90,6 +93,7 @@ namespace StereoApp.Presenter
             Vector2[] uv
         )
         {
+            var renderPoints = _renderPoints;
             if (vertices.Length != figure.Count)
             {
                 vertices = new Vector3[figure.Count];
@@ -101,6 +105,11 @@ namespace StereoApp.Presenter
                 var point = figure[i];
                 var vertex = point.ToVector3();
                 vertices[i] = vertex;
+                if (!renderPoints)
+                {
+                    continue;
+                }
+
                 var newGameObject = Instantiate(
                     _pointPrefab,
                     vertex,
