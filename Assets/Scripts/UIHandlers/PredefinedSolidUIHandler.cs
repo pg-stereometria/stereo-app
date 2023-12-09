@@ -23,6 +23,9 @@ namespace StereoApp.UIHandlers
         [SerializeField]
         private SpherePresenter _spherePresenter;
 
+        [SerializeField]
+        private ConicalFrustumPresenter _frustumPresenter;
+
         private const double Radius = 5.0;
 
         public void Start()
@@ -54,6 +57,15 @@ namespace StereoApp.UIHandlers
                     break;
                 case 2:
                     GenerateSphere();
+                    break;
+                case 3:
+                    GenerateCylinder();
+                    break;
+                case 4:
+                    GenerateCone();
+                    break;
+                case 5:
+                    GenerateTruncatedCone();
                     break;
             }
         }
@@ -97,6 +109,7 @@ namespace StereoApp.UIHandlers
 
             _solidPresenter.Solid = solid;
             _spherePresenter.Sphere = null;
+            _frustumPresenter.Figure = null;
         }
 
         private void GeneratePyramid()
@@ -116,6 +129,7 @@ namespace StereoApp.UIHandlers
 
             _solidPresenter.Solid = solid;
             _spherePresenter.Sphere = null;
+            _frustumPresenter.Figure = null;
         }
 
         private void GenerateSphere()
@@ -123,6 +137,36 @@ namespace StereoApp.UIHandlers
             var sphere = new Sphere((int)_sideCountSlider.value);
             _solidPresenter.Solid = null;
             _spherePresenter.Sphere = sphere;
+            _frustumPresenter.Figure = null;
+        }
+
+        private void GenerateCylinder()
+        {
+            var radius = _sideCountSlider.value;
+            var height = _sideCountSlider.value * 2;
+            var figure = new Cylinder(new Circle(radius), height);
+            _solidPresenter.Solid = null;
+            _spherePresenter.Sphere = null;
+            _frustumPresenter.Figure = figure;
+        }
+
+        private void GenerateCone()
+        {
+            var radius = _sideCountSlider.value;
+            var height = _sideCountSlider.value * 2;
+            var figure = new Cone(new Circle(radius), height);
+            _solidPresenter.Solid = null;
+            _spherePresenter.Sphere = null;
+            _frustumPresenter.Figure = figure;
+        }
+
+        private void GenerateTruncatedCone()
+        {
+            var radius = _sideCountSlider.value / 2;
+            var figure = new TruncatedCone(new Circle(radius), new Circle(6), 5);
+            _solidPresenter.Solid = null;
+            _spherePresenter.Sphere = null;
+            _frustumPresenter.Figure = figure;
         }
     }
 }
