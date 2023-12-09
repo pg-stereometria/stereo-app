@@ -22,7 +22,7 @@ namespace StereoApp.Model
 
         public SerializedProject ToSerializable()
         {
-            return new SerializedProject { figure = Figure.ToSerializable() };
+            return new SerializedProject { figure = Figure.ToSerializableFigure() };
         }
 
         public static Project FromProjectName(string projectName)
@@ -71,7 +71,7 @@ namespace StereoApp.Model
 
         public Project ToActualType()
         {
-            return new Project(figure.ToActualType());
+            return new Project(figure.ToActualFigure());
         }
     }
 }

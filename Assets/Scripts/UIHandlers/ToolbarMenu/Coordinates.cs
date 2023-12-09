@@ -15,8 +15,8 @@ namespace StereoApp.UIHandlers.ToolbarMenu
         public TMP_InputField yCoordinate;
         public TMP_InputField zCoordinate;
 
-        private Model.SolidFigure _currentSolid;
-        public Model.SolidFigure CurrentSolid
+        private Model.Polyhedron _currentSolid;
+        public Model.Polyhedron CurrentSolid
         {
             get => _currentSolid;
             set

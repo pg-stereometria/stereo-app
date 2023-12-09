@@ -1,11 +1,12 @@
 using System;
 using System.ComponentModel;
 using StereoApp.Model.Interfaces;
+using StereoApp.Presenter.Base;
 using UnityEngine;
 
 namespace StereoApp.Presenter
 {
-    public class ConicalFrustumPresenter : MonoBehaviour
+    public class ConicalFrustumPresenter : GeneratedMeshPresenter<IConicalFrustum>
     {
         // number of horizontal (☰) dividers - i.e. parallels on a globe
         private const int PARALLELS = 30;
@@ -13,70 +14,37 @@ namespace StereoApp.Presenter
         // number of vertical (|||) dividers - i.e. meridians (pole to pole) on a globe
         private const int MERIDIANS = 30;
 
-        private Mesh _mesh;
-        private MeshFilter _meshFilter;
-        private MeshRenderer _meshRenderer;
-
-        private IConicalFrustum _figure;
-        public IConicalFrustum Figure
+        public override IConicalFrustum Figure
         {
-            get => _figure;
             set
             {
-                if (_figure != null)
+                var oldFigure = base.Figure;
+                if (oldFigure != null)
                 {
-                    _figure.PropertyChanged -= OnFigureChanged;
+                    oldFigure.PropertyChanged -= OnFigureChanged;
                 }
 
-                _figure = value;
                 if (value != null)
                 {
                     value.PropertyChanged += OnFigureChanged;
                 }
 
-                UpdateMesh();
+                base.Figure = value;
             }
-        }
-
-        public void Start()
-        {
-            _meshRenderer = gameObject.GetComponent<MeshRenderer>();
-            _meshFilter = gameObject.GetComponent<MeshFilter>();
-            _mesh = new Mesh();
-            UpdateMesh();
-        }
-
-        public void OnDestroy()
-        {
-            _mesh.Clear();
-            Destroy(_meshFilter);
-            Destroy(_mesh);
-            Destroy(_meshRenderer);
         }
 
         private void OnFigureChanged(object sender, PropertyChangedEventArgs e)
         {
-            UpdateMesh();
+            OnChange();
         }
 
-        private void UpdateMesh()
+        protected override void RegenerateMesh(
+            IConicalFrustum figure,
+            Vector3[] vertices,
+            int[] triangles,
+            Vector2[] uv
+        )
         {
-            if (_mesh == null)
-            {
-                return;
-            }
-
-            if (_figure == null)
-            {
-                _mesh.Clear();
-                return;
-            }
-
-            var vertices = _mesh.vertices;
-            var triangles = _mesh.triangles;
-            var uv = _mesh.uv;
-            _mesh.Clear();
-
             const int verticesDimensionSize = MERIDIANS;
             const int trianglesDimensionSize = 6 * (MERIDIANS - 1);
             const int vertexCount = verticesDimensionSize * (PARALLELS + 1);
@@ -96,14 +64,14 @@ namespace StereoApp.Presenter
                 {
                     var fraction = (float)j / (MERIDIANS - 1);
                     var radius = Mathf.Lerp(
-                        _figure.BottomBase.Radius,
-                        _figure.TopBase.Radius,
+                        figure.BottomBase.Radius,
+                        figure.TopBase.Radius,
                         fraction
                     );
 
                     var conicalPoint = new Vector3(
                         radius * Mathf.Cos(longitude),
-                        Mathf.Lerp(0.0f, _figure.Height, fraction),
+                        Mathf.Lerp(0.0f, figure.Height, fraction),
                         radius * Mathf.Sin(longitude)
                     );
 
@@ -127,13 +95,7 @@ namespace StereoApp.Presenter
                 }
             }
 
-            _mesh.vertices = vertices;
-            _mesh.triangles = triangles;
-            _mesh.uv = uv;
-
-            _mesh.RecalculateBounds();
-            _mesh.RecalculateNormals();
-            _meshFilter.mesh = _mesh;
+            UpdateMesh(vertices, triangles, uv);
         }
     }
 }

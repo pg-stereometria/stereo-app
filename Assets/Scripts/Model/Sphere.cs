@@ -6,7 +6,10 @@ using StereoApp.Utils;
 
 namespace StereoApp.Model
 {
-    public class Sphere : ISerializableTo<Sphere, SerializedSphere>, INotifyPropertyChanged
+    public class Sphere
+        : SolidFigure,
+            ISerializableTo<Sphere, SerializedSphere>,
+            INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,6 +50,11 @@ namespace StereoApp.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
+        public override SerializedSolidFigure ToSerializableFigure()
+        {
+            return ToSerializable();
+        }
+
         public SerializedSphere ToSerializable()
         {
             return new SerializedSphere { circle = Circle.ToSerializable() };
@@ -62,9 +70,16 @@ namespace StereoApp.Model
     }
 
     [Serializable]
-    public class SerializedSphere : ISerializableFrom<SerializedSphere, Sphere>
+    public class SerializedSphere
+        : SerializedSolidFigure,
+            ISerializableFrom<SerializedSphere, Sphere>
     {
         public SerializedCircle circle;
+
+        public override SolidFigure ToActualFigure()
+        {
+            return ToActualType();
+        }
 
         public Sphere ToActualType()
         {

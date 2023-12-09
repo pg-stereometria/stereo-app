@@ -5,7 +5,7 @@ using StereoApp.Model.Interfaces;
 
 namespace StereoApp.Model
 {
-    public class Cone : ISerializableTo<Cone, SerializedCone>, IConicalFrustum
+    public class Cone : SolidFigure, IConicalFrustum, ISerializableTo<Cone, SerializedCone>
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,6 +43,11 @@ namespace StereoApp.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
+        public override SerializedSolidFigure ToSerializableFigure()
+        {
+            return ToSerializable();
+        }
+
         public SerializedCone ToSerializable()
         {
             return new SerializedCone { bottomBase = BottomBase.ToSerializable(), height = Height };
@@ -50,10 +55,15 @@ namespace StereoApp.Model
     }
 
     [Serializable]
-    public class SerializedCone : ISerializableFrom<SerializedCone, Cone>
+    public class SerializedCone : SerializedSolidFigure, ISerializableFrom<SerializedCone, Cone>
     {
         public SerializedCircle bottomBase;
         public float height;
+
+        public override SolidFigure ToActualFigure()
+        {
+            return ToActualType();
+        }
 
         public Cone ToActualType()
         {

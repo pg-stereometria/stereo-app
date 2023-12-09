@@ -1,10 +1,11 @@
 using System.ComponentModel;
 using StereoApp.Model;
+using StereoApp.Presenter.Base;
 using UnityEngine;
 
 namespace StereoApp.Presenter
 {
-    public class SpherePresenter : MonoBehaviour
+    public class SpherePresenter : GeneratedMeshPresenter<Sphere>
     {
         // number of horizontal (☰) dividers - i.e. parallels on a globe
         private const int PARALLELS = 30;
@@ -12,71 +13,37 @@ namespace StereoApp.Presenter
         // number of vertical (|||) dividers - i.e. meridians (pole to pole) on a globe
         private const int MERIDIANS = 30;
 
-        private Mesh _mesh;
-        private MeshFilter _meshFilter;
-        private MeshRenderer _meshRenderer;
-
-        private Sphere _sphere;
-
-        public Sphere Sphere
+        public override Sphere Figure
         {
-            get => _sphere;
             set
             {
-                if (_sphere != null)
+                var oldFigure = base.Figure;
+                if (oldFigure != null)
                 {
-                    _sphere.PropertyChanged -= OnSphereChanged;
+                    oldFigure.PropertyChanged -= OnFigureChanged;
                 }
 
-                _sphere = value;
                 if (value != null)
                 {
-                    value.PropertyChanged += OnSphereChanged;
+                    value.PropertyChanged += OnFigureChanged;
                 }
 
-                UpdateMesh();
+                base.Figure = value;
             }
         }
 
-        public void Start()
+        private void OnFigureChanged(object sender, PropertyChangedEventArgs e)
         {
-            _meshRenderer = gameObject.GetComponent<MeshRenderer>();
-            _meshFilter = gameObject.GetComponent<MeshFilter>();
-            _mesh = new Mesh();
-            UpdateMesh();
+            OnChange();
         }
 
-        public void OnDestroy()
+        protected override void RegenerateMesh(
+            Sphere figure,
+            Vector3[] vertices,
+            int[] triangles,
+            Vector2[] uv
+        )
         {
-            _mesh.Clear();
-            Destroy(_meshFilter);
-            Destroy(_mesh);
-            Destroy(_meshRenderer);
-        }
-
-        private void OnSphereChanged(object sender, PropertyChangedEventArgs e)
-        {
-            UpdateMesh();
-        }
-
-        private void UpdateMesh()
-        {
-            if (_mesh == null)
-            {
-                return;
-            }
-
-            if (_sphere == null)
-            {
-                _mesh.Clear();
-                return;
-            }
-
-            var vertices = _mesh.vertices;
-            var triangles = _mesh.triangles;
-            var uv = _mesh.uv;
-            _mesh.Clear();
-
             const int verticesDimensionSize = MERIDIANS + 1;
             const int trianglesDimensionSize = 6 * MERIDIANS;
             const int vertexCount = verticesDimensionSize * (PARALLELS + 1);
@@ -88,7 +55,7 @@ namespace StereoApp.Presenter
                 uv = new Vector2[vertexCount];
             }
 
-            var radius = _sphere.Radius;
+            var radius = figure.Radius;
 
             var n = 0;
             for (var i = 0; i <= PARALLELS; ++i)
@@ -122,13 +89,7 @@ namespace StereoApp.Presenter
                 }
             }
 
-            _mesh.vertices = vertices;
-            _mesh.triangles = triangles;
-            _mesh.uv = uv;
-
-            _mesh.RecalculateBounds();
-            _mesh.RecalculateNormals();
-            _meshFilter.mesh = _mesh;
+            UpdateMesh(vertices, triangles, uv);
         }
     }
 }

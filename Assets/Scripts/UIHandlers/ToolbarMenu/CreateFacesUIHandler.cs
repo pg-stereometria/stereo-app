@@ -8,7 +8,7 @@ namespace StereoApp.UIHandlers.ToolbarMenu
     public class CreateFacesUIHandler : MonoBehaviour
     {
         [SerializeField]
-        private Presenter.SolidFigurePresenter solidPresenter;
+        private Presenter.PolyhedronPresenter solidPresenter;
 
         [SerializeField]
         private GameObject buttonPrefab;
@@ -28,7 +28,7 @@ namespace StereoApp.UIHandlers.ToolbarMenu
         // Start is called before the first frame update
         void Start()
         {
-            solidPresenter.Solid = new Model.SolidFigure();
+            solidPresenter.Figure = new Model.Polyhedron();
             Vector3[] worldCorners = new Vector3[4];
             facesParent.GetWorldCorners(worldCorners);
             currentY = 0;
@@ -58,7 +58,7 @@ namespace StereoApp.UIHandlers.ToolbarMenu
 
             var ButtonText = newGameObject.GetComponentInChildren<TMP_Text>();
             ButtonText.text = "Face " + faceCount + ":";
-            MenuManager.Instance.polygonMenu.CurrentSolid = solidPresenter.Solid;
+            MenuManager.Instance.polygonMenu.CurrentSolid = solidPresenter.Figure;
             MenuManager.Instance.polygonMenu.Clear();
             MenuManager.Instance.ShowPolygonMenu();
         }
