@@ -1,13 +1,12 @@
-using System;
 using System.ComponentModel;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using StereoApp.Model;
+using StereoApp.Presenter.Base;
 using UnityEngine;
 
 namespace StereoApp.Presenter
 {
-    public class PolygonPresenter : MonoBehaviour
+    public class PolygonPresenter : GeneratedMeshPresenter<Polygon>
     {
         [SerializeField]
         private GameObject _segmentPrefab;
@@ -15,30 +14,24 @@ namespace StereoApp.Presenter
         [SerializeField]
         private GameObject _pointPrefab;
 
-        private Mesh _mesh;
-        private MeshFilter _meshFilter;
+        [SerializeField]
+        private bool _renderPoints = true;
 
-        private MeshRenderer _meshRenderer;
-        private Polygon _polygon;
-
-        private readonly List<GameObject> _gameObjects = new();
-
-        public Polygon Polygon
+        public override Polygon Figure
         {
-            get => _polygon;
             set
             {
-                if (_polygon != null)
+                var oldFigure = base.Figure;
+                if (oldFigure != null)
                 {
-                    foreach (var point in _polygon)
+                    foreach (var point in oldFigure)
                     {
                         point.PropertyChanged -= OnPointChanged;
                     }
 
-                    _polygon.CollectionChanged -= OnPolygonCollectionChanged;
+                    oldFigure.CollectionChanged -= OnPolygonCollectionChanged;
                 }
 
-                _polygon = value;
                 if (value != null)
                 {
                     foreach (var point in value)
@@ -49,31 +42,13 @@ namespace StereoApp.Presenter
                     value.CollectionChanged += OnPolygonCollectionChanged;
                 }
 
-                UpdateMesh();
+                base.Figure = value;
             }
-        }
-
-        public void Start()
-        {
-            _meshRenderer = gameObject.GetComponent<MeshRenderer>();
-
-            _meshFilter = gameObject.GetComponent<MeshFilter>();
-            _mesh = new Mesh();
-            UpdateMesh();
-        }
-
-        public void OnDestroy()
-        {
-            CleanupSegments();
-            _mesh.Clear();
-            Destroy(_meshFilter);
-            Destroy(_mesh);
-            Destroy(_meshRenderer);
         }
 
         private void OnPointChanged(object sender, PropertyChangedEventArgs e)
         {
-            UpdateMesh();
+            OnChange();
         }
 
         private void OnPolygonCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -108,38 +83,33 @@ namespace StereoApp.Presenter
                     break;
             }
 
-            UpdateMesh();
+            OnChange();
         }
 
-        private void UpdateMesh()
+        protected override void RegenerateMesh(
+            Polygon figure,
+            Vector3[] vertices,
+            int[] triangles,
+            Vector2[] uv
+        )
         {
-            if (_mesh == null)
+            var renderPoints = _renderPoints;
+            if (vertices.Length != figure.Count)
             {
-                return;
+                vertices = new Vector3[figure.Count];
+                triangles = new int[3 * (figure.Count - 2)];
             }
 
-            if (_polygon == null)
+            for (var i = 0; i < figure.Count; ++i)
             {
-                _mesh.Clear();
-                return;
-            }
-
-            var vertices = _mesh.vertices;
-            var triangles = _mesh.triangles;
-            _mesh.Clear();
-            CleanupSegments();
-
-            if (vertices.Length != _polygon.Count)
-            {
-                vertices = new Vector3[_polygon.Count];
-                triangles = new int[3 * (_polygon.Count - 2)];
-            }
-
-            for (var i = 0; i < _polygon.Count; ++i)
-            {
-                var point = _polygon[i];
+                var point = figure[i];
                 var vertex = point.ToVector3();
                 vertices[i] = vertex;
+                if (!renderPoints)
+                {
+                    continue;
+                }
+
                 var newGameObject = Instantiate(
                     _pointPrefab,
                     vertex,
@@ -147,10 +117,10 @@ namespace StereoApp.Presenter
                     transform
                 );
                 newGameObject.GetComponent<PointPresenter>().Point = point;
-                _gameObjects.Add(newGameObject);
+                TrackGameObject(newGameObject);
             }
 
-            foreach (var segment in _polygon.Segments)
+            foreach (var segment in figure.Segments)
             {
                 var gameObj = Instantiate(_segmentPrefab, transform);
 
@@ -166,11 +136,11 @@ namespace StereoApp.Presenter
                 localScale.y = Vector3.Distance(secondVertex, firstVertex) / 2;
                 t.localScale = localScale;
 
-                _gameObjects.Add(gameObj);
+                TrackGameObject(gameObj);
             }
 
             // simple fan triangulation - only guaranteed to work on convex polygons
-            for (var i = 0; i < _polygon.Count - 2; ++i)
+            for (var i = 0; i < figure.Count - 2; ++i)
             {
                 var baseIndex = 3 * i;
                 triangles[baseIndex] = 0;
@@ -178,19 +148,7 @@ namespace StereoApp.Presenter
                 triangles[baseIndex + 2] = i + 2;
             }
 
-            _mesh.vertices = vertices;
-            _mesh.triangles = triangles;
-            _meshFilter.mesh = _mesh;
-        }
-
-        private void CleanupSegments()
-        {
-            foreach (var gameObj in _gameObjects)
-            {
-                Destroy(gameObj);
-            }
-
-            _gameObjects.Clear();
+            UpdateMesh(vertices, triangles, uv, false);
         }
     }
 }

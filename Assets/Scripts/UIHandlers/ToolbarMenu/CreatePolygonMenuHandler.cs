@@ -20,7 +20,7 @@ namespace StereoApp.UIHandlers.ToolbarMenu
         [SerializeField]
         private float offset = 5.0f;
 
-        public Model.SolidFigure CurrentSolid { get; set; }
+        public Model.Polyhedron CurrentSolid { get; set; }
         public Model.Polygon CurrentPolygon { get; set; }
 
         private Stack<Coordinates> coordinates;
@@ -118,7 +118,7 @@ namespace StereoApp.UIHandlers.ToolbarMenu
             if (CurrentPolygon == null)
             {
                 var polygon = new Model.Polygon(points);
-                CurrentSolid.Add(polygon);
+                CurrentSolid.Faces.Add(polygon);
                 MenuManager.Instance.facesMenu.SetPolygonForLastButton(polygon);
             }
             else
