@@ -1,23 +1,25 @@
 using System.ComponentModel;
+using StereoApp.Model;
+using StereoApp.Presenter.Base;
 using UnityEngine;
 
 namespace StereoApp.Presenter.Figure
 {
-    public class PointPresenter : MonoBehaviour
+    public class PointPresenter : FigurePresenter<Point>
     {
-        private Model.Point _point;
+        [SerializeField]
+        private DisplayAboveObject displayAboveObject;
 
-        public Model.Point Point
+        public override Point Figure
         {
-            get => _point;
             set
             {
-                if (_point != null)
+                var oldFigure = base.Figure;
+                if (oldFigure != null)
                 {
-                    _point.PropertyChanged -= OnPointPropertyChanged;
+                    oldFigure.PropertyChanged -= OnPointPropertyChanged;
                 }
 
-                _point = value;
                 if (value != null)
                 {
                     value.PropertyChanged += OnPointPropertyChanged;
@@ -27,25 +29,22 @@ namespace StereoApp.Presenter.Figure
                 {
                     displayAboveObject.Text = value?.Label;
                 }
+
+                base.Figure = value;
             }
         }
 
         private void OnPointPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var point = (Model.Point)sender;
             if (displayAboveObject != null)
             {
-                displayAboveObject.Text = point.Label;
+                displayAboveObject.Text = Figure.Label;
             }
         }
 
-        [SerializeField]
-        private DisplayAboveObject displayAboveObject;
-
-        private bool _original = false;
-
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             Destroy(displayAboveObject.gameObject);
         }
     }
