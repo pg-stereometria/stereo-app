@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using UnityEngine;
 
-namespace StereoApp.Presenter
+namespace StereoApp.Presenter.Figure
 {
     public class PointPresenter : MonoBehaviour
     {

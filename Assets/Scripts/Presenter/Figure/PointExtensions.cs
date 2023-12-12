@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StereoApp.Presenter
+namespace StereoApp.Presenter.Figure
 {
     public static class PointExtensions
     {

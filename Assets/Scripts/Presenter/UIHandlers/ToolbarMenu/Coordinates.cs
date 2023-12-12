@@ -1,11 +1,11 @@
-using UnityEngine;
-using TMPro;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
+using TMPro;
+using UnityEngine;
 
-namespace StereoApp.UIHandlers.ToolbarMenu
+namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
     public class Coordinates : MonoBehaviour
     {
@@ -25,6 +25,7 @@ namespace StereoApp.UIHandlers.ToolbarMenu
                 {
                     throw new ArgumentNullException();
                 }
+
                 _currentSolid = value;
                 dropdown.ClearOptions();
                 dropdown.AddOptions(new List<string>() { "New Point" });
@@ -44,9 +45,10 @@ namespace StereoApp.UIHandlers.ToolbarMenu
                 zCoordinate.text = "";
                 return;
             }
+
             point = CurrentSolid.Points.Where(s => s.ToString() == value).Single();
-            string pattern = @"-?\d+\.?\d*";
-            Match match = Regex.Match(value, pattern);
+            var pattern = @"-?\d+\.?\d*";
+            var match = Regex.Match(value, pattern);
             xCoordinate.text = match.Value;
             match = match.NextMatch();
             yCoordinate.text = match.Value;

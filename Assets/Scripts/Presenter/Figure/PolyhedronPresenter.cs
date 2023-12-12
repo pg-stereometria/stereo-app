@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using StereoApp.Model;
 using StereoApp.Presenter.Base;
 using UnityEngine;
 
-namespace StereoApp.Presenter
+namespace StereoApp.Presenter.Figure
 {
     public class PolyhedronPresenter : FigurePresenter<Polyhedron>
     {

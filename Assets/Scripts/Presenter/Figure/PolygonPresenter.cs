@@ -1,10 +1,10 @@
-using System.ComponentModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using StereoApp.Model;
 using StereoApp.Presenter.Base;
 using UnityEngine;
 
-namespace StereoApp.Presenter
+namespace StereoApp.Presenter.Figure
 {
     public class PolygonPresenter : GeneratedMeshPresenter<Polygon>
     {

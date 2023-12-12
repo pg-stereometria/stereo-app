@@ -1,7 +1,7 @@
-using StereoApp.UIHandlers.ToolbarMenu;
+using StereoApp.Presenter.UIHandlers.ToolbarMenu;
 using UnityEngine;
 
-namespace StereoApp.UIHandlers
+namespace StereoApp.Presenter.UIHandlers
 {
     public class MenuManager : MonoBehaviour
     {
@@ -10,9 +10,13 @@ namespace StereoApp.UIHandlers
         private void Awake()
         {
             if (Instance == null)
+            {
                 Instance = this;
+            }
             else
+            {
                 Destroy(this);
+            }
         }
 
         public CreateFacesUIHandler facesMenu;

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using StereoApp.Model;
-using StereoApp.Presenter;
+using StereoApp.Presenter.Figure;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StereoApp.UIHandlers
+namespace StereoApp.Presenter.UIHandlers
 {
     public class PredefinedSolidUIHandler : MonoBehaviour
     {
