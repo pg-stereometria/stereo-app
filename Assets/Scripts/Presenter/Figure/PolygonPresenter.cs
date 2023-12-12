@@ -116,7 +116,7 @@ namespace StereoApp.Presenter.Figure
                     Quaternion.identity,
                     transform
                 );
-                newGameObject.GetComponent<PointPresenter>().Point = point;
+                newGameObject.GetComponent<PointPresenter>().Figure = point;
                 TrackGameObject(newGameObject);
             }
 
