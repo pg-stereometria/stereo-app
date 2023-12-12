@@ -4,7 +4,7 @@ using StereoApp.Model.Interfaces;
 using StereoApp.Presenter.Base;
 using UnityEngine;
 
-namespace StereoApp.Presenter
+namespace StereoApp.Presenter.Figure
 {
     public class FigurePresenterFactory : MonoBehaviour
     {

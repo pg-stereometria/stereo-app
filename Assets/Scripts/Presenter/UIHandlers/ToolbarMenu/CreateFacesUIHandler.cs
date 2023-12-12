@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using StereoApp.Presenter.Figure;
 using TMPro;
+using UnityEngine;
 
-namespace StereoApp.UIHandlers.ToolbarMenu
+namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
     public class CreateFacesUIHandler : MonoBehaviour
     {
         [SerializeField]
-        private Presenter.PolyhedronPresenter solidPresenter;
+        private PolyhedronPresenter solidPresenter;
 
         [SerializeField]
         private GameObject buttonPrefab;
@@ -26,16 +25,16 @@ namespace StereoApp.UIHandlers.ToolbarMenu
         private int faceCount = 0;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             solidPresenter.Figure = new Model.Polyhedron();
-            Vector3[] worldCorners = new Vector3[4];
+            var worldCorners = new Vector3[4];
             facesParent.GetWorldCorners(worldCorners);
             currentY = 0;
         }
 
         // Update is called once per frame
-        void Update() { }
+        private void Update() { }
 
         public void OnAddFacePressed()
         {
@@ -46,13 +45,16 @@ namespace StereoApp.UIHandlers.ToolbarMenu
                 facesParent
             );
 
-            RectTransform rt = newGameObject.GetComponent<RectTransform>();
+            var rt = newGameObject.GetComponent<RectTransform>();
             currentY -= rt.rect.height + offset;
             if (Mathf.Abs(currentY) > facesParent.rect.height)
+            {
                 facesParent.sizeDelta = new Vector2(
                     facesParent.sizeDelta.x,
                     facesParent.sizeDelta.y + rt.rect.height + offset
                 );
+            }
+
             faceCount++;
             lastButton = newGameObject.GetComponent<FaceButtonHandler>();
 

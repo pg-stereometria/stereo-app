@@ -2,7 +2,7 @@ using StereoApp.Model;
 using StereoApp.Presenter.Base;
 using UnityEngine;
 
-namespace StereoApp.Presenter
+namespace StereoApp.Presenter.Figure
 {
     public class SolidFigurePresenter : FigurePresenter<SolidFigure>
     {

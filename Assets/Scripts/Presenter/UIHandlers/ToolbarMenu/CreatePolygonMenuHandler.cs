@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace StereoApp.UIHandlers.ToolbarMenu
+namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
     public class CreatePolygonMenuHandler : MonoBehaviour
     {

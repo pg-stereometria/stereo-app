@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace StereoApp.UIHandlers.ToolbarMenu
+namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
     public class FaceButtonHandler : MonoBehaviour
     {
