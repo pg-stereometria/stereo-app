@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StereoApp.Model.Interfaces;
+using UnityEngine;
 
 namespace StereoApp.Model
 {
@@ -102,6 +103,11 @@ namespace StereoApp.Model
         public static Point operator /(Point a, float d)
         {
             return new Point(a.X / d, a.Y / d, a.Z / d, a.Label);
+        }
+
+        public static explicit operator Vector3(Point point)
+        {
+            return new Vector3(point.X, point.Y, point.Z);
         }
 
         public override string ToString()
