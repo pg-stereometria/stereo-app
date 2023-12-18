@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5528757407317221760}
   - component: {fileID: 4794952514967771103}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Point Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.021, y: 0.92}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 62.601, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4633469048114814733
@@ -149,7 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2345134072970349179}
-  offset: {x: 0, y: 0.2, z: 0}
+  offset: {x: 0, y: 0, z: 0}
+  onObject: 1
+  offsetValue: 0.2
 --- !u!1 &2345134072970349179
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,3 +264,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayAboveObject: {fileID: 4794952514967771103}
+  offsetValue: 0.1

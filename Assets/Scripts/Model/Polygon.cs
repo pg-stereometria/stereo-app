@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using StereoApp.Model.Interfaces;
 using UnityEngine;
 
@@ -43,6 +44,27 @@ namespace StereoApp.Model
                 Debug.Assert(IsCoplanar(point));
             }
 #endif
+        }
+
+        private string _label = "";
+        public string Label
+        {
+            get => _label;
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException();
+                }
+
+                _label = value;
+                OnPropertyChanged();
+            }
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         public SerializedPolygon ToSerializable()
