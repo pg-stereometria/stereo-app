@@ -1,5 +1,7 @@
 using StereoApp.Presenter.UIHandlers.ToolbarMenu;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace StereoApp.Presenter.UIHandlers
 {
@@ -21,6 +23,13 @@ namespace StereoApp.Presenter.UIHandlers
 
         public CreateFacesUIHandler facesMenu;
         public CreatePolygonMenuHandler polygonMenu;
+        public RectTransform mainMenu;
+        public RectTransform nameThingsMenu;
+        public NameSegmentsMenu nameSegmentsMenu;
+        public NameAnglesMenu nameAnglesMenu;
+
+        [SerializeField]
+        private RectTransform backButton;
 
         [SerializeField]
         private RectTransform menuButton;
@@ -28,10 +37,15 @@ namespace StereoApp.Presenter.UIHandlers
         [SerializeField]
         private RectTransform toolbarMenu;
 
+        public Stack<GameObject> LastMenus { get; set; }
+
+        private GameObject Current;
         private CameraMovement cameraMovement;
 
         private void Start()
         {
+            LastMenus = new Stack<GameObject>();
+            Current = mainMenu.gameObject;
             cameraMovement = Camera.main.GetComponent<CameraMovement>();
         }
 
@@ -59,20 +73,70 @@ namespace StereoApp.Presenter.UIHandlers
 
         public void ShowFacesMenu()
         {
-            HideEverythingInToolbar();
-            facesMenu.gameObject.SetActive(true);
+            SwitchToMenu(facesMenu);
         }
 
         public void ShowPolygonMenu()
         {
+            SwitchToMenu(polygonMenu);
+        }
+
+        public void ShowNameThingsMenu()
+        {
+            SwitchToMenu(nameThingsMenu);
+        }
+
+        public void ShowNameSegmentsMenu()
+        {
+            SwitchToMenu(nameSegmentsMenu);
+        }
+
+        public void ShowNameAnglesMenu()
+        {
+            SwitchToMenu(nameAnglesMenu);
+        }
+
+        private void SwitchToMenu(Component newMenu)
+        {
             HideEverythingInToolbar();
-            polygonMenu.gameObject.SetActive(true);
+            PushMenu(Current);
+            var obj = newMenu.gameObject;
+            Current = obj;
+            obj.SetActive(true);
+        }
+
+        public void GoBack()
+        {
+            if (LastMenus.Count == 0)
+            {
+                Current = mainMenu.gameObject;
+                return;
+            }
+            HideEverythingInToolbar();
+            Current = PopMenu();
+            Current.SetActive(true);
+        }
+
+        private void PushMenu(GameObject obj)
+        {
+            backButton.gameObject.SetActive(true);
+            LastMenus.Push(obj);
+        }
+
+        private GameObject PopMenu()
+        {
+            backButton.gameObject.SetActive(LastMenus.Count != 1);
+            return LastMenus.Pop();
         }
 
         public void HideEverythingInToolbar()
         {
             facesMenu.gameObject.SetActive(false);
             polygonMenu.gameObject.SetActive(false);
+            mainMenu.gameObject.SetActive(false);
+            nameThingsMenu.gameObject.SetActive(false);
+            nameSegmentsMenu.gameObject.SetActive(false);
+            nameAnglesMenu.gameObject.SetActive(false);
         }
     }
 }

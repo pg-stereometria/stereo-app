@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
@@ -16,6 +17,9 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         [SerializeField]
         private GameObject coordinatesParent;
+
+        [SerializeField]
+        private TMP_InputField inputLabel;
 
         [SerializeField]
         private float offset = 5.0f;
@@ -53,6 +57,8 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 AddNewPoint();
                 coordinates.Peek().SelectPoint(point);
             }
+
+            inputLabel.text = polygon.Label;
         }
 
         public void OnAddPointPressed()
@@ -118,16 +124,17 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             if (CurrentPolygon == null)
             {
                 var polygon = new Model.Polygon(points);
+                polygon.Label = inputLabel.text;
                 CurrentSolid.Faces.Add(polygon);
                 MenuManager.Instance.facesMenu.SetPolygonForLastButton(polygon);
             }
             else
             {
+                CurrentPolygon.Label = inputLabel.text;
                 CurrentPolygon.ReplaceAll(points);
                 CurrentPolygon = null;
             }
-
-            MenuManager.Instance.ShowFacesMenu();
+            MenuManager.Instance.GoBack();
         }
 
         private void SetDefaultValues()
@@ -138,6 +145,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             rt.GetWorldCorners(worldCorners);
             currentY = worldCorners[1].y; // Get top
             coordinates = new Stack<Coordinates>();
+            inputLabel.text = "";
         }
     }
 }

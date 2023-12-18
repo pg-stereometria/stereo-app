@@ -17,6 +17,9 @@ namespace StereoApp.Presenter.Figure
         [SerializeField]
         private bool _renderPoints = true;
 
+        [SerializeField]
+        private DisplayAboveObject displayAboveObject;
+
         public override Polygon Figure
         {
             set
@@ -29,6 +32,7 @@ namespace StereoApp.Presenter.Figure
                         point.PropertyChanged -= OnPointChanged;
                     }
 
+                    oldFigure.PropertyChanged -= OnFigureChanged;
                     oldFigure.CollectionChanged -= OnPolygonCollectionChanged;
                 }
 
@@ -39,10 +43,24 @@ namespace StereoApp.Presenter.Figure
                         point.PropertyChanged += OnPointChanged;
                     }
 
+                    value.PropertyChanged += OnFigureChanged;
                     value.CollectionChanged += OnPolygonCollectionChanged;
                 }
 
+                if (displayAboveObject != null)
+                {
+                    displayAboveObject.Text = value?.Label;
+                }
+
                 base.Figure = value;
+            }
+        }
+
+        private void OnFigureChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (displayAboveObject != null)
+            {
+                displayAboveObject.Text = Figure.Label;
             }
         }
 
@@ -136,6 +154,9 @@ namespace StereoApp.Presenter.Figure
                 localScale.y = Vector3.Distance(secondVertex, firstVertex) / 2;
                 t.localScale = localScale;
 
+                var segmentPresenter = gameObj.GetComponent<SegmentPresenter>();
+                segmentPresenter.Figure = segment;
+
                 TrackGameObject(gameObj);
             }
 
@@ -149,6 +170,26 @@ namespace StereoApp.Presenter.Figure
             }
 
             UpdateMesh(vertices, triangles, uv, false);
+
+            var sum = new Vector3(0, 0, 0);
+            foreach (var pointCoordinates in vertices)
+            {
+                sum += pointCoordinates;
+            }
+            var midpoint = sum / vertices.Length;
+            displayAboveObject.offset = midpoint - transform.position;
+            displayAboveObject.forwardVector = Vector3
+                .Cross(vertices[1] - vertices[0], vertices[1] - vertices[2])
+                .normalized;
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            if (displayAboveObject != null)
+            {
+                Destroy(displayAboveObject.gameObject);
+            }
         }
     }
 }

@@ -1,27 +1,32 @@
 using System.ComponentModel;
+using UnityEngine;
 using StereoApp.Model;
 using StereoApp.Presenter.Base;
-using UnityEngine;
 
 namespace StereoApp.Presenter.Figure
 {
-    public class PointPresenter : FigurePresenter<Point>
+    public class SegmentPresenter : FigurePresenter<Segment>
     {
         [SerializeField]
         private DisplayAboveObject displayAboveObject;
-        public override Point Figure
+
+        public override Segment Figure
         {
             set
             {
                 var oldFigure = base.Figure;
                 if (oldFigure != null)
                 {
-                    oldFigure.PropertyChanged -= OnPointPropertyChanged;
+                    oldFigure.PropertyChanged -= OnSegmentPropertyChanged;
+                    oldFigure.First.segments.Remove(oldFigure);
+                    oldFigure.Second.segments.Remove(oldFigure);
                 }
 
                 if (value != null)
                 {
-                    value.PropertyChanged += OnPointPropertyChanged;
+                    value.PropertyChanged += OnSegmentPropertyChanged;
+                    value.First.segments.Add(value);
+                    value.Second.segments.Add(value);
                 }
 
                 if (displayAboveObject != null)
@@ -33,7 +38,7 @@ namespace StereoApp.Presenter.Figure
             }
         }
 
-        private void OnPointPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnSegmentPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (displayAboveObject != null)
             {

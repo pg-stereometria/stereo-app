@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StereoApp.Model.Interfaces;
@@ -8,6 +10,7 @@ namespace StereoApp.Model
     public class Point : ISerializableTo<Point, SerializedPoint>, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public readonly HashSet<Segment> segments = new HashSet<Segment>();
 
         private string _label = "";
         public string Label
@@ -32,6 +35,7 @@ namespace StereoApp.Model
             {
                 _x = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(Location));
             }
         }
         private float _y;
@@ -42,6 +46,7 @@ namespace StereoApp.Model
             {
                 _y = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(Location));
             }
         }
         private float _z;
@@ -52,8 +57,10 @@ namespace StereoApp.Model
             {
                 _z = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(Location));
             }
         }
+        public (float, float, float) Location => (_x, _y, _z);
 
         public Point(float x, float y, float z)
         {

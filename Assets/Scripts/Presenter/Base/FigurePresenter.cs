@@ -26,6 +26,7 @@ namespace StereoApp.Presenter.Base
 
         protected virtual void OnDestroy()
         {
+            FigureObj = null;
             CleanupTrackedGameObjects();
         }
 
@@ -53,8 +54,6 @@ namespace StereoApp.Presenter.Base
     public abstract class FigurePresenter<TFigure> : FigurePresenter
         where TFigure : class
     {
-        private readonly List<GameObject> _gameObjects = new();
-
         public virtual TFigure Figure
         {
             get => (TFigure)base.FigureObj;
@@ -63,6 +62,12 @@ namespace StereoApp.Presenter.Base
                 base.FigureObj = value;
                 OnChange();
             }
+        }
+
+        protected override void OnDestroy()
+        {
+            Figure = null; // trigger cleanup of i.e. property changed handlers
+            base.OnDestroy();
         }
     }
 }
