@@ -57,6 +57,8 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 AddNewPoint();
                 coordinates.Peek().SelectPoint(point);
             }
+
+            inputLabel.text = polygon.Label;
         }
 
         public void OnAddPointPressed()

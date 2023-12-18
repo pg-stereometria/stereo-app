@@ -1237,6 +1237,34 @@ PrefabInstance:
       propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1298834865}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnPointDropdownChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: StereoApp.Presenter.UIHandlers.ToolbarMenu.NameSegmentsMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
 --- !u!1 &576331122
@@ -5895,6 +5923,34 @@ PrefabInstance:
     - target: {fileID: 5466781425186810784, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
       propertyPath: m_Interactable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1298834865}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnPointDropdownChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: StereoApp.Presenter.UIHandlers.ToolbarMenu.NameSegmentsMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756537038318223790, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eb4c0e5ebaf2b74f8994a3a7b7d7451, type: 3}

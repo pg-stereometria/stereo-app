@@ -27,10 +27,15 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             point2.CurrentSolid = solidPresenter.Figure;
         }
 
+        public void OnPointDropdownChange()
+        {
+            var segment = FindSegment();
+            valueText.text = segment?.Label ?? "";
+        }
+
         public void OnFinishPressed()
         {
-            Segment segment;
-            segment = FindSegment();
+            var segment = FindSegment();
             if (segment == null)
             {
                 return;
@@ -42,6 +47,10 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         private Segment FindSegment()
         {
+            if (point1.point == null || point2.point == null)
+            {
+                return null;
+            }
             foreach (var seg in point1.point.segments)
             {
                 if (point2.point.segments.Contains(seg))
