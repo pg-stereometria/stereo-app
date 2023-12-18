@@ -387,7 +387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &279008319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2059,6 +2059,7 @@ MonoBehaviour:
   nameThingsMenu: {fileID: 1703264641}
   nameSegmentsMenu: {fileID: 1298834865}
   nameAnglesMenu: {fileID: 502722646}
+  backButton: {fileID: 279008319}
   menuButton: {fileID: 226427617}
   toolbarMenu: {fileID: 667603861}
 --- !u!114 &857828059

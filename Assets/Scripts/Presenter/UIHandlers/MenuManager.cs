@@ -1,6 +1,7 @@
 using StereoApp.Presenter.UIHandlers.ToolbarMenu;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace StereoApp.Presenter.UIHandlers
 {
@@ -26,6 +27,9 @@ namespace StereoApp.Presenter.UIHandlers
         public RectTransform nameThingsMenu;
         public NameSegmentsMenu nameSegmentsMenu;
         public NameAnglesMenu nameAnglesMenu;
+
+        [SerializeField]
+        private RectTransform backButton;
 
         [SerializeField]
         private RectTransform menuButton;
@@ -69,42 +73,36 @@ namespace StereoApp.Presenter.UIHandlers
 
         public void ShowFacesMenu()
         {
-            HideEverythingInToolbar();
-            LastMenus.Push(Current);
-            Current = facesMenu.gameObject;
-            facesMenu.gameObject.SetActive(true);
+            SwitchToMenu(facesMenu);
         }
 
         public void ShowPolygonMenu()
         {
-            HideEverythingInToolbar();
-            LastMenus.Push(Current);
-            Current = polygonMenu.gameObject;
-            polygonMenu.gameObject.SetActive(true);
+            SwitchToMenu(polygonMenu);
         }
 
         public void ShowNameThingsMenu()
         {
-            HideEverythingInToolbar();
-            LastMenus.Push(Current);
-            Current = nameThingsMenu.gameObject;
-            nameThingsMenu.gameObject.SetActive(true);
+            SwitchToMenu(nameThingsMenu);
         }
 
         public void ShowNameSegmentsMenu()
         {
-            HideEverythingInToolbar();
-            LastMenus.Push(Current);
-            Current = nameSegmentsMenu.gameObject;
-            nameSegmentsMenu.gameObject.SetActive(true);
+            SwitchToMenu(nameSegmentsMenu);
         }
 
         public void ShowNameAnglesMenu()
         {
+            SwitchToMenu(nameAnglesMenu);
+        }
+
+        private void SwitchToMenu(Component newMenu)
+        {
             HideEverythingInToolbar();
-            LastMenus.Push(Current);
-            Current = nameAnglesMenu.gameObject;
-            nameAnglesMenu.gameObject.SetActive(true);
+            PushMenu(Current);
+            var obj = newMenu.gameObject;
+            Current = obj;
+            obj.SetActive(true);
         }
 
         public void GoBack()
@@ -115,8 +113,20 @@ namespace StereoApp.Presenter.UIHandlers
                 return;
             }
             HideEverythingInToolbar();
-            Current = LastMenus.Pop();
+            Current = PopMenu();
             Current.SetActive(true);
+        }
+
+        private void PushMenu(GameObject obj)
+        {
+            backButton.gameObject.SetActive(true);
+            LastMenus.Push(obj);
+        }
+
+        private GameObject PopMenu()
+        {
+            backButton.gameObject.SetActive(LastMenus.Count != 1);
+            return LastMenus.Pop();
         }
 
         public void HideEverythingInToolbar()
