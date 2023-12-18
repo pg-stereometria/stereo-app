@@ -32,6 +32,7 @@ namespace StereoApp.Presenter.Figure
                         point.PropertyChanged -= OnPointChanged;
                     }
 
+                    oldFigure.PropertyChanged -= OnFigureChanged;
                     oldFigure.CollectionChanged -= OnPolygonCollectionChanged;
                 }
 
@@ -42,6 +43,7 @@ namespace StereoApp.Presenter.Figure
                         point.PropertyChanged += OnPointChanged;
                     }
 
+                    value.PropertyChanged += OnFigureChanged;
                     value.CollectionChanged += OnPolygonCollectionChanged;
                 }
 
@@ -51,6 +53,14 @@ namespace StereoApp.Presenter.Figure
                 }
 
                 base.Figure = value;
+            }
+        }
+
+        private void OnFigureChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (displayAboveObject != null)
+            {
+                displayAboveObject.Text = Figure.Label;
             }
         }
 
