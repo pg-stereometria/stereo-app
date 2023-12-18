@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace StereoApp.Model
@@ -24,28 +25,63 @@ namespace StereoApp.Model
             }
         }
 
-        public Point First { get; set; }
-        public Point Second { get; set; }
+        public Point First { get; }
+        public Point Second { get; }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public Segment(Point first, Point second)
+        public Segment([NotNull] Point first, [NotNull] Point second)
         {
+            if (first.Location == second.Location)
+            {
+                throw new ArgumentException("Segment's points cannot be equal.");
+            }
             First = first;
             Second = second;
         }
 
+        public override int GetHashCode()
+        {
+            // Since First and Second can't be the same and order doesn't matter (per Equals()),
+            // XOR is actually a decent way of combining these and simpler than
+            // HashCode.Combine().
+            return First.GetHashCode() ^ Second.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Segment);
+        }
+
         public bool Equals(Segment other)
         {
-            if (
-                (this.First == other.First && this.Second == other.Second)
-                || (this.Second == other.First && this.First == other.Second)
-            )
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
                 return true;
-            return false;
+            }
+
+            if (this.GetType() != other.GetType())
+            {
+                return false;
+            }
+
+            return (
+                (First == other.First && Second == other.Second)
+                || (Second == other.First && First == other.Second)
+            );
+        }
+
+        public override string ToString()
+        {
+            return Label + "(" + First + "," + Second + ")";
         }
     }
 }
