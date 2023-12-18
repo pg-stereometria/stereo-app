@@ -18,11 +18,15 @@ namespace StereoApp.Presenter.Figure
                 if (oldFigure != null)
                 {
                     oldFigure.PropertyChanged -= OnSegmentPropertyChanged;
+                    oldFigure.First.segments.Remove(oldFigure);
+                    oldFigure.Second.segments.Remove(oldFigure);
                 }
 
                 if (value != null)
                 {
                     value.PropertyChanged += OnSegmentPropertyChanged;
+                    value.First.segments.Add(value);
+                    value.Second.segments.Add(value);
                 }
 
                 if (displayAboveObject != null)
@@ -42,15 +46,13 @@ namespace StereoApp.Presenter.Figure
             }
         }
 
-        void OnDestroy()
+        protected override void OnDestroy()
         {
-            if (Figure != null)
+            base.OnDestroy();
+            if (displayAboveObject != null)
             {
-                Figure.PropertyChanged -= OnSegmentPropertyChanged;
-                Figure.First.segments.Remove(Figure);
-                Figure.Second.segments.Remove(Figure);
+                Destroy(displayAboveObject.gameObject);
             }
-            Destroy(displayAboveObject.gameObject);
         }
     }
 }

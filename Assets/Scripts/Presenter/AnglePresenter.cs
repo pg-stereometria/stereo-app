@@ -40,11 +40,6 @@ namespace StereoApp.Presenter
             Initialize();
         }
 
-        private void OnDestroy()
-        {
-            Destroy(displayAboveObject.gameObject);
-        }
-
         public void Initialize()
         {
             var segmentMiddle = (point1.ToVector3() + point2.ToVector3()) / 2;
@@ -94,6 +89,14 @@ namespace StereoApp.Presenter
                 currentStep++;
                 circumferenceProgress += stepValue;
             } while (circumferenceProgress < angleValue);
+        }
+
+        private void OnDestroy()
+        {
+            if (displayAboveObject != null)
+            {
+                Destroy(displayAboveObject.gameObject);
+            }
         }
     }
 }

@@ -144,8 +144,6 @@ namespace StereoApp.Presenter.Figure
                 localScale.y = Vector3.Distance(secondVertex, firstVertex) / 2;
                 t.localScale = localScale;
 
-                segment.First.segments.Add(segment);
-                segment.Second.segments.Add(segment);
                 var segmentPresenter = gameObj.GetComponent<SegmentPresenter>();
                 segmentPresenter.Figure = segment;
 
@@ -175,13 +173,13 @@ namespace StereoApp.Presenter.Figure
                 .normalized;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            foreach (Point point in Figure)
+            base.OnDestroy();
+            if (displayAboveObject != null)
             {
-                point.PropertyChanged -= OnPointChanged;
+                Destroy(displayAboveObject.gameObject);
             }
-            Destroy(displayAboveObject.gameObject);
         }
     }
 }

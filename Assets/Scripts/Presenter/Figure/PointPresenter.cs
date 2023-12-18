@@ -44,7 +44,10 @@ namespace StereoApp.Presenter.Figure
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            Destroy(displayAboveObject.gameObject);
+            if (displayAboveObject != null)
+            {
+                Destroy(displayAboveObject.gameObject);
+            }
         }
     }
 }
