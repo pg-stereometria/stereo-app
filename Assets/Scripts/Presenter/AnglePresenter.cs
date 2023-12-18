@@ -9,7 +9,16 @@ namespace StereoApp.Presenter
         public Model.Point point1;
         public Model.Point middlePoint;
         public Model.Point point2;
-        public string Label { get; set; }
+        public string _label;
+        public string Label
+        {
+            get => _label;
+            set
+            {
+                _label = value;
+                displayAboveObject.Text = value;
+            }
+        }
 
         [SerializeField]
         LineRenderer lineRenderer1;
@@ -45,7 +54,6 @@ namespace StereoApp.Presenter
             var segmentMiddle = (point1.ToVector3() + point2.ToVector3()) / 2;
             _dirVector = segmentMiddle - middlePoint.ToVector3();
             _dirVector.Normalize();
-            displayAboveObject.Text = Label;
             displayAboveObject.offset = _dirVector * offsetValue;
 
             _vector1 = middlePoint.ToVector3() - point1.ToVector3();
