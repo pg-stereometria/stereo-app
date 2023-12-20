@@ -2,12 +2,13 @@ using StereoApp.Presenter.UIHandlers.ToolbarMenu;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using StereoApp.Presenter.Figure;
 
-namespace StereoApp.Presenter.UIHandlers
+namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
-    public class MenuManager : MonoBehaviour
+    public class ToolbarMenuManager : MonoBehaviour
     {
-        public static MenuManager Instance;
+        public static ToolbarMenuManager Instance;
 
         private void Awake()
         {
@@ -20,6 +21,9 @@ namespace StereoApp.Presenter.UIHandlers
                 Destroy(this);
             }
         }
+
+        public SolidFigurePresenter solidFigurePresenter;
+        public PolyhedronPresenter polyhedronPresenter;
 
         public CreateFacesUIHandler facesMenu;
         public CreatePolygonMenuHandler polygonMenu;
@@ -36,7 +40,7 @@ namespace StereoApp.Presenter.UIHandlers
 
         [SerializeField]
         private RectTransform toolbarMenu;
-
+    
         public Stack<GameObject> LastMenus { get; set; }
 
         private GameObject Current;

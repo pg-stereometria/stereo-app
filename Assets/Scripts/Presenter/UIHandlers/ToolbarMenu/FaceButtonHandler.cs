@@ -8,9 +8,9 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         public void EditPolygon()
         {
-            MenuManager.Instance.polygonMenu.Clear();
-            MenuManager.Instance.polygonMenu.FillInDataFromPolygon(polygon);
-            MenuManager.Instance.ShowPolygonMenu();
+            ToolbarMenuManager.Instance.polygonMenu.Clear();
+            ToolbarMenuManager.Instance.polygonMenu.FillInDataFromPolygon(polygon);
+            ToolbarMenuManager.Instance.ShowPolygonMenu();
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using StereoApp.Model.Interfaces;
+using StereoApp.Presenter.Figure;
+using UnityEngine;
 
 namespace StereoApp.Model
 {
@@ -33,6 +35,17 @@ namespace StereoApp.Model
             {
                 faces = Faces.Select(polygon => polygon.ToSerializable()).ToList()
             };
+        }
+
+        public Vector3 CaclulateMidpoint()
+        {
+            Vector3 sum = new Vector3(0, 0, 0);
+            foreach(var point in Points)
+            {
+                sum += point.ToVector3();
+            }
+            var midpoint = sum / Points.Count;
+            return midpoint;
         }
     }
 

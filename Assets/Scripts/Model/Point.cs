@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StereoApp.Model.Interfaces;
+using UnityEngine;
 
 namespace StereoApp.Model
 {
     public class Point : ISerializableTo<Point, SerializedPoint>, INotifyPropertyChanged
     {
+        public static char currentLabel = 'A';
         public event PropertyChangedEventHandler PropertyChanged;
         public readonly HashSet<Segment> segments = new HashSet<Segment>();
 
@@ -67,11 +69,24 @@ namespace StereoApp.Model
             X = x;
             Y = y;
             Z = z;
+            _label = currentLabel.ToString();
+            currentLabel++;
+        }
+
+        public Point(Vector3 vector)
+        {
+            X = vector.x;
+            Y = vector.y;
+            Z = vector.z;
+            _label = currentLabel.ToString();
+            currentLabel++;
         }
 
         public Point(float x, float y, float z, string label)
-            : this(x, y, z)
         {
+            X = x;
+            Y = y;
+            Z = z;
             Label = label;
         }
 
@@ -102,7 +117,7 @@ namespace StereoApp.Model
 
         public override string ToString()
         {
-            return Label + "(" + X + "," + Y + "," + Z + ")";
+            return Label + "(" + X.ToString("0.##") + "," + Y.ToString("0.##") + "," + Z.ToString("0.##") + ")";
         }
     }
 

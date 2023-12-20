@@ -24,7 +24,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         [SerializeField]
         private float offset = 5.0f;
 
-        public Model.Polyhedron CurrentSolid { get; set; }
+        public Model.Polyhedron CurrentPolyhedron { get; set; }
         public Model.Polygon CurrentPolygon { get; set; }
 
         private Stack<Coordinates> coordinates;
@@ -90,7 +90,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             var coordinate = newGameObject.GetComponent<Coordinates>();
 
             currentY -= newGameObject.GetComponent<RectTransform>().rect.height + offset;
-            coordinate.CurrentSolid = CurrentSolid;
+            coordinate.CurrentSolid = CurrentPolyhedron;
             count++;
 
             coordinates.Push(coordinate);
@@ -99,7 +99,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public void OnFinishPressed()
         {
             var points = new List<Model.Point>();
-            var pointsCount = CurrentSolid.Points.Count;
+            var pointsCount = CurrentPolyhedron.Points.Count;
             foreach (var coordinate in coordinates.Reverse())
             {
                 if (coordinate.point != null)
@@ -115,8 +115,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                     new Model.Point(
                         float.Parse(coordinate.xCoordinate.text),
                         float.Parse(coordinate.yCoordinate.text),
-                        float.Parse(coordinate.zCoordinate.text),
-                        ((char)(ALPHABET_START + pointsCount + points.Count)).ToString()
+                        float.Parse(coordinate.zCoordinate.text)
                     )
                 );
             }
@@ -125,8 +124,8 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             {
                 var polygon = new Model.Polygon(points);
                 polygon.Label = inputLabel.text;
-                CurrentSolid.Faces.Add(polygon);
-                MenuManager.Instance.facesMenu.SetPolygonForLastButton(polygon);
+                CurrentPolyhedron.Faces.Add(polygon);
+                ToolbarMenuManager.Instance.facesMenu.SetPolygonForLastButton(polygon);
             }
             else
             {
@@ -134,7 +133,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 CurrentPolygon.ReplaceAll(points);
                 CurrentPolygon = null;
             }
-            MenuManager.Instance.GoBack();
+            ToolbarMenuManager.Instance.GoBack();
         }
 
         private void SetDefaultValues()
