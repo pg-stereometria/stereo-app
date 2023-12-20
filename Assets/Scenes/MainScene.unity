@@ -976,9 +976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: 'Add Face
-
-'
+      value: "Dodaj \u015Acian\u0119"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -1746,7 +1744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Name Segments
+      value: Nazwij Odcinki
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -1977,9 +1975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Enter value
-
-'
+  m_text: "Tu Wpisz Etykiet\u0119"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2858,7 +2854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Finish
+      value: "Zatwierd\u017A"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -3187,7 +3183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Name Things
+      value: Oznacz Elementy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -3389,7 +3385,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose two points that you want to name segment
+  m_text: "Wybierz 3 punkty tworz\u0105ce k\u0105t, punkt \u015Brodkowy jest tym
+    przy kt\xF3rym jest k\u0105t."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3692,9 +3689,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Enter value
-
-'
+  m_text: "Tu Wpisz Etykiet\u0119"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4274,7 +4269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose two points that you want to name segment
+  m_text: "Wybierz dwa punkty tworz\u0105ce odcinek do oznaczenia"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4690,7 +4685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Finish
+      value: "Zatwierd\u017A"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -4863,7 +4858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Finish
+      value: "Zatwierd\u017A"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -4959,7 +4954,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Face Label
+  m_text: "Tu Wpisz Etykiet\u0119"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5219,7 +5214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Create Polygon
+      value: "Utw\xF3rz Wielok\u0105t"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -5424,7 +5419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Finish
+      value: "Zako\u0144cz"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -5571,9 +5566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: 'Name Angles
-
-'
+      value: "Nazwij K\u0105ty"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
