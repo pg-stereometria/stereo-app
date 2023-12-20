@@ -12,8 +12,10 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
     {
         [SerializeField]
         TMP_InputField heightInput;
+
         [SerializeField]
         TMP_InputField lengthInput;
+
         [SerializeField]
         Slider numberOfSidesInput;
 
@@ -23,8 +25,6 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             var length = float.Parse(lengthInput.text);
             var height = float.Parse(heightInput.text);
             var radius = length / (2 * Mathf.Sin(Mathf.PI / sideCount));
-
-
 
             var offset = Mathf.PI + Mathf.PI / 4;
             List<Point> bottom = CalculateBasePoints(sideCount, radius, offset, -height / 2);
@@ -36,16 +36,13 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             // lateral faces
             for (var i = 0; i < sideCount; ++i)
             {
-                figure.Faces.Add(
-                    new Polygon(
-                        bottom[i],
-                        bottom[(i + 1) % bottom.Count],
-                        topVertex
-                    )
-                );
+                figure.Faces.Add(new Polygon(bottom[i], bottom[(i + 1) % bottom.Count], topVertex));
             }
             Vector3 midpoint = figure.CaclulateMidpoint();
-            AppManager.Instance.longestDistance = Mathf.Max(length, Vector3.Distance(topVertex.ToVector3(), bottom[0].ToVector3()));
+            AppManager.Instance.longestDistance = Mathf.Max(
+                length,
+                Vector3.Distance(topVertex.ToVector3(), bottom[0].ToVector3())
+            );
             AppManager.Instance.midpoint = midpoint;
             return figure;
         }

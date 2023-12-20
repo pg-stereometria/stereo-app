@@ -10,7 +10,7 @@ namespace StereoApp
 
         private void Awake()
         {
-            if(Instance != null)
+            if (Instance != null)
             {
                 Destroy(this.gameObject);
                 return;
@@ -20,7 +20,7 @@ namespace StereoApp
         }
 
         public Model.SolidFigure figure;
-        public Vector3 midpoint = new Vector3(0,0,0);
+        public Vector3 midpoint = new Vector3(0, 0, 0);
         public float longestDistance;
     }
 }

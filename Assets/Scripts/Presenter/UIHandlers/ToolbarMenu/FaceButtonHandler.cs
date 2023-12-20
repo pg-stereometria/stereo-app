@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+
 namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
     public class FaceButtonHandler : MonoBehaviour

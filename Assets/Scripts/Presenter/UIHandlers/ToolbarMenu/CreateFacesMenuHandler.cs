@@ -6,8 +6,6 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
     public class CreateFacesMenuHandler : MonoBehaviour
     {
-        
-
         [SerializeField]
         private GameObject buttonPrefab;
 
@@ -26,10 +24,13 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         // Start is called before the first frame update
         private void Start()
         {
-            if (ToolbarMenuManager.Instance.solidFigurePresenter.Figure is Model.Polyhedron polyhedron)
+            if (
+                ToolbarMenuManager.Instance.solidFigurePresenter.Figure
+                is Model.Polyhedron polyhedron
+            )
             {
                 ToolbarMenuManager.Instance.polygonMenu.CurrentPolyhedron = polyhedron;
-                foreach(var face in polyhedron.Faces)
+                foreach (var face in polyhedron.Faces)
                 {
                     SetPolygonForLastButton(face);
                 }
@@ -37,7 +38,10 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             else
             {
                 ToolbarMenuManager.Instance.polyhedronPresenter.Figure = new Model.Polyhedron();
-                ToolbarMenuManager.Instance.polygonMenu.CurrentPolyhedron = ToolbarMenuManager.Instance.polyhedronPresenter.Figure;
+                ToolbarMenuManager.Instance.polygonMenu.CurrentPolyhedron = ToolbarMenuManager
+                    .Instance
+                    .polyhedronPresenter
+                    .Figure;
             }
 
             var worldCorners = new Vector3[4];
@@ -57,11 +61,11 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         private void AddFace()
         {
             var newGameObject = Instantiate(
-                            buttonPrefab,
-                            facesParent.TransformPoint(new Vector3(facesParent.rect.width / 2, currentY, 0)),
-                            Quaternion.identity,
-                            facesParent
-                        );
+                buttonPrefab,
+                facesParent.TransformPoint(new Vector3(facesParent.rect.width / 2, currentY, 0)),
+                Quaternion.identity,
+                facesParent
+            );
 
             var rt = newGameObject.GetComponent<RectTransform>();
             currentY -= rt.rect.height + offset;

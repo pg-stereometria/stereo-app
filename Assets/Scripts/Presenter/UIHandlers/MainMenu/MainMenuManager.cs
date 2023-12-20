@@ -22,26 +22,35 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
 
         [SerializeField]
         private RectTransform backButton;
+
         [SerializeField]
         private RectTransform mainMenu;
+
         [SerializeField]
         private CreatePrismMenuHandler createPrismMenu;
+
         [SerializeField]
         private CreatePyramidMenuHandler createPyramidMenu;
+
         [SerializeField]
         private CreateCuboidMenuHandler createCuboidMenu;
+
         [SerializeField]
         private CreateSphereMenuHandler createSphereMenu;
+
         [SerializeField]
         private CreateCylinderMenuHandler createCylinderMenu;
+
         [SerializeField]
         private CreateConeMenuHandler createConeMenu;
+
         [SerializeField]
         private CreateTrancatedConeMenuHandler createTrunatedConeMenu;
 
         public Stack<GameObject> LastMenus { get; set; }
 
         private GameObject Current;
+
         private void Start()
         {
             LastMenus = new Stack<GameObject>();

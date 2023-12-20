@@ -117,7 +117,14 @@ namespace StereoApp.Model
 
         public override string ToString()
         {
-            return Label + "(" + X.ToString("0.##") + "," + Y.ToString("0.##") + "," + Z.ToString("0.##") + ")";
+            return Label
+                + "("
+                + X.ToString("0.##")
+                + ","
+                + Y.ToString("0.##")
+                + ","
+                + Z.ToString("0.##")
+                + ")";
         }
     }
 

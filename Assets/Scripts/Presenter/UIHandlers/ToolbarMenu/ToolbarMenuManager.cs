@@ -40,7 +40,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         [SerializeField]
         private RectTransform toolbarMenu;
-    
+
         public Stack<GameObject> LastMenus { get; set; }
 
         private GameObject Current;

@@ -11,15 +11,17 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
     {
         [SerializeField]
         TMP_InputField radiusInput;
+
         [SerializeField]
         TMP_InputField heightInput;
+
         protected override SolidFigure GenerateFigure()
         {
             float radius = float.Parse(radiusInput.text);
             float height = float.Parse(heightInput.text);
             var figure = new Cylinder(new Circle(radius), height);
             AppManager.Instance.longestDistance = 1.5f * radius;
-            AppManager.Instance.midpoint = new Vector3(0, height/2, 0);
+            AppManager.Instance.midpoint = new Vector3(0, height / 2, 0);
 
             return figure;
         }

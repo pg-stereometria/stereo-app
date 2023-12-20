@@ -10,6 +10,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
     {
         [SerializeField]
         private Slider slider;
+
         [SerializeField]
         private TMP_Text text;
 

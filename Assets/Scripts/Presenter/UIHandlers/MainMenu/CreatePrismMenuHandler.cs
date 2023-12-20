@@ -12,6 +12,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
     {
         [SerializeField]
         TMP_InputField lengthInput;
+
         [SerializeField]
         Slider numberOfSidesInput;
 
@@ -21,11 +22,9 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             var length = float.Parse(lengthInput.text);
             var radius = length / (2 * Mathf.Sin(Mathf.PI / sideCount));
 
-
-
             var offset = Mathf.PI + Mathf.PI / 4;
-            List<Point> bottom = CalculateBasePoints(sideCount, radius, offset, -length/2);
-            List<Point> top = CalculateBasePoints(sideCount, radius, offset, length/2);
+            List<Point> bottom = CalculateBasePoints(sideCount, radius, offset, -length / 2);
+            List<Point> top = CalculateBasePoints(sideCount, radius, offset, length / 2);
 
             var figure = new Polyhedron();
             figure.Faces.Add(new Polygon(bottom));

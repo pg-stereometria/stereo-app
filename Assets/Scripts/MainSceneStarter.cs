@@ -20,7 +20,7 @@ namespace StereoApp
 
             presenter.Figure = AppManager.Instance.figure;
             CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
-            cameraMovement.radius = 3*AppManager.Instance.longestDistance;
+            cameraMovement.radius = 3 * AppManager.Instance.longestDistance;
             cameraMovement.centrePoint = AppManager.Instance.midpoint;
         }
     }

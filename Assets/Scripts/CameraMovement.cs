@@ -19,7 +19,7 @@ public class CameraMovement : MonoBehaviour
     private bool _flipped;
     private float _currentPolar;
     private float _currentElevation;
-    private Vector3 _newPosition = new Vector3(0,0,0);
+    private Vector3 _newPosition = new Vector3(0, 0, 0);
 
     void Start()
     {
@@ -67,11 +67,7 @@ public class CameraMovement : MonoBehaviour
         float prevTouchDeltaMag = (touchZeroPreviousPosition - touchOnePreviousPosition).magnitude;
         float TouchDeltaMag = (touch.position - touchOne.position).magnitude;
         float deltaMagDiff = prevTouchDeltaMag - TouchDeltaMag;
-        radius = Mathf.Clamp(
-            radius + deltaMagDiff * Time.deltaTime,
-            minRadius,
-            maxRadius
-        );
+        radius = Mathf.Clamp(radius + deltaMagDiff * Time.deltaTime, minRadius, maxRadius);
     }
 
     private void MoveCamera(Touch touch)

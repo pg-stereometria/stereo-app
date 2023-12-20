@@ -90,7 +90,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         public void OnFinishPressed()
         {
-            var points = new List<Model.Point>(); 
+            var points = new List<Model.Point>();
             foreach (var coordinate in coordinates.Reverse())
             {
                 if (coordinate.point != null)

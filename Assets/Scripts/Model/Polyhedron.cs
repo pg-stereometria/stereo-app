@@ -40,7 +40,7 @@ namespace StereoApp.Model
         public Vector3 CaclulateMidpoint()
         {
             Vector3 sum = new Vector3(0, 0, 0);
-            foreach(var point in Points)
+            foreach (var point in Points)
             {
                 sum += point.ToVector3();
             }

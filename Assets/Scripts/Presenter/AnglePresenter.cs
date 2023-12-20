@@ -75,7 +75,7 @@ namespace StereoApp.Presenter
         private void DrawCircle()
         {
             var partOfCircle = _angleValue / (2 * Mathf.PI);
-            var count = (int) Mathf.Abs(partOfCircle * steps);
+            var count = (int)Mathf.Abs(partOfCircle * steps);
             lineRenderer1.positionCount = count;
             lineRenderer2.positionCount = count;
             var stepValue = _angleValue / count;
