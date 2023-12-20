@@ -2732,7 +2732,7 @@ MonoBehaviour:
   minRadius: 1
   maxRadius: 1000
   centrePoint: {x: 0, y: 0, z: 0}
-  radius: 0
+  radius: 4
 --- !u!1001 &1217382177
 PrefabInstance:
   m_ObjectHideFlags: 0

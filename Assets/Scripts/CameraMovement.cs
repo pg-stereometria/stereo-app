@@ -19,11 +19,12 @@ public class CameraMovement : MonoBehaviour
     private bool _flipped;
     private float _currentPolar;
     private float _currentElevation;
-    private Vector3 _newPosition;
+    private Vector3 _newPosition = new Vector3(0,0,0);
 
     void Start()
     {
         CalculateStartingSphericalCoordinates();
+        UpdateTransform();
     }
 
     void Update()
@@ -39,18 +40,23 @@ public class CameraMovement : MonoBehaviour
             {
                 MoveCamera(touch);
             }
-            UpdateCartesian();
-            transform.position = _newPosition;
-
-            _flipped = false;
-            Vector3 direction = Vector3.up;
-            if (_currentElevation > Mathf.PI / 2 || _currentElevation < -Mathf.PI / 2)
-            {
-                direction = Vector3.down;
-                _flipped = true;
-            }
-            transform.LookAt(centrePoint, direction);
+            UpdateTransform();
         }
+    }
+
+    private void UpdateTransform()
+    {
+        UpdateCartesian();
+        transform.position = _newPosition;
+
+        _flipped = false;
+        Vector3 direction = Vector3.up;
+        if (_currentElevation > Mathf.PI / 2 || _currentElevation < -Mathf.PI / 2)
+        {
+            direction = Vector3.down;
+            _flipped = true;
+        }
+        transform.LookAt(centrePoint, direction);
     }
 
     private void HandleZoom(Touch touch)

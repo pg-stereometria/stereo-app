@@ -331,12 +331,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7918596373db72f4b8d2d7e417e2df17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _label: 
   lineRenderer1: {fileID: 4994193431576134758}
   lineRenderer2: {fileID: 7334299505187865555}
   displayAboveObject: {fileID: 5305303874853415992}
   offsetValue: 0.2
   steps: 100
-  radius: 0.35
+  radius: 0.5
 --- !u!1 &8319993178974066744
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,12 +32,6 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         private float currentY = 0;
         private int count = 0;
 
-        // Start is called before the first frame update
-        private void Start()
-        {
-            SetDefaultValues();
-        }
-
         public void Clear()
         {
             // Murder all children
@@ -57,7 +51,6 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 AddNewPoint();
                 coordinates.Peek().SelectPoint(point);
             }
-
             inputLabel.text = polygon.Label;
         }
 
@@ -92,14 +85,12 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             currentY -= newGameObject.GetComponent<RectTransform>().rect.height + offset;
             coordinate.CurrentSolid = CurrentPolyhedron;
             count++;
-
             coordinates.Push(coordinate);
         }
 
         public void OnFinishPressed()
         {
-            var points = new List<Model.Point>();
-            var pointsCount = CurrentPolyhedron.Points.Count;
+            var points = new List<Model.Point>(); 
             foreach (var coordinate in coordinates.Reverse())
             {
                 if (coordinate.point != null)
@@ -131,8 +122,8 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             {
                 CurrentPolygon.Label = inputLabel.text;
                 CurrentPolygon.ReplaceAll(points);
-                CurrentPolygon = null;
             }
+            CurrentPolygon = null;
             ToolbarMenuManager.Instance.GoBack();
         }
 

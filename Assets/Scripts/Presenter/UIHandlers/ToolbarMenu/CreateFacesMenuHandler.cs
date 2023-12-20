@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
-    public class CreateFacesUIHandler : MonoBehaviour
+    public class CreateFacesMenuHandler : MonoBehaviour
     {
         
 
@@ -29,6 +29,10 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             if (ToolbarMenuManager.Instance.solidFigurePresenter.Figure is Model.Polyhedron polyhedron)
             {
                 ToolbarMenuManager.Instance.polygonMenu.CurrentPolyhedron = polyhedron;
+                foreach(var face in polyhedron.Faces)
+                {
+                    SetPolygonForLastButton(face);
+                }
             }
             else
             {
@@ -46,12 +50,18 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         public void OnAddFacePressed()
         {
+            ToolbarMenuManager.Instance.polygonMenu.Clear();
+            ToolbarMenuManager.Instance.ShowPolygonMenu();
+        }
+
+        private void AddFace()
+        {
             var newGameObject = Instantiate(
-                buttonPrefab,
-                facesParent.TransformPoint(new Vector3(facesParent.rect.width / 2, currentY, 0)),
-                Quaternion.identity,
-                facesParent
-            );
+                            buttonPrefab,
+                            facesParent.TransformPoint(new Vector3(facesParent.rect.width / 2, currentY, 0)),
+                            Quaternion.identity,
+                            facesParent
+                        );
 
             var rt = newGameObject.GetComponent<RectTransform>();
             currentY -= rt.rect.height + offset;
@@ -65,15 +75,11 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
             faceCount++;
             lastButton = newGameObject.GetComponent<FaceButtonHandler>();
-
-            var ButtonText = newGameObject.GetComponentInChildren<TMP_Text>();
-            ButtonText.text = "Face " + faceCount + ":";
-            ToolbarMenuManager.Instance.polygonMenu.Clear();
-            ToolbarMenuManager.Instance.ShowPolygonMenu();
         }
 
         public void SetPolygonForLastButton(Model.Polygon polygon)
         {
+            AddFace();
             lastButton.polygon = polygon;
         }
     }

@@ -60,9 +60,9 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         {
             this.point = point;
             dropdown.value = dropdown.options.FindIndex(s => s.text == point.ToString());
-            xCoordinate.text = point.X.ToString();
-            yCoordinate.text = point.Y.ToString();
-            zCoordinate.text = point.Z.ToString();
+            xCoordinate.text = point.X.ToString("0.##");
+            yCoordinate.text = point.Y.ToString("0.##");
+            zCoordinate.text = point.Z.ToString("0.##");
         }
     }
 }

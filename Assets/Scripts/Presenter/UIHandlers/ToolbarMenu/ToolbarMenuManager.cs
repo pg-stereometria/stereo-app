@@ -25,7 +25,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public SolidFigurePresenter solidFigurePresenter;
         public PolyhedronPresenter polyhedronPresenter;
 
-        public CreateFacesUIHandler facesMenu;
+        public CreateFacesMenuHandler facesMenu;
         public CreatePolygonMenuHandler polygonMenu;
         public RectTransform mainMenu;
         public RectTransform nameThingsMenu;
