@@ -31,7 +31,9 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
 
             var figure = new Polyhedron();
             figure.Faces.Add(new Polygon(bottom));
-            var topVertex = figure.CalculateMidpoint() + new Point(0, height, 0);
+            var topVertex = PointManager.Label(
+                figure.CalculateMidpoint() + new Point(0, height, 0)
+            );
 
             // lateral faces
             for (var i = 0; i < sideCount; ++i)

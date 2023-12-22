@@ -26,14 +26,14 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             float height = float.Parse(heightInput.text);
             var points = new Dictionary<string, Point>
             {
-                { "A", new Point(-length / 2, -height / 2, -width / 2) },
-                { "B", new Point(length / 2, -height / 2, -width / 2) },
-                { "C", new Point(length / 2, -height / 2, width / 2) },
-                { "D", new Point(-length / 2, -height / 2, width / 2) },
-                { "E", new Point(-length / 2, height / 2, -width / 2) },
-                { "F", new Point(length / 2, height / 2, -width / 2) },
-                { "G", new Point(length / 2, height / 2, width / 2) },
-                { "H", new Point(-length / 2, height / 2, width / 2) },
+                { "A", PointManager.Create(-length / 2, -height / 2, -width / 2) },
+                { "B", PointManager.Create(length / 2, -height / 2, -width / 2) },
+                { "C", PointManager.Create(length / 2, -height / 2, width / 2) },
+                { "D", PointManager.Create(-length / 2, -height / 2, width / 2) },
+                { "E", PointManager.Create(-length / 2, height / 2, -width / 2) },
+                { "F", PointManager.Create(length / 2, height / 2, -width / 2) },
+                { "G", PointManager.Create(length / 2, height / 2, width / 2) },
+                { "H", PointManager.Create(-length / 2, height / 2, width / 2) },
             };
 
             var figure = new Polyhedron();

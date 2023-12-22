@@ -14,5 +14,15 @@ namespace StereoApp.Presenter.Figure
         {
             return new Point(vec.x, vec.y, vec.z);
         }
+
+        public static Point ToPoint(this Vector3 vec, string label)
+        {
+            return new Point(vec.x, vec.y, vec.z, label);
+        }
+
+        public static Point FromVector3(this PointManager pointManager, Vector3 vec)
+        {
+            return vec.ToPoint(pointManager.GenerateNextLabel());
+        }
     }
 }

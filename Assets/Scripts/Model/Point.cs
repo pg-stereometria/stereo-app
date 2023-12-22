@@ -8,7 +8,6 @@ namespace StereoApp.Model
 {
     public class Point : ISerializableTo<Point, SerializedPoint>, INotifyPropertyChanged
     {
-        public static char currentLabel = 'A';
         public event PropertyChangedEventHandler PropertyChanged;
         public readonly HashSet<Segment> segments = new HashSet<Segment>();
 
@@ -67,15 +66,11 @@ namespace StereoApp.Model
             X = x;
             Y = y;
             Z = z;
-            _label = currentLabel.ToString();
-            currentLabel++;
         }
 
         public Point(float x, float y, float z, string label)
+            : this(x, y, z)
         {
-            X = x;
-            Y = y;
-            Z = z;
             Label = label;
         }
 

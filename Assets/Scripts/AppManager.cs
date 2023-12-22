@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using StereoApp.Model;
+using StereoApp.Presenter.Figure;
 using UnityEngine;
 
 namespace StereoApp
@@ -19,6 +19,13 @@ namespace StereoApp
             DontDestroyOnLoad(this.gameObject);
         }
 
+        public PointManager RecreatePointManager()
+        {
+            pointManager = new PointManager();
+            return pointManager;
+        }
+
+        public PointManager pointManager = new();
         public Model.SolidFigure figure;
         public Vector3 midpoint = new Vector3(0, 0, 0);
         public float longestDistance;

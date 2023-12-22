@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,11 +8,27 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
 {
     public abstract class CreatePredefinedFigureMenuHandler : MonoBehaviour
     {
+        private PointManager pointManager;
+        protected PointManager PointManager =>
+            pointManager
+            ?? throw new InvalidOperationException(
+                "PointManager property can only be used from GenerateFigure()"
+            );
         protected abstract Model.SolidFigure GenerateFigure();
 
         public void ShowFigure()
         {
-            var figure = GenerateFigure();
+            pointManager = AppManager.Instance.RecreatePointManager();
+            SolidFigure figure;
+            try
+            {
+                figure = GenerateFigure();
+            }
+            finally
+            {
+                pointManager = null;
+            }
+
             AppManager.Instance.figure = figure;
             SceneManager.LoadScene("MainScene");
         }
@@ -30,7 +46,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             {
                 var x = (float)(radius * Mathf.Sin(i * angle + offset));
                 var z = (float)(radius * Mathf.Cos(i * angle + offset));
-                points.Add(new Point(x, height, z));
+                points.Add(PointManager.Create(x, height, z));
             }
 
             return points;

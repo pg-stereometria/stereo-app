@@ -103,7 +103,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 }
 
                 points.Add(
-                    new Model.Point(
+                    AppManager.Instance.pointManager.Create(
                         float.Parse(coordinate.xCoordinate.text),
                         float.Parse(coordinate.yCoordinate.text),
                         float.Parse(coordinate.zCoordinate.text)
