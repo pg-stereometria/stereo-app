@@ -27,7 +27,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             var radius = length / (2 * Mathf.Sin(Mathf.PI / sideCount));
 
             var bottomCenter = new Point(0, -height / 2, 0);
-            List<Point> bottom = CalculateBasePoints(sideCount, radius, offset, bottomCenter.Y);
+            List<Point> bottom = CalculateBasePoints(sideCount, radius, bottomCenter.Y);
 
             var figure = new Polyhedron();
             figure.Faces.Add(new Polygon(bottom));

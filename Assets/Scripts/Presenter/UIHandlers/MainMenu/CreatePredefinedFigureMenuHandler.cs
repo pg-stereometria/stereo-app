@@ -33,13 +33,9 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             SceneManager.LoadScene("MainScene");
         }
 
-        protected List<Point> CalculateBasePoints(
-            int sideCount,
-            float radius,
-            float offset,
-            float height
-        )
+        protected List<Point> CalculateBasePoints(int sideCount, float radius, float height)
         {
+            var offset = Mathf.PI + Mathf.PI / sideCount;
             var points = new List<Point>();
             var angle = -2 * Mathf.PI / sideCount;
             for (var i = 0; i < sideCount; ++i)
