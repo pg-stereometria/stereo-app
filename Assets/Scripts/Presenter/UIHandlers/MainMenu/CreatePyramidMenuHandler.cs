@@ -26,14 +26,12 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             var height = float.Parse(heightInput.text);
             var radius = length / (2 * Mathf.Sin(Mathf.PI / sideCount));
 
-            var offset = Mathf.PI + Mathf.PI / 4;
-            List<Point> bottom = CalculateBasePoints(sideCount, radius, offset, -height / 2);
+            var bottomCenter = new Point(0, -height / 2, 0);
+            List<Point> bottom = CalculateBasePoints(sideCount, radius, offset, bottomCenter.Y);
 
             var figure = new Polyhedron();
             figure.Faces.Add(new Polygon(bottom));
-            var topVertex = PointManager.Label(
-                figure.CalculateMidpoint() + new Point(0, height, 0)
-            );
+            var topVertex = PointManager.Label(bottomCenter + new Point(0, height, 0));
 
             // lateral faces
             for (var i = 0; i < sideCount; ++i)

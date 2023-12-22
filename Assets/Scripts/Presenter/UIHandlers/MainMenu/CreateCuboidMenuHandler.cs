@@ -43,11 +43,12 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             figure.Faces.Add(new Polygon(points["A"], points["E"], points["H"], points["D"]));
             figure.Faces.Add(new Polygon(points["C"], points["D"], points["H"], points["G"]));
             figure.Faces.Add(new Polygon(points["B"], points["C"], points["G"], points["F"]));
+            var midpoint = new Vector3(0, 0, 0);
             AppManager.Instance.longestDistance = Vector3.Distance(
-                new Vector3(0, 0, 0),
+                midpoint,
                 points["A"].ToVector3()
             );
-            AppManager.Instance.midpoint = figure.CalculateMidpoint().ToVector3();
+            AppManager.Instance.midpoint = midpoint;
 
             return figure;
         }
