@@ -6,7 +6,7 @@ using StereoApp.Presenter.Figure;
 
 namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
-    public class ToolbarMenuManager : MonoBehaviour
+    public class ToolbarMenuManager : MenuManager
     {
         public static ToolbarMenuManager Instance;
 
@@ -27,13 +27,9 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         public CreateFacesMenuHandler facesMenu;
         public CreatePolygonMenuHandler polygonMenu;
-        public RectTransform mainMenu;
         public RectTransform nameThingsMenu;
         public NameSegmentsMenu nameSegmentsMenu;
         public NameAnglesMenu nameAnglesMenu;
-
-        [SerializeField]
-        private RectTransform backButton;
 
         [SerializeField]
         private RectTransform menuButton;
@@ -41,15 +37,11 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         [SerializeField]
         private RectTransform toolbarMenu;
 
-        public Stack<GameObject> LastMenus { get; set; }
-
-        private GameObject Current;
         private CameraMovement cameraMovement;
 
-        private void Start()
+        protected override void Start()
         {
-            LastMenus = new Stack<GameObject>();
-            Current = mainMenu.gameObject;
+            base.Start();
             cameraMovement = Camera.main.GetComponent<CameraMovement>();
         }
 
@@ -100,40 +92,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             SwitchToMenu(nameAnglesMenu);
         }
 
-        private void SwitchToMenu(Component newMenu)
-        {
-            HideEverythingInToolbar();
-            PushMenu(Current);
-            var obj = newMenu.gameObject;
-            Current = obj;
-            obj.SetActive(true);
-        }
-
-        public void GoBack()
-        {
-            if (LastMenus.Count == 0)
-            {
-                Current = mainMenu.gameObject;
-                return;
-            }
-            HideEverythingInToolbar();
-            Current = PopMenu();
-            Current.SetActive(true);
-        }
-
-        private void PushMenu(GameObject obj)
-        {
-            backButton.gameObject.SetActive(true);
-            LastMenus.Push(obj);
-        }
-
-        private GameObject PopMenu()
-        {
-            backButton.gameObject.SetActive(LastMenus.Count != 1);
-            return LastMenus.Pop();
-        }
-
-        public void HideEverythingInToolbar()
+        public override void HideEverythingInToolbar()
         {
             facesMenu.gameObject.SetActive(false);
             polygonMenu.gameObject.SetActive(false);

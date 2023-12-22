@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StereoApp.Presenter.UIHandlers.MainMenu
 {
-    public class MainMenuManager : MonoBehaviour
+    public class MainMenuManager : MenuManager
     {
         public static MainMenuManager Instance;
 
@@ -19,12 +19,6 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
                 Destroy(this);
             }
         }
-
-        [SerializeField]
-        private RectTransform backButton;
-
-        [SerializeField]
-        private RectTransform mainMenu;
 
         [SerializeField]
         private CreatePrismMenuHandler createPrismMenu;
@@ -46,21 +40,6 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
 
         [SerializeField]
         private CreateTruncatedConeMenuHandler createTruncatedConeMenu;
-
-        public Stack<GameObject> LastMenus { get; set; }
-
-        private GameObject Current;
-
-        private void Start()
-        {
-            LastMenus = new Stack<GameObject>();
-            Current = mainMenu.gameObject;
-        }
-
-        public void ShowMainMenu()
-        {
-            SwitchToMenu(mainMenu);
-        }
 
         public void ShowPrismMenu()
         {
@@ -97,40 +76,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             SwitchToMenu(createTruncatedConeMenu);
         }
 
-        private void SwitchToMenu(Component newMenu)
-        {
-            HideEverythingInToolbar();
-            PushMenu(Current);
-            var obj = newMenu.gameObject;
-            Current = obj;
-            obj.SetActive(true);
-        }
-
-        public void GoBack()
-        {
-            if (LastMenus.Count == 0)
-            {
-                Current = mainMenu.gameObject;
-                return;
-            }
-            HideEverythingInToolbar();
-            Current = PopMenu();
-            Current.SetActive(true);
-        }
-
-        private void PushMenu(GameObject obj)
-        {
-            backButton.gameObject.SetActive(true);
-            LastMenus.Push(obj);
-        }
-
-        private GameObject PopMenu()
-        {
-            backButton.gameObject.SetActive(LastMenus.Count != 1);
-            return LastMenus.Pop();
-        }
-
-        public void HideEverythingInToolbar()
+        public override void HideEverythingInToolbar()
         {
             mainMenu.gameObject.SetActive(false);
             createPrismMenu.gameObject.SetActive(false);
