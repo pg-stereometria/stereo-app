@@ -42,7 +42,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
                     )
                 );
             }
-            Vector3 midpoint = figure.CaclulateMidpoint();
+            Vector3 midpoint = figure.CalculateMidpoint().ToVector3();
             AppManager.Instance.longestDistance = Vector3.Distance(midpoint, bottom[0].ToVector3());
             AppManager.Instance.midpoint = midpoint;
             return figure;

@@ -1,10 +1,8 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StereoApp.Model.Interfaces;
-using UnityEngine;
 
 namespace StereoApp.Model
 {
@@ -73,15 +71,6 @@ namespace StereoApp.Model
             currentLabel++;
         }
 
-        public Point(Vector3 vector)
-        {
-            X = vector.x;
-            Y = vector.y;
-            Z = vector.z;
-            _label = currentLabel.ToString();
-            currentLabel++;
-        }
-
         public Point(float x, float y, float z, string label)
         {
             X = x;
@@ -113,6 +102,11 @@ namespace StereoApp.Model
         public static Point operator -(Point a, Point b)
         {
             return new Point(a.X + b.X, a.Y + b.Y, a.Z + b.Z, a.Label);
+        }
+
+        public static Point operator /(Point a, float d)
+        {
+            return new Point(a.X / d, a.Y / d, a.Z / d, a.Label);
         }
 
         public override string ToString()

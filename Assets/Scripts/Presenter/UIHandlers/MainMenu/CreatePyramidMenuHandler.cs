@@ -31,14 +31,14 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
 
             var figure = new Polyhedron();
             figure.Faces.Add(new Polygon(bottom));
-            var topVertex = new Point(figure.CaclulateMidpoint() + new Vector3(0, height, 0));
+            var topVertex = figure.CalculateMidpoint() + new Point(0, height, 0);
 
             // lateral faces
             for (var i = 0; i < sideCount; ++i)
             {
                 figure.Faces.Add(new Polygon(bottom[i], bottom[(i + 1) % bottom.Count], topVertex));
             }
-            Vector3 midpoint = figure.CaclulateMidpoint();
+            Vector3 midpoint = figure.CalculateMidpoint().ToVector3();
             AppManager.Instance.longestDistance = Mathf.Max(
                 length,
                 Vector3.Distance(topVertex.ToVector3(), bottom[0].ToVector3())

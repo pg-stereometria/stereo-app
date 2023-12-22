@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using StereoApp.Model.Interfaces;
-using StereoApp.Presenter.Figure;
-using UnityEngine;
 
 namespace StereoApp.Model
 {
@@ -37,12 +35,12 @@ namespace StereoApp.Model
             };
         }
 
-        public Vector3 CaclulateMidpoint()
+        public Point CalculateMidpoint()
         {
-            Vector3 sum = new Vector3(0, 0, 0);
+            var sum = new Point(0, 0, 0);
             foreach (var point in Points)
             {
-                sum += point.ToVector3();
+                sum += point;
             }
             var midpoint = sum / Points.Count;
             return midpoint;

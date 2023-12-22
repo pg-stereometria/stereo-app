@@ -47,7 +47,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
                 new Vector3(0, 0, 0),
                 points["A"].ToVector3()
             );
-            AppManager.Instance.midpoint = figure.CaclulateMidpoint();
+            AppManager.Instance.midpoint = figure.CalculateMidpoint().ToVector3();
 
             return figure;
         }
