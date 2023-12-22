@@ -259,12 +259,17 @@ namespace StereoApp.Model
 
         public override string ToString()
         {
-            string name = "";
+            var name = "";
             foreach (var item in _points)
             {
                 name += item.Label;
             }
-            return name + "(" + Label + ")";
+
+            if (!string.IsNullOrEmpty(Label))
+            {
+                name += $"({Label})";
+            }
+            return name;
         }
     }
 
