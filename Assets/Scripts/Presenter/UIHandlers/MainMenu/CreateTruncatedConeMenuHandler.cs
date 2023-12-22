@@ -27,7 +27,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             AppManager.Instance.longestDistance = Mathf.Max(
                 1.5f * bottomRadius,
                 1.5f * topRadius,
-                height
+                height / 2
             );
             AppManager.Instance.midpoint = new Vector3(0, height / 2, 0);
 
