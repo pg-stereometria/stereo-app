@@ -45,7 +45,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
         private CreateConeMenuHandler createConeMenu;
 
         [SerializeField]
-        private CreateTrancatedConeMenuHandler createTrunatedConeMenu;
+        private CreateTruncatedConeMenuHandler createTruncatedConeMenu;
 
         public Stack<GameObject> LastMenus { get; set; }
 
@@ -92,9 +92,9 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             SwitchToMenu(createConeMenu);
         }
 
-        public void ShowTrancatedConeMenu()
+        public void ShowTruncatedConeMenu()
         {
-            SwitchToMenu(createTrunatedConeMenu);
+            SwitchToMenu(createTruncatedConeMenu);
         }
 
         private void SwitchToMenu(Component newMenu)
@@ -139,7 +139,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             createSphereMenu.gameObject.SetActive(false);
             createCylinderMenu.gameObject.SetActive(false);
             createConeMenu.gameObject.SetActive(false);
-            createTrunatedConeMenu.gameObject.SetActive(false);
+            createTruncatedConeMenu.gameObject.SetActive(false);
         }
     }
 }

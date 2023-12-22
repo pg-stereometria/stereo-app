@@ -874,7 +874,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 863404584879256015, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_Name
-      value: Trunated Cone Button
+      value: Truncated Cone Button
       objectReference: {fileID: 0}
     - target: {fileID: 2345814083021574855, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_Pivot.x
@@ -978,7 +978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowTrancatedConeMenu
+      value: ShowTruncatedConeMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -3105,7 +3105,7 @@ MonoBehaviour:
   createSphereMenu: {fileID: 1078850989}
   createCylinderMenu: {fileID: 1380038741}
   createConeMenu: {fileID: 1041535059}
-  createTrunatedConeMenu: {fileID: 922707989}
+  createTruncatedConeMenu: {fileID: 922707989}
 --- !u!1001 &1274141918
 PrefabInstance:
   m_ObjectHideFlags: 0

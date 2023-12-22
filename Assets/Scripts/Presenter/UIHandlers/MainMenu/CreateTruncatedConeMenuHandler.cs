@@ -7,7 +7,7 @@ using StereoApp.Presenter.Figure;
 
 namespace StereoApp.Presenter.UIHandlers.MainMenu
 {
-    public class CreateTrancatedConeMenuHandler : CreatePredefinedFigureMenuHandler
+    public class CreateTruncatedConeMenuHandler : CreatePredefinedFigureMenuHandler
     {
         [SerializeField]
         TMP_InputField bottomRadiusInput;
