@@ -32,7 +32,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 ToolbarMenuManager.Instance.polygonMenu.CurrentPolyhedron = polyhedron;
                 foreach (var face in polyhedron.Faces)
                 {
-                    SetPolygonForLastButton(face);
+                    AddButtonForPolygon(face);
                 }
             }
             else
@@ -81,7 +81,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             lastButton = newGameObject.GetComponent<FaceButtonHandler>();
         }
 
-        public void SetPolygonForLastButton(Model.Polygon polygon)
+        public void AddButtonForPolygon(Model.Polygon polygon)
         {
             AddFace();
             lastButton.polygon = polygon;

@@ -116,7 +116,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 var polygon = new Model.Polygon(points);
                 polygon.Label = inputLabel.text;
                 CurrentPolyhedron.Faces.Add(polygon);
-                ToolbarMenuManager.Instance.facesMenu.SetPolygonForLastButton(polygon);
+                ToolbarMenuManager.Instance.facesMenu.AddButtonForPolygon(polygon);
             }
             else
             {
