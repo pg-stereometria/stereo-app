@@ -34,6 +34,17 @@ namespace StereoApp.Model
                 faces = Faces.Select(polygon => polygon.ToSerializable()).ToList()
             };
         }
+
+        public Point CalculateMidpoint()
+        {
+            var sum = new Point(0, 0, 0);
+            foreach (var point in Points)
+            {
+                sum += point;
+            }
+            var midpoint = sum / Points.Count;
+            return midpoint;
+        }
     }
 
     [Serializable]

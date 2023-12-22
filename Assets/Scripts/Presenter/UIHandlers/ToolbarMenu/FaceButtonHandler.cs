@@ -1,16 +1,25 @@
 using UnityEngine;
+using TMPro;
 
 namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
     public class FaceButtonHandler : MonoBehaviour
     {
+        [SerializeField]
+        private TMP_Text textField;
+
         public Model.Polygon polygon;
+
+        private void Update()
+        {
+            textField.text = polygon.ToString();
+        }
 
         public void EditPolygon()
         {
-            MenuManager.Instance.polygonMenu.Clear();
-            MenuManager.Instance.polygonMenu.FillInDataFromPolygon(polygon);
-            MenuManager.Instance.ShowPolygonMenu();
+            ToolbarMenuManager.Instance.polygonMenu.Clear();
+            ToolbarMenuManager.Instance.polygonMenu.FillInDataFromPolygon(polygon);
+            ToolbarMenuManager.Instance.ShowPolygonMenu();
         }
     }
 }

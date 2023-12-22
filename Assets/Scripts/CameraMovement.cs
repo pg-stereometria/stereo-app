@@ -11,25 +11,20 @@ public class CameraMovement : MonoBehaviour
     private float minRadius = 1f;
 
     [SerializeField]
-    private float maxRadius = 10f;
+    private float maxRadius = 100f;
 
-    [SerializeField]
-    private Transform centrePoint;
-
-    private float _width;
-    private float _height;
+    public Vector3 centrePoint;
+    public float radius;
 
     private bool _flipped;
-    private float _currentRadius;
     private float _currentPolar;
     private float _currentElevation;
-    private Vector3 _newPosition;
+    private Vector3 _newPosition = new Vector3(0, 0, 0);
 
     void Start()
     {
-        _width = Screen.width / 2f;
-        _height = Screen.height / 2f;
         CalculateStartingSphericalCoordinates();
+        UpdateTransform();
     }
 
     void Update()
@@ -45,18 +40,23 @@ public class CameraMovement : MonoBehaviour
             {
                 MoveCamera(touch);
             }
-            UpdateCartesian();
-            transform.position = _newPosition;
-
-            _flipped = false;
-            Vector3 direction = Vector3.up;
-            if (_currentElevation > Mathf.PI / 2 || _currentElevation < -Mathf.PI / 2)
-            {
-                direction = Vector3.down;
-                _flipped = true;
-            }
-            transform.LookAt(centrePoint, direction);
+            UpdateTransform();
         }
+    }
+
+    private void UpdateTransform()
+    {
+        UpdateCartesian();
+        transform.position = _newPosition;
+
+        _flipped = false;
+        Vector3 direction = Vector3.up;
+        if (_currentElevation > Mathf.PI / 2 || _currentElevation < -Mathf.PI / 2)
+        {
+            direction = Vector3.down;
+            _flipped = true;
+        }
+        transform.LookAt(centrePoint, direction);
     }
 
     private void HandleZoom(Touch touch)
@@ -67,11 +67,7 @@ public class CameraMovement : MonoBehaviour
         float prevTouchDeltaMag = (touchZeroPreviousPosition - touchOnePreviousPosition).magnitude;
         float TouchDeltaMag = (touch.position - touchOne.position).magnitude;
         float deltaMagDiff = prevTouchDeltaMag - TouchDeltaMag;
-        _currentRadius = Mathf.Clamp(
-            _currentRadius + deltaMagDiff * Time.deltaTime,
-            minRadius,
-            maxRadius
-        );
+        radius = Mathf.Clamp(radius + deltaMagDiff * Time.deltaTime, minRadius, maxRadius);
     }
 
     private void MoveCamera(Touch touch)
@@ -100,10 +96,10 @@ public class CameraMovement : MonoBehaviour
 
     private void UpdateCartesian()
     {
-        float a = _currentRadius * Mathf.Cos(_currentElevation);
-        _newPosition.x = a * Mathf.Cos(_currentPolar) + centrePoint.position.x;
-        _newPosition.y = _currentRadius * Mathf.Sin(_currentElevation) + centrePoint.position.y;
-        _newPosition.z = a * Mathf.Sin(_currentPolar) + centrePoint.position.z;
+        float a = radius * Mathf.Cos(_currentElevation);
+        _newPosition.x = a * Mathf.Cos(_currentPolar) + centrePoint.x;
+        _newPosition.y = radius * Mathf.Sin(_currentElevation) + centrePoint.y;
+        _newPosition.z = a * Mathf.Sin(_currentPolar) + centrePoint.z;
     }
 
     private void CalculateStartingSphericalCoordinates()
@@ -111,14 +107,9 @@ public class CameraMovement : MonoBehaviour
         Vector3 cartCoords = transform.position;
         if (cartCoords.x == 0)
             cartCoords.x = Mathf.Epsilon;
-        _currentRadius = Mathf.Sqrt(
-            (cartCoords.x * cartCoords.x)
-                + (cartCoords.y * cartCoords.y)
-                + (cartCoords.z * cartCoords.z)
-        );
         _currentPolar = Mathf.Atan(cartCoords.z / cartCoords.x);
         if (cartCoords.x < 0)
             _currentPolar += Mathf.PI;
-        _currentElevation = Mathf.Asin(cartCoords.y / _currentRadius);
+        _currentElevation = Mathf.Asin(cartCoords.y / radius);
     }
 }

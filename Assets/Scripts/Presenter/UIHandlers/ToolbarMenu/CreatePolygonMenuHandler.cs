@@ -24,19 +24,13 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         [SerializeField]
         private float offset = 5.0f;
 
-        public Model.Polyhedron CurrentSolid { get; set; }
+        public Model.Polyhedron CurrentPolyhedron { get; set; }
         public Model.Polygon CurrentPolygon { get; set; }
 
         private Stack<Coordinates> coordinates;
 
         private float currentY = 0;
         private int count = 0;
-
-        // Start is called before the first frame update
-        private void Start()
-        {
-            SetDefaultValues();
-        }
 
         public void Clear()
         {
@@ -57,7 +51,6 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 AddNewPoint();
                 coordinates.Peek().SelectPoint(point);
             }
-
             inputLabel.text = polygon.Label;
         }
 
@@ -90,16 +83,14 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             var coordinate = newGameObject.GetComponent<Coordinates>();
 
             currentY -= newGameObject.GetComponent<RectTransform>().rect.height + offset;
-            coordinate.CurrentSolid = CurrentSolid;
+            coordinate.CurrentSolid = CurrentPolyhedron;
             count++;
-
             coordinates.Push(coordinate);
         }
 
         public void OnFinishPressed()
         {
             var points = new List<Model.Point>();
-            var pointsCount = CurrentSolid.Points.Count;
             foreach (var coordinate in coordinates.Reverse())
             {
                 if (coordinate.point != null)
@@ -112,11 +103,10 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 }
 
                 points.Add(
-                    new Model.Point(
+                    AppManager.Instance.pointManager.Create(
                         float.Parse(coordinate.xCoordinate.text),
                         float.Parse(coordinate.yCoordinate.text),
-                        float.Parse(coordinate.zCoordinate.text),
-                        ((char)(ALPHABET_START + pointsCount + points.Count)).ToString()
+                        float.Parse(coordinate.zCoordinate.text)
                     )
                 );
             }
@@ -125,16 +115,16 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             {
                 var polygon = new Model.Polygon(points);
                 polygon.Label = inputLabel.text;
-                CurrentSolid.Faces.Add(polygon);
-                MenuManager.Instance.facesMenu.SetPolygonForLastButton(polygon);
+                CurrentPolyhedron.Faces.Add(polygon);
+                ToolbarMenuManager.Instance.facesMenu.AddButtonForPolygon(polygon);
             }
             else
             {
                 CurrentPolygon.Label = inputLabel.text;
                 CurrentPolygon.ReplaceAll(points);
-                CurrentPolygon = null;
             }
-            MenuManager.Instance.GoBack();
+            CurrentPolygon = null;
+            ToolbarMenuManager.Instance.GoBack();
         }
 
         private void SetDefaultValues()

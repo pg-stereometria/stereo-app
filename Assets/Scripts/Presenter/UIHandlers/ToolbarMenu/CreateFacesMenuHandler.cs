@@ -4,11 +4,8 @@ using UnityEngine;
 
 namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
-    public class CreateFacesUIHandler : MonoBehaviour
+    public class CreateFacesMenuHandler : MonoBehaviour
     {
-        [SerializeField]
-        private PolyhedronPresenter solidPresenter;
-
         [SerializeField]
         private GameObject buttonPrefab;
 
@@ -27,7 +24,26 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         // Start is called before the first frame update
         private void Start()
         {
-            solidPresenter.Figure = new Model.Polyhedron();
+            if (
+                ToolbarMenuManager.Instance.solidFigurePresenter.Figure
+                is Model.Polyhedron polyhedron
+            )
+            {
+                ToolbarMenuManager.Instance.polygonMenu.CurrentPolyhedron = polyhedron;
+                foreach (var face in polyhedron.Faces)
+                {
+                    AddButtonForPolygon(face);
+                }
+            }
+            else
+            {
+                ToolbarMenuManager.Instance.polyhedronPresenter.Figure = new Model.Polyhedron();
+                ToolbarMenuManager.Instance.polygonMenu.CurrentPolyhedron = ToolbarMenuManager
+                    .Instance
+                    .polyhedronPresenter
+                    .Figure;
+            }
+
             var worldCorners = new Vector3[4];
             facesParent.GetWorldCorners(worldCorners);
             currentY = 0;
@@ -37,6 +53,12 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         private void Update() { }
 
         public void OnAddFacePressed()
+        {
+            ToolbarMenuManager.Instance.polygonMenu.Clear();
+            ToolbarMenuManager.Instance.ShowPolygonMenu();
+        }
+
+        private void AddFace()
         {
             var newGameObject = Instantiate(
                 buttonPrefab,
@@ -57,16 +79,11 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
             faceCount++;
             lastButton = newGameObject.GetComponent<FaceButtonHandler>();
-
-            var ButtonText = newGameObject.GetComponentInChildren<TMP_Text>();
-            ButtonText.text = "Face " + faceCount + ":";
-            MenuManager.Instance.polygonMenu.CurrentSolid = solidPresenter.Figure;
-            MenuManager.Instance.polygonMenu.Clear();
-            MenuManager.Instance.ShowPolygonMenu();
         }
 
-        public void SetPolygonForLastButton(Model.Polygon polygon)
+        public void AddButtonForPolygon(Model.Polygon polygon)
         {
+            AddFace();
             lastButton.polygon = polygon;
         }
     }

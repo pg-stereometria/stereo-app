@@ -66,13 +66,14 @@ namespace StereoApp.Presenter.UIHandlers
 
         private static Polygon GenerateRegularPolygonBase(int sideCount)
         {
+            var pointManager = AppManager.Instance.RecreatePointManager();
             var angle = 2 * Math.PI / sideCount;
             var basePoints = new List<Point>();
             for (var i = 0; i < sideCount; ++i)
             {
                 var x = (float)(Radius * Math.Sin(i * angle));
                 var z = (float)(Radius * Math.Cos(i * angle));
-                basePoints.Add(new Point(x, 0, z));
+                basePoints.Add(pointManager.Create(x, 0, z));
             }
 
             return new Polygon(basePoints);
@@ -80,13 +81,16 @@ namespace StereoApp.Presenter.UIHandlers
 
         private void GeneratePrism()
         {
+            var pointManager = AppManager.Instance.RecreatePointManager();
             var bottom = GenerateRegularPolygonBase((int)_sideCountSlider.value);
             var polyhedron = new Polyhedron();
-            var offset = new Point(0, (float)Radius, 0);
+            var offset = pointManager.Create(0, (float)Radius, 0);
 
             // bases
             polyhedron.Faces.Add(bottom);
-            polyhedron.Faces.Add(new Polygon(bottom.Select(point => point + offset)));
+            polyhedron.Faces.Add(
+                new Polygon(bottom.Select(point => pointManager.Label(point + offset)))
+            );
 
             // lateral faces
             for (var i = 0; i < bottom.Count; ++i)
@@ -95,8 +99,8 @@ namespace StereoApp.Presenter.UIHandlers
                     new Polygon(
                         bottom[i],
                         bottom[(i + 1) % bottom.Count],
-                        bottom[(i + 1) % bottom.Count] + offset,
-                        bottom[i] + offset
+                        pointManager.Label(bottom[(i + 1) % bottom.Count] + offset),
+                        pointManager.Label(bottom[i] + offset)
                     )
                 );
             }
@@ -106,9 +110,10 @@ namespace StereoApp.Presenter.UIHandlers
 
         private void GeneratePyramid()
         {
+            var pointManager = AppManager.Instance.RecreatePointManager();
             var bottom = GenerateRegularPolygonBase((int)_sideCountSlider.value);
             var polyhedron = new Polyhedron();
-            var topVertex = new Point(0, (float)Radius, 0);
+            var topVertex = pointManager.Create(0, (float)Radius, 0);
 
             // base
             polyhedron.Faces.Add(bottom);

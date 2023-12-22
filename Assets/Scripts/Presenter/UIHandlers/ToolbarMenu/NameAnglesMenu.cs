@@ -24,16 +24,24 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         [SerializeField]
         private TMP_InputField valueText;
 
-        [SerializeField]
-        private PolyhedronPresenter solidPresenter;
-
         private List<AnglePresenter> anglePresenters = new List<AnglePresenter>();
+
+        private Polyhedron _polyhedron;
 
         private void Start()
         {
-            point1.CurrentSolid = solidPresenter.Figure;
-            middlePoint.CurrentSolid = solidPresenter.Figure;
-            point2.CurrentSolid = solidPresenter.Figure;
+            if (ToolbarMenuManager.Instance.solidFigurePresenter.Figure is Polyhedron polyhedron)
+            {
+                _polyhedron = polyhedron;
+            }
+            else
+            {
+                _polyhedron = ToolbarMenuManager.Instance.polyhedronPresenter.Figure;
+            }
+
+            point1.CurrentSolid = _polyhedron;
+            middlePoint.CurrentSolid = _polyhedron;
+            point2.CurrentSolid = _polyhedron;
         }
 
         public void OnPointDropdownChange()
@@ -48,7 +56,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             if (angle != null)
             {
                 angle.Label = valueText.text;
-                MenuManager.Instance.GoBack();
+                ToolbarMenuManager.Instance.GoBack();
                 return;
             }
 
@@ -63,7 +71,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             angle.point2 = point2.point;
             angle.Label = valueText.text;
             anglePresenters.Add(angle);
-            MenuManager.Instance.GoBack();
+            ToolbarMenuManager.Instance.GoBack();
         }
 
         public AnglePresenter FindAngle()

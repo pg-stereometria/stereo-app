@@ -1,107 +1,36 @@
-using StereoApp.Presenter.UIHandlers.ToolbarMenu;
-using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace StereoApp.Presenter.UIHandlers
 {
-    public class MenuManager : MonoBehaviour
+    public abstract class MenuManager : MonoBehaviour
     {
-        public static MenuManager Instance;
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(this);
-            }
-        }
-
-        public CreateFacesUIHandler facesMenu;
-        public CreatePolygonMenuHandler polygonMenu;
-        public RectTransform mainMenu;
-        public RectTransform nameThingsMenu;
-        public NameSegmentsMenu nameSegmentsMenu;
-        public NameAnglesMenu nameAnglesMenu;
+        [SerializeField]
+        protected RectTransform backButton;
 
         [SerializeField]
-        private RectTransform backButton;
+        protected RectTransform mainMenu;
 
-        [SerializeField]
-        private RectTransform menuButton;
+        public Stack<GameObject> LastMenus { get; set; } = new();
 
-        [SerializeField]
-        private RectTransform toolbarMenu;
+        protected GameObject current;
 
-        public Stack<GameObject> LastMenus { get; set; }
-
-        private GameObject Current;
-        private CameraMovement cameraMovement;
-
-        private void Start()
+        protected virtual void Start()
         {
-            LastMenus = new Stack<GameObject>();
-            Current = mainMenu.gameObject;
-            cameraMovement = Camera.main.GetComponent<CameraMovement>();
+            current = mainMenu.gameObject;
         }
 
-        public void OnMenuButtonPressed()
+        public void ShowMainMenu()
         {
-            if (!toolbarMenu.gameObject.activeSelf)
-            {
-                menuButton.anchoredPosition = new Vector2(
-                    menuButton.anchoredPosition.x,
-                    menuButton.anchoredPosition.y + toolbarMenu.rect.height
-                );
-                toolbarMenu.gameObject.SetActive(true);
-                cameraMovement.enabled = false;
-            }
-            else
-            {
-                menuButton.anchoredPosition = new Vector2(
-                    menuButton.anchoredPosition.x,
-                    menuButton.anchoredPosition.y - toolbarMenu.rect.height
-                );
-                toolbarMenu.gameObject.SetActive(false);
-                cameraMovement.enabled = true;
-            }
+            SwitchToMenu(mainMenu);
         }
 
-        public void ShowFacesMenu()
-        {
-            SwitchToMenu(facesMenu);
-        }
-
-        public void ShowPolygonMenu()
-        {
-            SwitchToMenu(polygonMenu);
-        }
-
-        public void ShowNameThingsMenu()
-        {
-            SwitchToMenu(nameThingsMenu);
-        }
-
-        public void ShowNameSegmentsMenu()
-        {
-            SwitchToMenu(nameSegmentsMenu);
-        }
-
-        public void ShowNameAnglesMenu()
-        {
-            SwitchToMenu(nameAnglesMenu);
-        }
-
-        private void SwitchToMenu(Component newMenu)
+        protected void SwitchToMenu(Component newMenu)
         {
             HideEverythingInToolbar();
-            PushMenu(Current);
+            PushMenu(current);
             var obj = newMenu.gameObject;
-            Current = obj;
+            current = obj;
             obj.SetActive(true);
         }
 
@@ -109,12 +38,12 @@ namespace StereoApp.Presenter.UIHandlers
         {
             if (LastMenus.Count == 0)
             {
-                Current = mainMenu.gameObject;
+                current = mainMenu.gameObject;
                 return;
             }
             HideEverythingInToolbar();
-            Current = PopMenu();
-            Current.SetActive(true);
+            current = PopMenu();
+            current.SetActive(true);
         }
 
         private void PushMenu(GameObject obj)
@@ -129,14 +58,6 @@ namespace StereoApp.Presenter.UIHandlers
             return LastMenus.Pop();
         }
 
-        public void HideEverythingInToolbar()
-        {
-            facesMenu.gameObject.SetActive(false);
-            polygonMenu.gameObject.SetActive(false);
-            mainMenu.gameObject.SetActive(false);
-            nameThingsMenu.gameObject.SetActive(false);
-            nameSegmentsMenu.gameObject.SetActive(false);
-            nameAnglesMenu.gameObject.SetActive(false);
-        }
+        public abstract void HideEverythingInToolbar();
     }
 }

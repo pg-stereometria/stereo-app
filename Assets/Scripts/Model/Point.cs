@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -100,9 +99,21 @@ namespace StereoApp.Model
             return new Point(a.X + b.X, a.Y + b.Y, a.Z + b.Z, a.Label);
         }
 
+        public static Point operator /(Point a, float d)
+        {
+            return new Point(a.X / d, a.Y / d, a.Z / d, a.Label);
+        }
+
         public override string ToString()
         {
-            return Label + "(" + X + "," + Y + "," + Z + ")";
+            return Label
+                + "("
+                + X.ToString("0.##")
+                + ","
+                + Y.ToString("0.##")
+                + ","
+                + Z.ToString("0.##")
+                + ")";
         }
     }
 

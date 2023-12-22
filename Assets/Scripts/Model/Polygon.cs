@@ -256,6 +256,21 @@ namespace StereoApp.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
             CollectionChanged?.Invoke(this, e);
         }
+
+        public override string ToString()
+        {
+            var name = "";
+            foreach (var item in _points)
+            {
+                name += item.Label;
+            }
+
+            if (!string.IsNullOrEmpty(Label))
+            {
+                name += $"({Label})";
+            }
+            return name;
+        }
     }
 
     [Serializable]

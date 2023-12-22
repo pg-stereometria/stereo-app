@@ -18,13 +18,21 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         [SerializeField]
         private TMP_InputField valueText;
 
-        [SerializeField]
-        private PolyhedronPresenter solidPresenter;
+        private Polyhedron _polyhedron;
 
         private void Start()
         {
-            point1.CurrentSolid = solidPresenter.Figure;
-            point2.CurrentSolid = solidPresenter.Figure;
+            if (ToolbarMenuManager.Instance.solidFigurePresenter.Figure is Polyhedron polyhedron)
+            {
+                _polyhedron = polyhedron;
+            }
+            else
+            {
+                _polyhedron = ToolbarMenuManager.Instance.polyhedronPresenter.Figure;
+            }
+
+            point1.CurrentSolid = _polyhedron;
+            point2.CurrentSolid = _polyhedron;
         }
 
         public void OnPointDropdownChange()
@@ -42,7 +50,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             }
 
             segment.Label = valueText.text;
-            MenuManager.Instance.GoBack();
+            ToolbarMenuManager.Instance.GoBack();
         }
 
         private Segment FindSegment()

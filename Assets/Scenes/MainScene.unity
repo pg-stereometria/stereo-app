@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -339,7 +339,7 @@ PrefabInstance:
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 857828058}
+      objectReference: {fileID: 857828063}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -350,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: StereoApp.MenuManager, Assembly-CSharp
+      value: StereoApp.Presenter.UIHandlers.ToolbarMenu.ToolbarMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -453,8 +453,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 857828058}
-        m_TargetAssemblyTypeName: StereoApp.UIHandlers.MenuManager, Assembly-CSharp
+      - m_Target: {fileID: 857828063}
+        m_TargetAssemblyTypeName: StereoApp.Presenter.UIHandlers.ToolbarMenu.ToolbarMenuManager,
+          Assembly-CSharp
         m_MethodName: GoBack
         m_Mode: 1
         m_Arguments:
@@ -647,6 +648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 347084588}
+  - component: {fileID: 347084589}
   m_Layer: 0
   m_Name: Solids
   m_TagString: Untagged
@@ -667,9 +669,46 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 528313264}
+  - {fileID: 365479644}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &347084589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347084587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af67fbe68298034494e7e1341bc21ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presenter: {fileID: 1142339950}
+--- !u!1 &365479642 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3145364137751533602, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+  m_PrefabInstance: {fileID: 787376716}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &365479643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365479642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80085ee9d51497a999bd77f61452439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _polygonPrefab: {fileID: 1380528700517873463, guid: 6c66e7efc2125ca57bbce79a3c2bee55, type: 3}
+--- !u!4 &365479644 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+  m_PrefabInstance: {fileID: 787376716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &425935450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -937,9 +976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: 'Add Face
-
-'
+      value: "Dodaj \u015Bcian\u0119"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -1016,7 +1053,6 @@ MonoBehaviour:
   point2: {fileID: 1446834156}
   anglePrefab: {fileID: 6980967024125376744, guid: 7bbcb33cbe4590d4baa1baa19d45bd72, type: 3}
   valueText: {fileID: 2108488698}
-  solidPresenter: {fileID: 528313265}
 --- !u!1001 &521249726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1175,17 +1211,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3785525283170326425, guid: 5c5545bc037e4c96d986615b772c706e, type: 3}
   m_PrefabInstance: {fileID: 1142339947}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &528313265 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8306838113950530938, guid: 5c5545bc037e4c96d986615b772c706e, type: 3}
-  m_PrefabInstance: {fileID: 1142339947}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a80085ee9d51497a999bd77f61452439, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &548287996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1700,7 +1725,7 @@ PrefabInstance:
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 857828058}
+      objectReference: {fileID: 857828063}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1711,7 +1736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: StereoApp.UIHandlers.MenuManager, Assembly-CSharp
+      value: StereoApp.Presenter.UIHandlers.ToolbarMenu.ToolbarMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1719,7 +1744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Name Segments
+      value: Oznacz odcinki
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -1812,6 +1837,65 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &787376716
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 347084588}
+    m_Modifications:
+    - target: {fileID: 3145364137751533602, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_Name
+      value: PolyhedronFigure
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427266337860349777, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5638068322302596213, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+    - {fileID: 696318772190250983, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
 --- !u!1 &789980650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,9 +1975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Enter value
-
-'
+  m_text: "Tu wpisz etykiet\u0119"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1920,7 +2002,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 57.4
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2117,7 +2199,7 @@ GameObject:
   - component: {fileID: 857828061}
   - component: {fileID: 857828060}
   - component: {fileID: 857828059}
-  - component: {fileID: 857828058}
+  - component: {fileID: 857828063}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2125,27 +2207,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &857828058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 857828057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9060896ee285f27448fc4ad9787548a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  facesMenu: {fileID: 1674344289}
-  polygonMenu: {fileID: 1905616493}
-  mainMenu: {fileID: 967887693}
-  nameThingsMenu: {fileID: 1703264641}
-  nameSegmentsMenu: {fileID: 1298834865}
-  nameAnglesMenu: {fileID: 502722646}
-  backButton: {fileID: 279008319}
-  menuButton: {fileID: 226427617}
-  toolbarMenu: {fileID: 667603861}
 --- !u!114 &857828059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2229,6 +2290,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &857828063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857828057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1731879559fe6c94bb1e4010b155f26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solidFigurePresenter: {fileID: 1142339950}
+  polyhedronPresenter: {fileID: 365479643}
+  facesMenu: {fileID: 1674344289}
+  polygonMenu: {fileID: 1905616493}
+  mainMenu: {fileID: 967887693}
+  nameThingsMenu: {fileID: 1703264641}
+  nameSegmentsMenu: {fileID: 1298834865}
+  nameAnglesMenu: {fileID: 502722646}
+  backButton: {fileID: 279008319}
+  menuButton: {fileID: 226427617}
+  toolbarMenu: {fileID: 667603861}
 --- !u!1 &862209204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2471,8 +2555,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8306838113950530938, guid: 5c5545bc037e4c96d986615b772c706e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5c5545bc037e4c96d986615b772c706e, type: 3}
+--- !u!1 &1142339948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3032737136996991276, guid: 5c5545bc037e4c96d986615b772c706e, type: 3}
+  m_PrefabInstance: {fileID: 1142339947}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1142339949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142339948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0088e3e9f54dc090bcb1186332c647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _polyhedronPrefab: {fileID: 3032737136996991276, guid: 5c5545bc037e4c96d986615b772c706e, type: 3}
+  _spherePrefab: {fileID: 3718182380102358564, guid: f8ac77405ff16e75487f06fc3f146c0f, type: 3}
+  _conicalFrustumPrefab: {fileID: 2881201808924593240, guid: 51ad5a0749999decaafb71157ebd019c, type: 3}
+--- !u!114 &1142339950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142339948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0021577c941840848fc5b3ad03699ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _figurePresenterFactory: {fileID: 1142339949}
 --- !u!1 &1157430595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,8 +2726,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   minRadius: 1
-  maxRadius: 10
-  centrePoint: {fileID: 1735158978}
+  maxRadius: 1000
+  centrePoint: {x: 0, y: 0, z: 0}
+  radius: 4
 --- !u!1001 &1217382177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2735,7 +2854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Finish
+      value: "Zatwierd\u017A"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -2939,7 +3058,6 @@ MonoBehaviour:
   point1: {fileID: 27445379}
   point2: {fileID: 1087708373}
   valueText: {fileID: 1422627257}
-  solidPresenter: {fileID: 528313265}
 --- !u!1001 &1299589895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3046,7 +3164,7 @@ PrefabInstance:
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 857828058}
+      objectReference: {fileID: 857828063}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -3057,7 +3175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: StereoApp.UIHandlers.MenuManager, Assembly-CSharp
+      value: StereoApp.Presenter.UIHandlers.ToolbarMenu.ToolbarMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -3065,7 +3183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Name Things
+      value: Oznacz elementy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -3267,7 +3385,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose two points that you want to name segment
+  m_text: "Wybierz 3 punkty tworz\u0105ce k\u0105t.\nDrugi punkt na li\u015Bcie jest
+    wierzcho\u0142kiem k\u0105ta."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3570,9 +3689,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Enter value
-
-'
+  m_text: "Tu wpisz etykiet\u0119"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3599,7 +3716,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 57.4
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4091,7 +4208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a974c3e31c16ff94fb4c25faac0af092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  solidPresenter: {fileID: 528313265}
   buttonPrefab: {fileID: 863404584879256015, guid: 378dda19bd5f0ef429edd2446f0831e5, type: 3}
   facesParent: {fileID: 1157430596}
   offset: 20
@@ -4153,7 +4269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose two points that you want to name segment
+  m_text: "Wybierz dwa punkty tworz\u0105ce odcinek do oznaczenia"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4569,7 +4685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Finish
+      value: "Zatwierd\u017A"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -4742,7 +4858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Finish
+      value: "Zatwierd\u017A"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -4838,7 +4954,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Face Label
+  m_text: "Tu wpisz etykiet\u0119"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4865,7 +4981,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 57.4
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5079,7 +5195,7 @@ PrefabInstance:
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 857828058}
+      objectReference: {fileID: 857828063}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -5090,7 +5206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: StereoApp.UIHandlers.MenuManager, Assembly-CSharp
+      value: StereoApp.Presenter.UIHandlers.ToolbarMenu.ToolbarMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5098,7 +5214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Create Polygon
+      value: "Utw\xF3rz wielok\u0105t"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -5284,7 +5400,7 @@ PrefabInstance:
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 857828058}
+      objectReference: {fileID: 857828063}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -5295,7 +5411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: StereoApp.Presenter.UIHandlers.MenuManager, Assembly-CSharp
+      value: StereoApp.Presenter.UIHandlers.ToolbarMenu.ToolbarMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5303,7 +5419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Finish
+      value: "Zako\u0144cz"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -5431,7 +5547,7 @@ PrefabInstance:
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 857828058}
+      objectReference: {fileID: 857828063}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -5442,7 +5558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: StereoApp.Presenter.UIHandlers.MenuManager, Assembly-CSharp
+      value: StereoApp.Presenter.UIHandlers.ToolbarMenu.ToolbarMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5450,9 +5566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: 'Name Angles
-
-'
+      value: "Oznacz k\u0105ty"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -5465,7 +5579,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 863404584879256015, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_Name
-      value: Deleate Point
+      value: Delete Point
       objectReference: {fileID: 0}
     - target: {fileID: 2345814083021574855, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_Pivot.x
