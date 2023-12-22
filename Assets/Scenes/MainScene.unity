@@ -976,7 +976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: "Dodaj \u015Acian\u0119"
+      value: "Dodaj \u015Bcian\u0119"
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -1744,7 +1744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Nazwij Odcinki
+      value: Oznacz odcinki
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -1975,7 +1975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tu Wpisz Etykiet\u0119"
+  m_text: "Tu wpisz etykiet\u0119"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2002,7 +2002,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 57.4
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3183,7 +3183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: Oznacz Elementy
+      value: Oznacz elementy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -3385,8 +3385,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Wybierz 3 punkty tworz\u0105ce k\u0105t, punkt \u015Brodkowy jest tym
-    przy kt\xF3rym jest k\u0105t."
+  m_text: "Wybierz 3 punkty tworz\u0105ce k\u0105t.\nDrugi punkt na li\u015Bcie jest
+    wierzcho\u0142kiem k\u0105ta."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3689,7 +3689,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tu Wpisz Etykiet\u0119"
+  m_text: "Tu wpisz etykiet\u0119"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3716,7 +3716,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 57.4
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4954,7 +4954,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tu Wpisz Etykiet\u0119"
+  m_text: "Tu wpisz etykiet\u0119"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4981,7 +4981,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 57.4
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5214,7 +5214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: "Utw\xF3rz Wielok\u0105t"
+      value: "Utw\xF3rz wielok\u0105t"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -5566,7 +5566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: "Nazwij K\u0105ty"
+      value: "Oznacz k\u0105ty"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
@@ -5579,7 +5579,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 863404584879256015, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_Name
-      value: Deleate Point
+      value: Delete Point
       objectReference: {fileID: 0}
     - target: {fileID: 2345814083021574855, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_Pivot.x

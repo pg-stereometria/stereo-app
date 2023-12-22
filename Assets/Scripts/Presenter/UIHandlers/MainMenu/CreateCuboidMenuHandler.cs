@@ -4,24 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using StereoApp.Presenter.Figure;
+using UnityEngine.Serialization;
 
 namespace StereoApp.Presenter.UIHandlers.MainMenu
 {
     public class CreateCuboidMenuHandler : CreatePredefinedFigureMenuHandler
     {
         [SerializeField]
-        TMP_InputField lengthInput;
+        TMP_InputField widthInput;
 
         [SerializeField]
-        TMP_InputField widthInput;
+        TMP_InputField depthInput;
 
         [SerializeField]
         TMP_InputField heightInput;
 
         protected override SolidFigure GenerateFigure()
         {
-            float length = float.Parse(lengthInput.text);
-            float width = float.Parse(widthInput.text);
+            float length = float.Parse(widthInput.text);
+            float width = float.Parse(depthInput.text);
             float height = float.Parse(heightInput.text);
             var points = new Dictionary<string, Point>
             {
