@@ -20,6 +20,15 @@ namespace StereoApp.Presenter.UIHandlers
             current = mainMenu.gameObject;
         }
 
+        protected virtual void Update()
+        {
+            // back button on Android
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                GoBack();
+            }
+        }
+
         public void ShowMainMenu()
         {
             SwitchToMenu(mainMenu);
@@ -34,7 +43,7 @@ namespace StereoApp.Presenter.UIHandlers
             obj.SetActive(true);
         }
 
-        public void GoBack()
+        public virtual void GoBack()
         {
             if (LastMenus.Count == 0)
             {
