@@ -48,6 +48,16 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             cameraMovement = mainCamera.GetComponent<CameraMovement>();
         }
 
+        public override void GoBack()
+        {
+            if (LastMenus.Count == 0 && toolbarMenu.gameObject.activeSelf)
+            {
+                OnMenuButtonPressed();
+                return;
+            }
+            base.GoBack();
+        }
+
         public void OnMenuButtonPressed()
         {
             if (!toolbarMenu.gameObject.activeSelf)
