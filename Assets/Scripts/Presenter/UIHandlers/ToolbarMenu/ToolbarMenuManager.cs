@@ -38,11 +38,14 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         private RectTransform toolbarMenu;
 
         private CameraMovement cameraMovement;
+        private Camera mainCamera;
+        private float menuOpenCameraOffset => toolbarMenu.rect.height / Screen.height;
 
         protected override void Start()
         {
             base.Start();
-            cameraMovement = Camera.main.GetComponent<CameraMovement>();
+            mainCamera = Camera.main;
+            cameraMovement = mainCamera.GetComponent<CameraMovement>();
         }
 
         public void OnMenuButtonPressed()
@@ -54,6 +57,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                     menuButton.anchoredPosition.y + toolbarMenu.rect.height
                 );
                 toolbarMenu.gameObject.SetActive(true);
+                mainCamera.transform.position -= menuOpenCameraOffset * mainCamera.transform.up;
                 cameraMovement.enabled = false;
             }
             else
@@ -63,6 +67,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                     menuButton.anchoredPosition.y - toolbarMenu.rect.height
                 );
                 toolbarMenu.gameObject.SetActive(false);
+                mainCamera.transform.position += menuOpenCameraOffset * mainCamera.transform.up;
                 cameraMovement.enabled = true;
             }
         }
