@@ -15,6 +15,7 @@ namespace StereoApp
                 Destroy(this.gameObject);
                 return;
             }
+            Screen.fullScreen = false;
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
