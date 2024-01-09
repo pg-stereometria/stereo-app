@@ -28,6 +28,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public CreateFacesMenuHandler facesMenu;
         public CreatePolygonMenuHandler polygonMenu;
         public RectTransform nameThingsMenu;
+        public RectTransform newProjectConfirmMenu;
         public NameSegmentsMenu nameSegmentsMenu;
         public NameAnglesMenu nameAnglesMenu;
 
@@ -82,6 +83,11 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             SwitchToMenu(nameThingsMenu);
         }
 
+        public void ShowNewProjectConfirmMenu()
+        {
+            SwitchToMenu(newProjectConfirmMenu);
+        }
+
         public void ShowNameSegmentsMenu()
         {
             SwitchToMenu(nameSegmentsMenu);
@@ -98,6 +104,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             polygonMenu.gameObject.SetActive(false);
             mainMenu.gameObject.SetActive(false);
             nameThingsMenu.gameObject.SetActive(false);
+            newProjectConfirmMenu.gameObject.SetActive(false);
             nameSegmentsMenu.gameObject.SetActive(false);
             nameAnglesMenu.gameObject.SetActive(false);
         }
