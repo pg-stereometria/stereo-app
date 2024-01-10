@@ -24,11 +24,6 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             float topRadius = float.Parse(topRadiusInput.text);
             float height = float.Parse(heightInput.text);
             var figure = new TruncatedCone(new Circle(topRadius), new Circle(bottomRadius), height);
-            AppManager.Instance.longestDistance = Mathf.Max(
-                1.5f * bottomRadius,
-                1.5f * topRadius,
-                height / 2
-            );
             AppManager.Instance.midpoint = new Vector3(0, height / 2, 0);
 
             return figure;

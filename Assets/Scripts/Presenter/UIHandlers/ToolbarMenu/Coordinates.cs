@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 {
@@ -14,6 +15,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public TMP_InputField xCoordinate;
         public TMP_InputField yCoordinate;
         public TMP_InputField zCoordinate;
+        public UnityEvent onValueChanged;
 
         private Model.Polyhedron _currentSolid;
         public Model.Polyhedron CurrentSolid
@@ -32,6 +34,11 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 dropdown.AddOptions(value.Points.Select(s => s.ToString()).ToList());
                 dropdown.value = 0;
             }
+        }
+
+        public void OnChange()
+        {
+            onValueChanged.Invoke();
         }
 
         public void UpdateDataFromDropdown()

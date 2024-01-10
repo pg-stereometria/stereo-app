@@ -11,6 +11,9 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
     public class CreatePrismMenuHandler : CreatePredefinedFigureMenuHandler
     {
         [SerializeField]
+        TMP_InputField heightInput;
+
+        [SerializeField]
         TMP_InputField lengthInput;
 
         [SerializeField]
@@ -19,11 +22,12 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
         protected override SolidFigure GenerateFigure()
         {
             var sideCount = (int)numberOfSidesInput.value;
+            var height = float.Parse(heightInput.text);
             var length = float.Parse(lengthInput.text);
             var radius = length / (2 * Mathf.Sin(Mathf.PI / sideCount));
 
-            List<Point> bottom = CalculateBasePoints(sideCount, radius, -length / 2);
-            List<Point> top = CalculateBasePoints(sideCount, radius, length / 2);
+            List<Point> bottom = CalculateBasePoints(sideCount, radius, -height / 2);
+            List<Point> top = CalculateBasePoints(sideCount, radius, height / 2);
 
             var figure = new Polyhedron();
             figure.Faces.Add(new Polygon(bottom));
@@ -41,8 +45,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
                     )
                 );
             }
-            Vector3 midpoint = figure.CalculateMidpoint().ToVector3();
-            AppManager.Instance.longestDistance = Vector3.Distance(midpoint, bottom[0].ToVector3());
+            Vector3 midpoint = figure.CalculateMidpoint().ToPosition();
             AppManager.Instance.midpoint = midpoint;
             return figure;
         }

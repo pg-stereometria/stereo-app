@@ -83,5 +83,10 @@ namespace StereoApp.Model
         {
             return Label + "(" + First + "," + Second + ")";
         }
+
+        public float GetLength()
+        {
+            return (First.ToVector3() - Second.ToVector3()).magnitude;
+        }
     }
 }

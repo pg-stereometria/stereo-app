@@ -5,9 +5,9 @@ namespace StereoApp.Presenter.Figure
 {
     public static class PointExtensions
     {
-        public static Vector3 ToVector3(this Point point)
+        public static Vector3 ToPosition(this Point point)
         {
-            return new Vector3(point.X, point.Y, point.Z);
+            return new Vector3(point.X, point.Y, point.Z) * AppManager.Instance.scale;
         }
 
         public static Point ToPoint(this Vector3 vec)

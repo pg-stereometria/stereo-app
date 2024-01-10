@@ -21,5 +21,10 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             ToolbarMenuManager.Instance.polygonMenu.FillInDataFromPolygon(polygon);
             ToolbarMenuManager.Instance.ShowPolygonMenu();
         }
+
+        public void CalculatePolygon()
+        {
+            GetComponentInParent<CalculateFacesMenuHandler>().CalculatePolygon(polygon);
+        }
     }
 }

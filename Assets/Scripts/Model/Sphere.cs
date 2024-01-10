@@ -67,6 +67,16 @@ namespace StereoApp.Model
                 OnPropertyChanged(nameof(Radius));
             }
         }
+
+        public override float TotalArea()
+        {
+            return 4 * MathF.PI * MathF.Pow(Radius, 2);
+        }
+
+        public override float Volume()
+        {
+            return (4 / 3) * MathF.PI * MathF.Pow(Radius, 3);
+        }
     }
 
     [Serializable]

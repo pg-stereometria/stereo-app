@@ -31,6 +31,12 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public RectTransform newProjectConfirmMenu;
         public NameSegmentsMenu nameSegmentsMenu;
         public NameAnglesMenu nameAnglesMenu;
+        public RectTransform calculateThingsMenu;
+        public CalculateSegmentsMenu calculateSegmentsMenu;
+        public CalculateAnglesMenu calculateAnglesMenu;
+        public CalculateFacesMenuHandler calculateFacesMenu;
+        public CalculateTotalAreaMenu calculateTotalAreaMenu;
+        public CalculateVolumeMenu calculateVolumeMenu;
 
         [SerializeField]
         private RectTransform menuButton;
@@ -113,6 +119,36 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             SwitchToMenu(nameAnglesMenu);
         }
 
+        public void ShowCalculateThingsMenu()
+        {
+            SwitchToMenu(calculateThingsMenu);
+        }
+
+        public void ShowCalculateSegmentsMenu()
+        {
+            SwitchToMenu(calculateSegmentsMenu);
+        }
+
+        public void ShowCalculateAnglesMenu()
+        {
+            SwitchToMenu(calculateAnglesMenu);
+        }
+
+        public void ShowCalculateFacesMenu()
+        {
+            SwitchToMenu(calculateFacesMenu);
+        }
+
+        public void ShowCalculateTotalAreaMenu()
+        {
+            SwitchToMenu(calculateTotalAreaMenu);
+        }
+
+        public void ShowCalculateVolumeMenu()
+        {
+            SwitchToMenu(calculateVolumeMenu);
+        }
+
         public override void HideEverythingInToolbar()
         {
             facesMenu.gameObject.SetActive(false);
@@ -122,6 +158,12 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             newProjectConfirmMenu.gameObject.SetActive(false);
             nameSegmentsMenu.gameObject.SetActive(false);
             nameAnglesMenu.gameObject.SetActive(false);
+            calculateThingsMenu.gameObject.SetActive(false);
+            calculateSegmentsMenu.gameObject.SetActive(false);
+            calculateAnglesMenu.gameObject.SetActive(false);
+            calculateFacesMenu.gameObject.SetActive(false);
+            calculateTotalAreaMenu.gameObject.SetActive(false);
+            calculateVolumeMenu.gameObject.SetActive(false);
         }
     }
 }

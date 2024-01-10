@@ -56,7 +56,6 @@ namespace StereoApp.Presenter.Figure
             {
                 return;
             }
-
             var radius = figure.Radius;
             var y = Y;
 

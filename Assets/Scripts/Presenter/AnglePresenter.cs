@@ -52,9 +52,9 @@ namespace StereoApp.Presenter
 
         public void Initialize()
         {
-            _vector1 = point1.ToVector3() - middlePoint.ToVector3();
-            _vector2 = point2.ToVector3() - middlePoint.ToVector3();
-            _vector3 = point1.ToVector3() - point2.ToVector3();
+            _vector1 = point1.ToPosition() - middlePoint.ToPosition();
+            _vector2 = point2.ToPosition() - middlePoint.ToPosition();
+            _vector3 = point1.ToPosition() - point2.ToPosition();
 
             _vectorPerpendicular = Vector3.Cross(_vector1, _vector2);
             _vectorPerpendicular.Normalize();
