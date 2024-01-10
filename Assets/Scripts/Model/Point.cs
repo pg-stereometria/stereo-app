@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StereoApp.Model.Interfaces;
+using UnityEngine;
 
 namespace StereoApp.Model
 {
@@ -114,6 +115,11 @@ namespace StereoApp.Model
                 + ","
                 + Z.ToString("0.##")
                 + ")";
+        }
+
+        public Vector3 ToVector3()
+        {
+            return new Vector3(X, Y, Z);
         }
     }
 

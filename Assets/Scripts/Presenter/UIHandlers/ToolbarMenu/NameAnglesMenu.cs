@@ -62,7 +62,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
             var gameObj = Instantiate(
                 anglePrefab,
-                middlePoint.point.ToVector3(),
+                middlePoint.point.ToPosition(),
                 Quaternion.identity
             );
             angle = gameObj.GetComponent<AnglePresenter>();

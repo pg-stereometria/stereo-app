@@ -76,6 +76,17 @@ namespace StereoApp.Model
                 height = Height
             };
         }
+
+        public override float TotalArea()
+        {
+            var sh = MathF.Sqrt(MathF.Pow(BottomBase.Radius - TopBase.Radius, 2) + MathF.Pow(Height, 2));
+            return MathF.PI * MathF.Pow(BottomBase.Radius, 2) + MathF.PI * MathF.Pow(TopBase.Radius, 2) + MathF.PI * (BottomBase.Radius + TopBase.Radius) * sh;
+        }
+
+        public override float Volume()
+        {
+            return MathF.PI * (Height / 3) * (MathF.Pow(BottomBase.Radius, 2) + BottomBase.Radius * TopBase.Radius + MathF.Pow(TopBase.Radius, 2));
+        }
     }
 
     [Serializable]

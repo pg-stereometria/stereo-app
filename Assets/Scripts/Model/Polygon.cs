@@ -271,6 +271,40 @@ namespace StereoApp.Model
             }
             return name;
         }
+
+        public List<List<Point>> GetTriangles()
+        {
+            List<List<Point>> triangles = new List<List<Point>>();
+            for (int i = 0; i < _points.Count - 2; i++)
+            {
+                List<Point> triangle = new List<Point>();
+                triangle.Add(_points[0]);
+                triangle.Add(_points[i + 1]);
+                triangle.Add(_points[i + 2]);
+                triangles.Add(triangle);
+            }
+            return triangles;
+        }
+
+        public float CalculateArea()
+        {
+            var triangles = GetTriangles();
+            float area = 0.0f;
+
+            foreach(var triangle in triangles)
+            {
+                area += CalculateAreaOfTriangle(triangle);
+            }
+            return area;
+        }
+
+        private float CalculateAreaOfTriangle(List<Point> triangle)
+        {
+            var vector1 = triangle[1].ToVector3() - triangle[0].ToVector3();
+            var vector2 = triangle[2].ToVector3() - triangle[0].ToVector3();
+            return (float) 0.5 * Vector3.Cross(vector1, vector2).magnitude;
+        }
+
     }
 
     [Serializable]

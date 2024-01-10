@@ -46,7 +46,7 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
             var midpoint = new Vector3(0, 0, 0);
             AppManager.Instance.longestDistance = Vector3.Distance(
                 midpoint,
-                points["A"].ToVector3()
+                points["A"].ToPosition()
             );
             AppManager.Instance.midpoint = midpoint;
 

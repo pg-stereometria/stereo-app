@@ -121,7 +121,7 @@ namespace StereoApp.Presenter.Figure
             for (var i = 0; i < figure.Count; ++i)
             {
                 var point = figure[i];
-                var vertex = point.ToVector3();
+                var vertex = point.ToPosition();
                 vertices[i] = vertex;
                 if (!renderPoints)
                 {
@@ -142,8 +142,8 @@ namespace StereoApp.Presenter.Figure
             {
                 var gameObj = Instantiate(_segmentPrefab, transform);
 
-                var firstVertex = segment.First.ToVector3();
-                var secondVertex = segment.Second.ToVector3();
+                var firstVertex = segment.First.ToPosition();
+                var secondVertex = segment.Second.ToPosition();
 
                 var t = gameObj.transform;
                 t.position = firstVertex;
