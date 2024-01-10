@@ -50,7 +50,7 @@ namespace StereoApp.Model
         public override float TotalArea()
         {
             float sum = 0.0f;
-            foreach(var polygon in Faces)
+            foreach (var polygon in Faces)
             {
                 sum += polygon.CalculateArea();
             }
@@ -65,7 +65,11 @@ namespace StereoApp.Model
                 var triangles = polygon.GetTriangles();
                 foreach (var triangle in triangles)
                 {
-                    sum += SignedVolumeOfTriangle(triangle[0].ToVector3(), triangle[1].ToVector3(), triangle[2].ToVector3());
+                    sum += SignedVolumeOfTriangle(
+                        triangle[0].ToVector3(),
+                        triangle[1].ToVector3(),
+                        triangle[2].ToVector3()
+                    );
                 }
             }
             return sum;
@@ -83,7 +87,7 @@ namespace StereoApp.Model
             var normal = Vector3.Cross(p2 - p1, p3 - p1);
             var origin = new Vector3(0, 0, 0);
             var multiplyer = -1;
-            if(Vector3.Dot(normal,-1*p1) < 0)
+            if (Vector3.Dot(normal, -1 * p1) < 0)
                 multiplyer = 1;
             return multiplyer * (1.0f / 6.0f) * (-v321 + v231 + v312 - v132 - v213 + v123);
         }

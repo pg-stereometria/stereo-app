@@ -55,12 +55,17 @@ namespace StereoApp.Model
 
         public override float TotalArea()
         {
-            return MathF.PI * BottomBase.Radius * (BottomBase.Radius + MathF.Sqrt(MathF.Pow(BottomBase.Radius, 2) + MathF.Pow(Height, 2)));
+            return MathF.PI
+                * BottomBase.Radius
+                * (
+                    BottomBase.Radius
+                    + MathF.Sqrt(MathF.Pow(BottomBase.Radius, 2) + MathF.Pow(Height, 2))
+                );
         }
 
         public override float Volume()
         {
-            return MathF.PI * MathF.Pow(BottomBase.Radius, 2) * (Height/3);
+            return MathF.PI * MathF.Pow(BottomBase.Radius, 2) * (Height / 3);
         }
     }
 

@@ -291,7 +291,7 @@ namespace StereoApp.Model
             var triangles = GetTriangles();
             float area = 0.0f;
 
-            foreach(var triangle in triangles)
+            foreach (var triangle in triangles)
             {
                 area += CalculateAreaOfTriangle(triangle);
             }
@@ -302,9 +302,8 @@ namespace StereoApp.Model
         {
             var vector1 = triangle[1].ToVector3() - triangle[0].ToVector3();
             var vector2 = triangle[2].ToVector3() - triangle[0].ToVector3();
-            return (float) 0.5 * Vector3.Cross(vector1, vector2).magnitude;
+            return (float)0.5 * Vector3.Cross(vector1, vector2).magnitude;
         }
-
     }
 
     [Serializable]
