@@ -6,9 +6,63 @@ namespace StereoApp.Presenter
 {
     public class AnglePresenter : MonoBehaviour
     {
-        public Model.Point point1;
-        public Model.Point middlePoint;
-        public Model.Point point2;
+        private Model.Point _point1;
+        public Model.Point Point1
+        {
+            get => _point1;
+            set
+            {
+                if (_point1 != null)
+                {
+                    _point1.PropertyChanged -= OnPointChange;
+                }
+
+                if (value != null)
+                {
+                    value.PropertyChanged += OnPointChange;
+                }
+
+                _point1 = value;
+            }
+        }
+        private Model.Point _middlePoint;
+        public Model.Point MiddlePoint
+        {
+            get => _middlePoint;
+            set
+            {
+                if (_middlePoint != null)
+                {
+                    _middlePoint.PropertyChanged -= OnPointChange;
+                }
+
+                if (value != null)
+                {
+                    value.PropertyChanged += OnPointChange;
+                }
+
+                _middlePoint = value;
+            }
+        }
+        private Model.Point _point2;
+        public Model.Point Point2
+        {
+            get => _point2;
+            set
+            {
+                if (_point2 != null)
+                {
+                    _point2.PropertyChanged -= OnPointChange;
+                }
+
+                if (value != null)
+                {
+                    value.PropertyChanged += OnPointChange;
+                }
+
+                _point2 = value;
+            }
+        }
         public string _label;
         public string Label
         {
@@ -50,11 +104,16 @@ namespace StereoApp.Presenter
             Initialize();
         }
 
+        private void OnPointChange(object sender, PropertyChangedEventArgs e)
+        {
+            Initialize();
+        }
+
         public void Initialize()
         {
-            _vector1 = point1.ToPosition() - middlePoint.ToPosition();
-            _vector2 = point2.ToPosition() - middlePoint.ToPosition();
-            _vector3 = point1.ToPosition() - point2.ToPosition();
+            _vector1 = Point1.ToPosition() - MiddlePoint.ToPosition();
+            _vector2 = Point2.ToPosition() - MiddlePoint.ToPosition();
+            _vector3 = Point1.ToPosition() - Point2.ToPosition();
 
             _vectorPerpendicular = Vector3.Cross(_vector1, _vector2);
             _vectorPerpendicular.Normalize();

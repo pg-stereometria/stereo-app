@@ -66,9 +66,9 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 Quaternion.identity
             );
             angle = gameObj.GetComponent<AnglePresenter>();
-            angle.point1 = point1.point;
-            angle.middlePoint = middlePoint.point;
-            angle.point2 = point2.point;
+            angle.Point1 = point1.point;
+            angle.MiddlePoint = middlePoint.point;
+            angle.Point2 = point2.point;
             angle.Label = valueText.text;
             anglePresenters.Add(angle);
             ToolbarMenuManager.Instance.GoBack();
@@ -82,17 +82,17 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             }
             foreach (var angle in anglePresenters)
             {
-                if (angle.middlePoint != middlePoint.point)
+                if (angle.MiddlePoint != middlePoint.point)
                 {
                     continue;
                 }
 
-                if (angle.point1 == point1.point && angle.point2 == point2.point)
+                if (angle.Point1 == point1.point && angle.Point2 == point2.point)
                 {
                     return angle;
                 }
 
-                if (angle.point1 == point2.point && angle.point2 == point1.point)
+                if (angle.Point1 == point2.point && angle.Point2 == point1.point)
                 {
                     return angle;
                 }
