@@ -41,6 +41,11 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         public void OnCalculatePressed()
         {
+            if (point1.point == null || point2.point == null || middlePoint.point == null)
+            {
+                valueText.text = "---";
+                return;
+            }
             var vector1 = point1.point.ToPosition() - middlePoint.point.ToPosition();
             var vector2 = point2.point.ToPosition() - middlePoint.point.ToPosition();
             var vector3 = point1.point.ToPosition() - point2.point.ToPosition();
@@ -50,7 +55,9 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                     / (2 * vector1.magnitude * vector2.magnitude)
             );
             var angleInDegrees = angleValue * (180 / Mathf.PI);
-            valueText.text = Mathf.RoundToInt(angleInDegrees).ToString();
+            valueText.text = float.IsNaN(angleInDegrees)
+                ? "Nieprawidłowy kąt"
+                : Mathf.RoundToInt(angleInDegrees).ToString() + '\u00b0';
         }
     }
 }

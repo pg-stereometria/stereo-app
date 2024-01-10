@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -37,27 +38,25 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         public void OnCalculatePressed()
         {
-            var segment = FindSegment();
-            if (segment == null)
+            if (point1.point == null || point2.point == null)
             {
+                valueText.text = "---";
                 return;
             }
 
-            valueText.text = segment.GetLength().ToString("0.##");
-        }
+            Segment segment;
+            try
+            {
+                segment = new Segment(point1.point, point2.point);
+            }
+            catch (ArgumentException)
+            {
+                // same point -> distance = 0
+                valueText.text = "0";
+                return;
+            }
 
-        private Segment FindSegment()
-        {
-            if (point1.point == null || point2.point == null)
-            {
-                return null;
-            }
-            foreach (var seg in point1.point.segments)
-            {
-                if (point2.point.segments.Contains(seg))
-                    return seg;
-            }
-            return null;
+            valueText.text = segment.GetLength().ToString("0.## j");
         }
     }
 }
