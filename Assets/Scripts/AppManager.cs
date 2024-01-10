@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using StereoApp.Model;
 using StereoApp.Presenter.Figure;
 using UnityEngine;
@@ -28,6 +29,7 @@ namespace StereoApp
 
         public PointManager pointManager = new();
         public Model.SolidFigure figure;
+        public readonly HashSet<Segment> segments = new HashSet<Segment>();
         public Vector3 midpoint = new Vector3(0, 0, 0);
         public float scale;
     }

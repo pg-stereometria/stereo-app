@@ -18,15 +18,11 @@ namespace StereoApp.Presenter.Figure
                 if (oldFigure != null)
                 {
                     oldFigure.PropertyChanged -= OnSegmentPropertyChanged;
-                    oldFigure.First.segments.Remove(oldFigure);
-                    oldFigure.Second.segments.Remove(oldFigure);
                 }
 
                 if (value != null)
                 {
                     value.PropertyChanged += OnSegmentPropertyChanged;
-                    value.First.segments.Add(value);
-                    value.Second.segments.Add(value);
                 }
 
                 if (displayAboveObject != null)

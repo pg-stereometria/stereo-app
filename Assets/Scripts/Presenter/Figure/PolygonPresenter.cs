@@ -154,8 +154,14 @@ namespace StereoApp.Presenter.Figure
                 localScale.y = Vector3.Distance(secondVertex, firstVertex) / 2;
                 t.localScale = localScale;
 
+                AppManager.Instance.segments.TryGetValue(segment, out var existing);
+                if (existing == null)
+                {
+                    AppManager.Instance.segments.Add(segment);
+                    existing = segment;
+                }
                 var segmentPresenter = gameObj.GetComponent<SegmentPresenter>();
-                segmentPresenter.Figure = segment;
+                segmentPresenter.Figure = existing;
 
                 TrackGameObject(gameObj);
             }

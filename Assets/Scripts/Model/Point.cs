@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StereoApp.Model.Interfaces;
@@ -10,7 +9,6 @@ namespace StereoApp.Model
     public class Point : ISerializableTo<Point, SerializedPoint>, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public readonly HashSet<Segment> segments = new HashSet<Segment>();
 
         private string _label = "";
         public string Label

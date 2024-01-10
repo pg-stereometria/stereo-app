@@ -59,12 +59,10 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             {
                 return null;
             }
-            foreach (var seg in point1.point.segments)
-            {
-                if (point2.point.segments.Contains(seg))
-                    return seg;
-            }
-            return null;
+
+            var toFind = new Segment(point1.point, point2.point);
+            AppManager.Instance.segments.TryGetValue(toFind, out var toReturn);
+            return toReturn;
         }
     }
 }
