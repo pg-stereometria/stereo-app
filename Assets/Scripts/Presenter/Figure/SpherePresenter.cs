@@ -58,7 +58,7 @@ namespace StereoApp.Presenter.Figure
                 uv = new Vector2[vertexCount];
             }
 
-            var radius = figure.Radius;
+            var radius = figure.Radius * AppManager.Instance.scale;
 
             var n = 0;
             for (var i = 0; i <= PARALLELS; ++i)

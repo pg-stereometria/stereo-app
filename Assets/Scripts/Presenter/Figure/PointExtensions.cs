@@ -7,7 +7,7 @@ namespace StereoApp.Presenter.Figure
     {
         public static Vector3 ToPosition(this Point point)
         {
-            return new Vector3(point.X, point.Y, point.Z);
+            return new Vector3(point.X, point.Y, point.Z) * AppManager.Instance.scale;
         }
 
         public static Point ToPoint(this Vector3 vec)

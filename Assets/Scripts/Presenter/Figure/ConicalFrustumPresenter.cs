@@ -65,15 +65,13 @@ namespace StereoApp.Presenter.Figure
                 for (var j = 0; j < MERIDIANS; ++j)
                 {
                     var fraction = (float)j / (MERIDIANS - 1);
-                    var radius = Mathf.Lerp(
-                        figure.BottomBase.Radius,
-                        figure.TopBase.Radius,
-                        fraction
-                    );
+                    var radius =
+                        Mathf.Lerp(figure.BottomBase.Radius, figure.TopBase.Radius, fraction)
+                        * AppManager.Instance.scale;
 
                     var conicalPoint = new Vector3(
                         radius * Mathf.Cos(longitude),
-                        Mathf.Lerp(0.0f, figure.Height, fraction),
+                        Mathf.Lerp(0.0f, figure.Height * AppManager.Instance.scale, fraction),
                         radius * Mathf.Sin(longitude)
                     );
 

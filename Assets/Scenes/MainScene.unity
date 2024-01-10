@@ -1768,6 +1768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presenter: {fileID: 1142339950}
+  targetViewPort: {x: 1, y: 2, z: 1}
 --- !u!1 &365479642 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3145364137751533602, guid: 28b05209f95f062599d1754ca97b9577, type: 3}
@@ -3053,7 +3054,7 @@ PrefabInstance:
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 944394969}
     - target: {fileID: 5018248064666231718, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -3072,7 +3073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_text
-      value: "Zatwierd\u017A"
+      value: Oblicz
       objectReference: {fileID: 0}
     - target: {fileID: 6588335682597765967, guid: 3dd74334990842b4b89bd6cc527393fa, type: 3}
       propertyPath: m_fontSize
@@ -5511,7 +5512,7 @@ MonoBehaviour:
   minRadius: 1
   maxRadius: 1000
   centrePoint: {x: 0, y: 0, z: 0}
-  radius: 4
+  radius: 5
 --- !u!1 &1184774754
 GameObject:
   m_ObjectHideFlags: 0
@@ -6681,6 +6682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   midpoint: {x: 0, y: 0, z: 0}
   longestDistance: 0
+  scale: 0
 --- !u!4 &1421610583
 Transform:
   m_ObjectHideFlags: 0

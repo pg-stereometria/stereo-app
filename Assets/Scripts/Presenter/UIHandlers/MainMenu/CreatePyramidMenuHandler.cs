@@ -39,10 +39,6 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
                 figure.Faces.Add(new Polygon(bottom[i], bottom[(i + 1) % bottom.Count], topVertex));
             }
             Vector3 midpoint = figure.CalculateMidpoint().ToPosition();
-            AppManager.Instance.longestDistance = Mathf.Max(
-                length,
-                Vector3.Distance(topVertex.ToPosition(), bottom[0].ToPosition())
-            );
             AppManager.Instance.midpoint = midpoint;
             return figure;
         }
