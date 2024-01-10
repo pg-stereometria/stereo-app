@@ -80,7 +80,8 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         public void CalculatePolygon(Model.Polygon polygon)
         {
-            valueText.text = polygon.CalculateArea().ToString("0.##");
+            valueText.text =
+                $"{polygon.ToString()}: " + polygon.CalculateArea().ToString("0.## j\u00b2");
         }
     }
 }

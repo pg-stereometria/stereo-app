@@ -17,7 +17,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public void FillInTotalVolume()
         {
             figure = ToolbarMenuManager.Instance.solidFigurePresenter.Figure;
-            valueText.text = figure.Volume().ToString("0.##");
+            valueText.text = figure.Volume().ToString("0.## j\u00b3");
         }
     }
 }
