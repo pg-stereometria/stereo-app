@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3490844b6a6eb0e4485ba5d8b80a23a9, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 3490844b6a6eb0e4485ba5d8b80a23a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2345134072970349179}
   offset: {x: 0, y: 0, z: 0}
+  forwardVector: {x: 0, y: 0, z: 0}
   onObject: 1
   offsetValue: 0.2
 --- !u!1 &2345134072970349179
@@ -264,4 +265,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayAboveObject: {fileID: 4794952514967771103}
-  offsetValue: 0.1

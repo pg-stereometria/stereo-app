@@ -30,6 +30,7 @@ namespace StereoApp
         public PointManager pointManager = new();
         public Model.SolidFigure figure;
         public readonly HashSet<Segment> segments = new HashSet<Segment>();
+        public readonly HashSet<Point> points = new HashSet<Point>();
         public Vector3 midpoint = new Vector3(0, 0, 0);
         public float scale;
     }

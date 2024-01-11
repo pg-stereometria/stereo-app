@@ -206,7 +206,7 @@ namespace StereoApp.Model
                 new NotifyCollectionChangedEventArgs(
                     NotifyCollectionChangedAction.Replace,
                     oldItems,
-                    _points.AsReadOnly()
+                    _points
                 )
             );
         }

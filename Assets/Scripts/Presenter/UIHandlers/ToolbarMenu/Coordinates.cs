@@ -1,5 +1,7 @@
+using StereoApp.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using TMPro;
@@ -15,6 +17,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public TMP_InputField xCoordinate;
         public TMP_InputField yCoordinate;
         public TMP_InputField zCoordinate;
+        public bool noChangingPoints = false;
         public UnityEvent onValueChanged;
 
         private Model.Polyhedron _currentSolid;
@@ -29,11 +32,22 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 }
 
                 _currentSolid = value;
-                dropdown.ClearOptions();
-                dropdown.AddOptions(new List<string>() { "New Point" });
-                dropdown.AddOptions(value.Points.Select(s => s.ToString()).ToList());
-                dropdown.value = 0;
+                Initialize();
             }
+        }
+
+        public void Initialize()
+        {
+            dropdown.ClearOptions();
+            dropdown.AddOptions(new List<string>() { "New Point" });
+            dropdown.AddOptions(AppManager.Instance.points.Select(s => s.ToString()).ToList());
+            dropdown.value = 0;
+            UpdateDataFromDropdown();
+        }
+
+        private void OnPointPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Initialize();
         }
 
         public void OnChange()
@@ -44,16 +58,27 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public void UpdateDataFromDropdown()
         {
             var value = dropdown.options[dropdown.value].text;
+
             if (value == "New Point")
             {
                 point = null;
                 xCoordinate.text = "";
                 yCoordinate.text = "";
                 zCoordinate.text = "";
+                xCoordinate.interactable = true;
+                yCoordinate.interactable = true;
+                zCoordinate.interactable = true;
                 return;
             }
 
-            point = CurrentSolid.Points.Where(s => s.ToString() == value).Single();
+            if (noChangingPoints)
+            {
+                xCoordinate.interactable = false;
+                yCoordinate.interactable = false;
+                zCoordinate.interactable = false;
+            }
+
+            point = AppManager.Instance.points.Where(s => s.ToString() == value).Single();
             var pattern = @"-?\d+\.?\d*";
             var match = Regex.Match(value, pattern);
             xCoordinate.text = match.Value;

@@ -112,11 +112,13 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public void ShowNameSegmentsMenu()
         {
             SwitchToMenu(nameSegmentsMenu);
+            nameSegmentsMenu.ReInitialize();
         }
 
         public void ShowNameAnglesMenu()
         {
             SwitchToMenu(nameAnglesMenu);
+            nameAnglesMenu.ReInitialize();
         }
 
         public void ShowCalculateThingsMenu()
@@ -127,11 +129,13 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public void ShowCalculateSegmentsMenu()
         {
             SwitchToMenu(calculateSegmentsMenu);
+            calculateSegmentsMenu.ReInitialize();
         }
 
         public void ShowCalculateAnglesMenu()
         {
             SwitchToMenu(calculateAnglesMenu);
+            calculateAnglesMenu.ReInitialize();
         }
 
         public void ShowCalculateFacesMenu()

@@ -10,6 +10,9 @@ namespace StereoApp.Presenter.UIHandlers.MainMenu
 
         private void Awake()
         {
+            AppManager.Instance.points.Clear();
+            AppManager.Instance.segments.Clear();
+
             if (Instance == null)
             {
                 Instance = this;

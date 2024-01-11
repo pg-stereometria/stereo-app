@@ -10,6 +10,7 @@ namespace StereoApp.Presenter.Figure
         [SerializeField]
         private DisplayAboveObject displayAboveObject;
 
+        private Segment _segment;
         public override Segment Figure
         {
             set
@@ -18,11 +19,15 @@ namespace StereoApp.Presenter.Figure
                 if (oldFigure != null)
                 {
                     oldFigure.PropertyChanged -= OnSegmentPropertyChanged;
+                    oldFigure.First.PropertyChanged -= OnPointPropertyChanged;
+                    oldFigure.Second.PropertyChanged -= OnPointPropertyChanged;
                 }
 
                 if (value != null)
                 {
                     value.PropertyChanged += OnSegmentPropertyChanged;
+                    value.First.PropertyChanged += OnPointPropertyChanged;
+                    value.Second.PropertyChanged += OnPointPropertyChanged;
                 }
 
                 if (displayAboveObject != null)
@@ -31,7 +36,25 @@ namespace StereoApp.Presenter.Figure
                 }
 
                 base.Figure = value;
+                _segment = value;
+                Initialize();
             }
+        }
+
+        private void Initialize()
+        {
+            if (_segment is null)
+                return;
+            var firstVertex = _segment.First.ToPosition();
+            var secondVertex = _segment.Second.ToPosition();
+
+            transform.position = firstVertex;
+            transform.LookAt(secondVertex);
+            transform.RotateAround(transform.position, transform.right, 90);
+
+            var localScale = transform.localScale;
+            localScale.y = Vector3.Distance(secondVertex, firstVertex) / 2;
+            transform.localScale = localScale;
         }
 
         private void OnSegmentPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -40,6 +63,11 @@ namespace StereoApp.Presenter.Figure
             {
                 displayAboveObject.Text = Figure.Label;
             }
+        }
+
+        private void OnPointPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Initialize();
         }
 
         protected override void OnDestroy()
