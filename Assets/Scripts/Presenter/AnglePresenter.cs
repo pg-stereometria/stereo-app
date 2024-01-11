@@ -128,6 +128,7 @@ namespace StereoApp.Presenter
             );
 
             DrawCircle();
+            transform.position = MiddlePoint.ToPosition();
             transform.rotation = Quaternion.LookRotation(_vectorPerpendicular, _dirVector);
         }
 

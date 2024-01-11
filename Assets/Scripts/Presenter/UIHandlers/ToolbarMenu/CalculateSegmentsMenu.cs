@@ -58,5 +58,12 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
             valueText.text = segment.GetLength().ToString("0.## j");
         }
+
+        public void ReInitialize()
+        {
+            point1.Initialize();
+            point2.Initialize();
+            valueText.text = "---";
+        }
     }
 }

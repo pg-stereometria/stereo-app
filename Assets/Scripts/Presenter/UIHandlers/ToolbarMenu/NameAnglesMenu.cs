@@ -100,5 +100,13 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
             return null;
         }
+
+        public void ReInitialize()
+        {
+            point1.Initialize();
+            point2.Initialize();
+            middlePoint.Initialize();
+            valueText.text = "";
+        }
     }
 }

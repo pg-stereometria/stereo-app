@@ -59,5 +59,13 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 ? "Nieprawidłowy kąt"
                 : Mathf.RoundToInt(angleInDegrees).ToString() + '\u00b0';
         }
+
+        public void ReInitialize()
+        {
+            point1.Initialize();
+            point2.Initialize();
+            middlePoint.Initialize();
+            valueText.text = "---";
+        }
     }
 }

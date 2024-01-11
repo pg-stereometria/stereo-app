@@ -141,19 +141,6 @@ namespace StereoApp.Presenter.Figure
             foreach (var segment in figure.Segments)
             {
                 var gameObj = Instantiate(_segmentPrefab, transform);
-
-                var firstVertex = segment.First.ToPosition();
-                var secondVertex = segment.Second.ToPosition();
-
-                var t = gameObj.transform;
-                t.position = firstVertex;
-                t.LookAt(secondVertex);
-                t.RotateAround(t.position, t.right, 90);
-
-                var localScale = t.localScale;
-                localScale.y = Vector3.Distance(secondVertex, firstVertex) / 2;
-                t.localScale = localScale;
-
                 AppManager.Instance.segments.TryGetValue(segment, out var existing);
                 if (existing == null)
                 {
@@ -162,7 +149,6 @@ namespace StereoApp.Presenter.Figure
                 }
                 var segmentPresenter = gameObj.GetComponent<SegmentPresenter>();
                 segmentPresenter.Figure = existing;
-
                 TrackGameObject(gameObj);
             }
 

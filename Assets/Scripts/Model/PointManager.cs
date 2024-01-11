@@ -12,12 +12,15 @@ namespace StereoApp.Model
 
         public Point Create(float x, float y, float z)
         {
-            return new Point(x, y, z, GenerateNextLabel());
+            var point = new Point(x, y, z, GenerateNextLabel());
+            AppManager.Instance.points.Add(point);
+            return point;
         }
 
         public Point Label(Point point)
         {
             point.Label = GenerateNextLabel();
+            AppManager.Instance.points.Add(point);
             return point;
         }
     }

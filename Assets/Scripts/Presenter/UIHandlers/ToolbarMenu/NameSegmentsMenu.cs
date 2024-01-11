@@ -18,6 +18,11 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         [SerializeField]
         private TMP_InputField valueText;
 
+        [SerializeField]
+        private GameObject _segmentPrefab;
+        [SerializeField]
+        private GameObject _pointPrefab;
+
         private Polyhedron _polyhedron;
 
         private void Start()
@@ -41,12 +46,23 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             valueText.text = segment?.Label ?? "";
         }
 
+        public void ReInitialize()
+        {
+            point1.Initialize();
+            point2.Initialize();
+            valueText.text = "";
+        }
+
         public void OnFinishPressed()
         {
             var segment = FindSegment();
             if (segment == null)
             {
-                return;
+                var gameObj = Instantiate(_segmentPrefab);
+                segment = new Segment(point1.point, point2.point);
+                AppManager.Instance.segments.Add(segment);
+                var segmentPresenter = gameObj.GetComponent<SegmentPresenter>();
+                segmentPresenter.Figure = segment;
             }
 
             segment.Label = valueText.text;
@@ -55,9 +71,29 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         private Segment FindSegment()
         {
-            if (point1.point == null || point2.point == null)
+            if (point1.point == null)
             {
-                return null;
+                if (point1.xCoordinate.text.Equals("") || point1.yCoordinate.text.Equals("") || point1.zCoordinate.text.Equals(""))
+                    return null;
+                point1.point = AppManager.Instance.pointManager.Create(float.Parse(point1.xCoordinate.text), float.Parse(point1.yCoordinate.text), float.Parse(point1.zCoordinate.text));
+                var newGameObject = Instantiate(
+                    _pointPrefab,
+                    point1.point.ToPosition(),
+                    Quaternion.identity
+                );
+                newGameObject.GetComponent<PointPresenter>().Figure = point1.point;
+            }
+            if (point2.point == null)
+            {
+                if (point2.xCoordinate.text.Equals("") || point2.yCoordinate.text.Equals("") || point2.zCoordinate.text.Equals(""))
+                    return null;
+                point2.point = AppManager.Instance.pointManager.Create(float.Parse(point2.xCoordinate.text), float.Parse(point2.yCoordinate.text), float.Parse(point2.zCoordinate.text));
+                var newGameObject = Instantiate(
+                    _pointPrefab,
+                    point2.point.ToPosition(),
+                    Quaternion.identity
+                );
+                newGameObject.GetComponent<PointPresenter>().Figure = point2.point;
             }
 
             var toFind = new Segment(point1.point, point2.point);
