@@ -20,6 +20,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
 
         [SerializeField]
         private GameObject _segmentPrefab;
+
         [SerializeField]
         private GameObject _pointPrefab;
 
@@ -73,9 +74,17 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         {
             if (point1.point == null)
             {
-                if (point1.xCoordinate.text.Equals("") || point1.yCoordinate.text.Equals("") || point1.zCoordinate.text.Equals(""))
+                if (
+                    point1.xCoordinate.text.Equals("")
+                    || point1.yCoordinate.text.Equals("")
+                    || point1.zCoordinate.text.Equals("")
+                )
                     return null;
-                point1.point = AppManager.Instance.pointManager.Create(float.Parse(point1.xCoordinate.text), float.Parse(point1.yCoordinate.text), float.Parse(point1.zCoordinate.text));
+                point1.point = AppManager.Instance.pointManager.Create(
+                    float.Parse(point1.xCoordinate.text),
+                    float.Parse(point1.yCoordinate.text),
+                    float.Parse(point1.zCoordinate.text)
+                );
                 var newGameObject = Instantiate(
                     _pointPrefab,
                     point1.point.ToPosition(),
@@ -85,9 +94,17 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
             }
             if (point2.point == null)
             {
-                if (point2.xCoordinate.text.Equals("") || point2.yCoordinate.text.Equals("") || point2.zCoordinate.text.Equals(""))
+                if (
+                    point2.xCoordinate.text.Equals("")
+                    || point2.yCoordinate.text.Equals("")
+                    || point2.zCoordinate.text.Equals("")
+                )
                     return null;
-                point2.point = AppManager.Instance.pointManager.Create(float.Parse(point2.xCoordinate.text), float.Parse(point2.yCoordinate.text), float.Parse(point2.zCoordinate.text));
+                point2.point = AppManager.Instance.pointManager.Create(
+                    float.Parse(point2.xCoordinate.text),
+                    float.Parse(point2.yCoordinate.text),
+                    float.Parse(point2.zCoordinate.text)
+                );
                 var newGameObject = Instantiate(
                     _pointPrefab,
                     point2.point.ToPosition(),

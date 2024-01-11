@@ -58,7 +58,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
         public void UpdateDataFromDropdown()
         {
             var value = dropdown.options[dropdown.value].text;
-            
+
             if (value == "New Point")
             {
                 point = null;
@@ -71,7 +71,7 @@ namespace StereoApp.Presenter.UIHandlers.ToolbarMenu
                 return;
             }
 
-            if(noChangingPoints)
+            if (noChangingPoints)
             {
                 xCoordinate.interactable = false;
                 yCoordinate.interactable = false;

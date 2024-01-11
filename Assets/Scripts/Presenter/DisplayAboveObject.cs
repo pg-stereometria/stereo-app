@@ -84,11 +84,11 @@ namespace StereoApp.Presenter
                     transform.position = target.transform.position + offset;
                     transform.rotation = Quaternion.LookRotation(forwardVector, cameraTransform.up);
                 }
-            } catch(MissingReferenceException e)
+            }
+            catch (MissingReferenceException e)
             {
                 Destroy(gameObject);
             }
-            
         }
     }
 }
