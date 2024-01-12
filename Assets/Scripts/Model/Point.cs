@@ -103,6 +103,11 @@ namespace StereoApp.Model
             return new Point(a.X / d, a.Y / d, a.Z / d, a.Label);
         }
 
+        public static explicit operator Vector3(Point point)
+        {
+            return new Vector3(point.X, point.Y, point.Z);
+        }
+
         public override string ToString()
         {
             return Label

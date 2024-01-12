@@ -19,7 +19,7 @@ namespace StereoApp.Model
         private const float CoplanarTolerance = 1e-5f;
         private List<Point> _points;
 
-        public IEnumerable<Segment> Segments =>
+        public IEnumerable<Segment> Sides =>
             _points.Select((point, i) => new Segment(point, _points[(i + 1) % _points.Count]));
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -41,9 +41,13 @@ namespace StereoApp.Model
 #if DEBUG
             foreach (var point in _points.Skip(3))
             {
-                Debug.Assert(IsCoplanar(point));
+                Debug.Assert(IsCoplanarWith(point));
             }
 #endif
+            if (!IsConvex())
+            {
+                throw new ArgumentException("The provided points don't make a convex polygon.");
+            }
         }
 
         private string _label = "";
@@ -75,7 +79,7 @@ namespace StereoApp.Model
             };
         }
 
-        private bool IsCoplanar(Point point)
+        public bool IsCoplanarWith(Point point)
         {
             // partial calculations
             var a1 = _points[1].X - _points[0].X;
@@ -96,6 +100,38 @@ namespace StereoApp.Model
             return result < CoplanarTolerance && result > -CoplanarTolerance;
         }
 
+        private bool IsConvex()
+        {
+            var previousSide = new Segment(_points[^1], _points[0]);
+            var angleSum = 0.0f;
+            foreach (var side in Sides)
+            {
+                var v1 = (Vector3)previousSide.First;
+                var v2 = (Vector3)previousSide.Second;
+                var v3 = (Vector3)side.Second;
+                var angle = Vector3.SignedAngle(v2 - v1, v3 - v2, Vector3.up);
+
+                if (angle is 0.0f or 180.0f or -180.0f)
+                {
+                    // points are collinear
+                    return false;
+                }
+
+                if (angleSum * angle < 0.0f)
+                {
+                    // angles have different directions - one of them will be concave
+                    return false;
+                }
+
+                angleSum += angle;
+                previousSide = side;
+            }
+
+            // absolute sum of the calculated angles should be approximately equal to 360 degrees,
+            // otherwise polygon is self-intersecting and therefore not convex
+            return Mathf.Abs(Mathf.Abs(angleSum) - 360.0f) < 5.0f;
+        }
+
         public IEnumerator<Point> GetEnumerator()
         {
             return _points.GetEnumerator();
@@ -113,12 +149,20 @@ namespace StereoApp.Model
                 throw new ArgumentNullException();
             }
 
-            if (!IsCoplanar(item))
+            if (!IsCoplanarWith(item))
             {
                 throw new ArgumentException("The point is not coplanar with existing points.");
             }
 
             _points.Add(item);
+            if (!IsConvex())
+            {
+                _points.RemoveAt(_points.Count - 1);
+                throw new ArgumentException(
+                    "The polygon is not convex when the provided point is part of it."
+                );
+            }
+
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(
                     NotifyCollectionChangedAction.Add,
@@ -152,11 +196,29 @@ namespace StereoApp.Model
                 );
             }
 
-            var value = _points.Remove(item);
-            OnCollectionChanged(
-                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item)
-            );
-            return value;
+            for (var i = 0; i < _points.Count; ++i)
+            {
+                if (!_points[i].Equals(item))
+                {
+                    continue;
+                }
+
+                _points.RemoveAt(i);
+                if (!IsConvex())
+                {
+                    _points.Insert(i, item);
+                    throw new ArgumentException(
+                        "The polygon is not convex without the provided point."
+                    );
+                }
+
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item)
+                );
+                return true;
+            }
+
+            return false;
         }
 
         public int IndexOf(Point item)
@@ -171,12 +233,20 @@ namespace StereoApp.Model
                 throw new ArgumentNullException();
             }
 
-            if (!IsCoplanar(item))
+            if (!IsCoplanarWith(item))
             {
                 throw new ArgumentException("The point is not coplanar with existing points.");
             }
 
             _points.Insert(index, item);
+            if (!IsConvex())
+            {
+                _points.RemoveAt(index);
+                throw new ArgumentException(
+                    "The polygon is not convex when the provided point is part of it."
+                );
+            }
+
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index)
             );
@@ -193,6 +263,14 @@ namespace StereoApp.Model
 
             var item = this[index];
             _points.RemoveAt(index);
+            if (!IsConvex())
+            {
+                _points.Insert(index, item);
+                throw new ArgumentException(
+                    "The polygon is not convex without the point at provided index."
+                );
+            }
+
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item)
             );
@@ -202,6 +280,18 @@ namespace StereoApp.Model
         {
             var oldItems = _points;
             _points = new List<Point>(points);
+
+            if (_points.Skip(3).Any(point => !IsCoplanarWith(point)))
+            {
+                _points = oldItems;
+                throw new ArgumentException("The provided points are not coplanar.");
+            }
+            if (!IsConvex())
+            {
+                _points = oldItems;
+                throw new ArgumentException("The polygon is not convex with the provided points.");
+            }
+
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(
                     NotifyCollectionChangedAction.Replace,
@@ -223,12 +313,12 @@ namespace StereoApp.Model
                     {
                         // temporary swap
                         (_points[index], _points[3]) = (_points[3], _points[index]);
-                        isCoplanar = IsCoplanar(value);
+                        isCoplanar = IsCoplanarWith(value);
                         (_points[index], _points[3]) = (_points[3], _points[index]);
                     }
                     else
                     {
-                        isCoplanar = IsCoplanar(value);
+                        isCoplanar = IsCoplanarWith(value);
                     }
 
                     if (!isCoplanar)
@@ -241,6 +331,15 @@ namespace StereoApp.Model
 
                 var oldValue = _points[index];
                 _points[index] = value;
+
+                if (!IsConvex())
+                {
+                    _points[index] = oldValue;
+                    throw new ArgumentException(
+                        "The polygon is not convex when the provided point is part of it."
+                    );
+                }
+
                 OnCollectionChanged(
                     new NotifyCollectionChangedEventArgs(
                         NotifyCollectionChangedAction.Replace,

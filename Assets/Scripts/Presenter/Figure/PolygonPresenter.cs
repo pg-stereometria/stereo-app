@@ -138,7 +138,7 @@ namespace StereoApp.Presenter.Figure
                 TrackGameObject(newGameObject);
             }
 
-            foreach (var segment in figure.Segments)
+            foreach (var segment in figure.Sides)
             {
                 var gameObj = Instantiate(_segmentPrefab, transform);
 
